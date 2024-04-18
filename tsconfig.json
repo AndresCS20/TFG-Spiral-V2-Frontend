@@ -23,9 +23,15 @@
       "dom"
     ],
     "paths": {
-      "@helpers": ["./src/app/_helpers"],
-      "@services": ["./src/app/_services"],
-      "@shared": ["./src/app/_shared"],
+      "@app/*": ["./src/app/*"],
+      // "@env/*": ["src/environments/*"],
+      "@core/*": ["./src/app/core/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@interfaces/*": ["./src/app/core/interfaces/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@guards/*": ["./src/app/guards/*"],
+      "@interceptors/*": ["./src/app/interceptors/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "angularCompilerOptions": {
