@@ -22,10 +22,27 @@
       "ES2022",
       "dom"
     ],
+    "baseUrl": "./",
     "paths": {
-      "@helpers": ["./src/app/_helpers"],
-      "@services": ["./src/app/_services"],
-      "@shared": ["./src/app/_shared"],
+      "@components/layout/*": [
+        "src/app/components/layout/*"
+      ],
+      "@components/pages/*": [
+        "src/app/components/pages/*"
+      ],
+      "@services/*": [
+        "src/app/core/services/*"
+      ],
+      "@interfaces/*": [
+        "src/app/core/interfaces/*"
+      ],
+      "@shared/*": [
+        "src/app/core/shared/*"
+      ],
+      "@helpers/*":[
+        "src/app/core/helpers/*"
+      ],
+
     }
   },
   "angularCompilerOptions": {
