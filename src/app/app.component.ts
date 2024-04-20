@@ -4,11 +4,13 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
 import { StorageService } from './core/services/storage.service';
 import { EventBusService } from './core/shared/event-bus.service';
+import { HeaderComponent } from '@components/layout/header/header.component';
+import { SidebarComponent } from '@components/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

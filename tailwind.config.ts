@@ -20,6 +20,12 @@ export default {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
           "background": "#0071eb",
+          ".color-logo": {
+            "color": "#fff",
+          },
+          ".color-logo::hover": {
+            color: "blue"
+          }
         },
         dark:{
           ...require("daisyui/src/theming/themes")["dark"],
@@ -80,6 +86,9 @@ export default {
         pastel:{
           ...require("daisyui/src/theming/themes")["pastel"],
           "background": "#bbc7e9",
+          ".color-logo": {
+            "color": "#000",
+          }
         },
         fantasy:{
           ...require("daisyui/src/theming/themes")["fantasy"],
@@ -88,6 +97,9 @@ export default {
         wireframe:{
           ...require("daisyui/src/theming/themes")["wireframe"],
           "background": "#c5c5c5",
+          ".color-logo": {
+            "color": "#000",
+          }
         },
         black:{
           ...require("daisyui/src/theming/themes")["black"],
