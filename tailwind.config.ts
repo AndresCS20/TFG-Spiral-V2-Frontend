@@ -19,7 +19,7 @@ export default {
       {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
-          "background": "#0071eb",
+          "background": "#0071eb !important",
           ".color-logo": {
             "color": "#fff",
           },

@@ -1,16 +1,16 @@
 
+ <app-header class="w-full bg-background block px-5 py-3 h-fit relative"></app-header>
 <div class="flex md:flex-row-reverse flex-wrap">
   
-  <app-header class="w-full bg-background block sm:hidden"></app-header>
 
-  <main class="flex w-full md:w-4/5 pb-24 py-0 md:py-6 h-screen h-screen-ios">
+  <main class="flex w-full md:w-4/5 pb-0 md:pb-28 pt-0 h-screen h-screen-ios">
   <!--Main Content-->
   <div class="relative grow max-w-full overflow-y-auto scroll p-3 mr-0 lg:mr-3 scroll-5 w-full  max-w-full bg-base-300 rounded-[none] md:rounded-[1.25rem] dark:bg-n-6">
     <router-outlet></router-outlet>
   </div>
   </main>
   <!--Sidebar-->
-  <app-sidebar class="w-full z-10 md:w-1/5 bg-cyan-500 md:bg-transparent px-2 text-center fixed bottom-0 md:pt-8 md:top-0 md:left-0 h-16 md:h-screen"></app-sidebar>
+  <app-sidebar class="w-full z-10 md:w-1/5 bg-white  md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent px-2 text-center fixed md:top-14 bottom-0 md:pt-8 md:top-0 md:left-0 h-16 md:h-screen"></app-sidebar>
 </div>
 
 <!-- <div id="app">

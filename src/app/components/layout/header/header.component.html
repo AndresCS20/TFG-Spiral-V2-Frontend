@@ -1,13 +1,7 @@
-<header class="flex">
-    <a routerLink="/" class="flex mx-auto justify-center items-center py-3">
+<header class="flex justify-between">
+    <a routerLink="/" class="flex mx-auto mx-0 justify-center xl:justify-normal items-center py-3">
       <img src="assets/images/spiral.png" class="h-6 me-3 sm:h-9" alt="Spiral Logo">
       <span class="self-center text-3xl font-semibold whitespace-nowrap font-['Righteous'] color-logo">Spiral</span>
    </a>
-   <div class="dropdown">
-     <label tabindex="0" class="btn m-1"><img src="" alt="">Usuario</label>
-     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-       <li><a>Item 1</a></li>
-       <li><a>Item 2</a></li>
-     </ul>
-   </div>
+    <app-userzone></app-userzone>
   </header>
