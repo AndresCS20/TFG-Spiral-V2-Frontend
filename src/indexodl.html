@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en" data-theme="cupcake">
+<head>
+  <meta charset="utf-8">
+  <title>SpiralV2Frontend</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<!-- <body class="font-sans leading-normal overflow-hidden tracking-normal" style="background-color: var(--bg-base-bg);background-image: url(https://i.imgur.com/XBxSNNE.png);background-size: 25%;"> -->
+
+<body class="font-sans leading-normal overflow-hidden tracking-normal">
+  <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100vh">
+    <defs><linearGradient gradientTransform="rotate(150, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient">
+      <stop stop-color="var(--bg-base-bg)" stop-opacity="1" offset="0%"></stop>
+      <stop stop-color="oklch(var(--p))" stop-opacity="1" offset="100%"></stop>
+    </linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.005 0.003" numOctaves="2" seed="286" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
+    <feGaussianBlur stdDeviation="20 0" x="0%" y="0%" width="100%" height="100%" in="turbulence" edgeMode="duplicate" result="blur"></feGaussianBlur>
+    <feBlend mode="color-dodge" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" in2="blur" result="blend"></feBlend>
+    
+  </filter></defs><rect width="100%" height="100%" fill="url(#ffflux-gradient)" filter="url(#ffflux-filter)"></rect></svg>
+  
+
+  <div class="flex md:flex-row-reverse flex-wrap">
+  
+
+    <main class="w-full lg:w-5/6 pt-5 pb-0 md:pb-28 p-0 xl:px-8  h-screen h-screen-ios">
+      <header class="mb-5  relative bg-base-100 xl:rounded-2xl py-5 z-10">
+        <h1 class="font-bold text-2xl text-dark">Hedersito</h1>
+      </header>
+    <!--Main Content-->
+    <div class="relative grow max-w-full overflow-y-auto scroll p-3 scroll-5 w-full  max-w-full bg-base-100 rounded-[none] md:rounded-[1.25rem] dark:bg-n-6">
+            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                <div class="flex flex-1 flex-col p-8">
+                  <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper</h3>
+                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <dt class="sr-only">Title</dt>
+                    <dd class="text-sm text-gray-500">Paradigm Representative</dd>
+                    <dt class="sr-only">Role</dt>
+                    <dd class="mt-3">
+                      <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                    </dd>
+                  </dl>
+                </div>
+                <div>
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="mailto:janecooper@example.com" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                          <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+                        </svg>
+                        Email
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <a href="tel:+1-202-555-0170" class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                        </svg>
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            
+              <!-- More people... -->
+            </ul>
+           </div>
+        </main>
+    
+    <!--Sidebar-->
+        <div  class="w-full z-10 lg:w-1/6 bg-base-100 rounded-none md:rounded-2xl  px-2 text-center fixed md:relative md:top-5 bottom-0 md:pt-8 md:left-3 h-16 md:h-[94vh]">
+             
+    <a href="https://flowbite.com/" class="hidden lg:flex justify-center items-center -ms-3 mb-5">
+      <img src="assets/images/spiral.png" class="h-6 me-3 sm:h-9" alt="Spiral Logo">
+      <span class="self-center text-3xl font-semibold whitespace-nowrap font-['Righteous']">Spiral</span>
+   </a> 
+          <div class="lg:relative mx-auto  lg:px-6">
+              <ul
+              class="menu menu-horizontal p-0 lg:menu-vertical list-reset flex flex-row md:flex-col text-center md:text-left">
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block active text-center md:text-left  py-1 md:py-3 px-1 align-middle">
+                  <i class="fa-regular fa-home px-0 md:px-3"></i>
+                  <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+                    Inicio</span>
+                </a>
+              </li>
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block text-center md:text-left py-1 md:py-3 px-1 align-middle">
+                  <i class="fa-duotone fa-planet-moon px-0 md:px-3"></i>
+                  <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+                    Explorar</span>
+                </a>
+              </li>
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle">
+                  <i class="fa-duotone fa-people-group px-0 md:px-3"></i>
+                  <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+                    Comunidades</span>
+                </a>
+              </li>
+              <li class="my-1 flex-1 dropdown dropdown-top sm:dropdown-bottom w-full">
+                <a
+                  tabindex="0"
+                  class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle">
+                  <i class="fa-regular fa-badge-sheriff px-0 md:px-3"></i>
+                  <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">Panel Admin</span>
+                  <i class="fa-regular fa-down px-0 md:px-3"></i>
+                </a>
+                <ul
+                  tabindex="0"
+                  class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 mt-4">
+                  <li><button>Item 1</button></li>
+                  <li><button>Item 2</button></li>
+                </ul>
+            </li>
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle">
+                  <i class="fa-regular fa-bell px-0 md:px-3"></i>
+                  <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+                    Notificaciones</span>
+                </a>
+              </li>
+              
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle">
+                  <i class="fa-duotone fa-bookmark px-0 md:px-3"></i
+                  ><span
+                    class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block"
+                    >Guardado</span
+                  >
+                </a>
+              </li>
+              <li class="my-1 flex-1">
+                <a
+                  href="#"
+                  class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle">
+                  <i class="fa-duotone fa-flask px-0 md:px-3"></i
+                  ><span
+                    class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block"
+                    >Test</span
+                  >
+                </a>
+              </li>
+      
+            </ul>
+           </div>
+        </div>
+     </div>
+ <!--  <app-root></app-root>-->
+</body> 
+</html>
