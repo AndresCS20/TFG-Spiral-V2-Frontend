@@ -1,74 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="absolute top-0" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100vh">
-  <defs><linearGradient gradientTransform="rotate(150, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient">
-    <stop stop-color="var(--bg-base-bg)" stop-opacity="1" offset="0%"></stop>
-    <stop stop-color="oklch(var(--p))" stop-opacity="1" offset="100%"></stop>
-  </linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-  <feTurbulence type="fractalNoise" baseFrequency="0.005 0.003" numOctaves="2" seed="286" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
-  <feGaussianBlur stdDeviation="20 0" x="0%" y="0%" width="100%" height="100%" in="turbulence" edgeMode="duplicate" result="blur"></feGaussianBlur>
-  <feBlend mode="color-dodge" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" in2="blur" result="blend"></feBlend>
-  
-</filter></defs><rect width="100%" height="100%" fill="url(#ffflux-gradient)" filter="url(#ffflux-filter)"></rect></svg>
- <app-header class="w-full bg-background block px-5 py-3 h-fit relative"></app-header>
-<div class="flex md:flex-row-reverse flex-wrap">
-  
-
-  <main class="flex w-full md:w-5/6 pb-0 md:pb-28 pt-0 h-screen h-screen-ios">
-  <!--Main Content-->
-  <div class="relative grow max-w-full overflow-y-auto scroll p-3 mr-0 lg:mr-3 scroll-5 w-full  max-w-full bg-base-100 rounded-[none] md:rounded-[1.25rem] dark:bg-n-6">
-    <router-outlet></router-outlet>
+<div class="flex flex-row p-5 h-screen">
+  <app-sidebar class="sidebar bg-base-100 shadow-lg z-10"></app-sidebar>
+  <div class="flex pb-5 ps-3 pe-1 h-screen h-screen-ios w-full">
+      <div class="relative flex flex-col grow max-w-full md:pt-18 pb-2 mb-3">
+        <app-header class="flex items-center min-h-[4.5rem] px-10 py-3 bg-base-100 rounded-2xl shadow 2xl:px-6 lg:-mt-18 lg:pr-20 md:pl-5 md:pr-18"></app-header>
+        <div class="2xl:p-6 grow md:p-5 mt-3 bg-base-100 rounded-2xl shadow overflow-hidden relative scroll-smooth scrollbar-none space-y-10 z-2">
+        <div class="overflow-auto h-full ">	
+          <router-outlet></router-outlet>
+        </div>
+        </div>
+      </div>
   </div>
-  </main>
-  <!--Sidebar-->
-  <app-sidebar class="w-full z-10 md:w-1/6 bg-background  md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent px-2 text-center fixed md:top-14 bottom-0 md:pt-8 md:top-0 md:left-0 h-16 md:h-screen"></app-sidebar>
-</div>
-
-<!-- <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">bezKoder</a>
-      <ul class="navbar-nav mr-auto" routerLinkActive="active">
-        <li class="nav-item">
-          <a href="/home" class="nav-link" routerLink="home">Home </a>
-        </li>
-        @if (showAdminBoard) {
-          <li class="nav-item">
-            <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-          </li>
-        }
-        @if (showModeratorBoard) {
-          <li class="nav-item">
-            <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-          </li>
-        }
-        @if (isLoggedIn) {
-          <li class="nav-item">
-            <a href="/user" class="nav-link" routerLink="user">User</a>
-          </li>
-        }
-      </ul>
-  
-      @if (!isLoggedIn) {
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a href="/login" class="nav-link" routerLink="login">Login</a>
-          </li>
-        </ul>
-      } @else {
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-          </li>
-          <li class="nav-item">
-            <a href class="nav-link" (click)="logout()">LogOut</a>
-          </li>
-        </ul>
-      }
-    </nav>
-  
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
-  </div> -->
   

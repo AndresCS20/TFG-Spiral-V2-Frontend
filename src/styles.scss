@@ -39,6 +39,21 @@
     flex-direction: column;
     transition: max-width 0.2s ease-in-out;
   }
+  .content .inner-div {
+    /* ... tus otros estilos ... */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si es necesario */
+    border-radius: 15px; /* Ajusta según tus necesidades */
+    height: 100%; /* Asegura que el div interior no exceda la altura del div exterior */
+  }
+  
+  /* Asegura que los bordes redondeados se respeten en todos los navegadores */
+  .content .inner-div::-webkit-scrollbar {
+    border-radius: 15px;
+  }
+  
+  .content .inner-div::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+  }
   
   .sidebar h2 {
     color: var(--headline-text);
@@ -53,7 +68,7 @@
   
   body.collapsed .sidebar {
     max-width: 5rem;
-    min-width: fit-content;
+    min-width: 90px;
     display: flex;
   }
   
@@ -83,7 +98,6 @@
   .logo__wrapper {
     display: flex;
     align-items: center;
-    color: var(--text-link);
     font-weight: 700;
     text-decoration: none;
     font-size: 1.35rem;
@@ -112,9 +126,6 @@
     position: relative;
   }
   
-  body.collapsed .sidebar-links-wrapper {
-    overflow: hidden;
-  }
   
   .sidebar-links ul {
     list-style-type: none;
@@ -127,63 +138,7 @@
     min-width: 3rem;
     width: 100%;
   }
-  
-  // .sidebar-links li svg {
-  //   stroke: var(--text-link);
-  //   width: 1.75rem;
-  //   height: 1.75rem;
-  //   min-width: 1.75rem;
-  // }
-  
-  // .sidebar-links li a:hover {
-  //   background: var(--sidebar-hover);
-  // }
-  
-  // .sidebar-links li a {
-  //   color: var(--text-link);
-  //   width: 100%;
-  //   padding: 0 0.6rem;
-  //   font-size: 1.25rem;
-  //   display: flex;
-  //   gap: 0.75rem;
-  //   border-radius: 0.75rem;
-  //   justify-content: start;
-  //   align-items: center;
-  //   min-height: 3.25rem;
-  //   text-decoration: none;
-  //   transition: background 0.2s ease-in-out;
-  // }
-  
-  // .sidebar-links li .tag {
-  //   margin-left: auto;
-  //   padding: 0.25rem 0.5rem;
-  //   border-radius: 0.5rem;
-  //   font-size: 0.75rem;
-  //   background: var(--sidebar-hover);
-  //   color: var(--text-link);
-  //   border: 1px solid var(--shadow-color);
-  // }
-  
-  // .sidebar-links li a .link {
-  //   overflow: hidden;
-  //   white-space: nowrap;
-  //   animation: fadeIn 0.2s ease-in-out;
-  // }
-  
-  // .sidebar-links .active:hover {
-  //   background: var(--sidebar-hover);
-  // }
-  
-  // .sidebar-links .active {
-  //   text-decoration: none;
-  //   background: var(--sidebar-hover);
-  //   color: var(--text-link);
-  // }
-  
-  // .sidebar-links .active svg {
-  //   stroke: var(--text-link);
-  // }
-  
+    
   .divider {
     display: none;
   }
@@ -303,4 +258,39 @@
 
   .flex-1-auto{
     flex: 1 1 0%;
+  }
+
+  .menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    overflow-y: scroll;
+}
+
+  ::-webkit-scrollbar {
+    width: 0.2em;
+  }
+   
+  // ::-webkit-scrollbar-track {
+  //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  // }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 1rem;
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 2px;
+    background: #ccc;
+  }
+  
+  /* The progress bar (scroll indicator) */
+  .progress-bar {
+    height: 8px;
+    background: #04AA6D;
+    width: 0%;
   }
