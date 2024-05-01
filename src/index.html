@@ -1,16 +1,87 @@
-<!doctype html>
-<html lang="en" data-theme="cupcake">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>SpiralV2Frontend</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<meta charset="utf-8">
+	<title>SpiralV2Frontend</title>
+	<base href="/">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="favicon.ico" rel="icon" type="image/x-icon">
 </head>
-<!-- <body class="font-sans leading-normal overflow-hidden tracking-normal" style="background-color: var(--bg-base-bg);background-image: url(https://i.imgur.com/XBxSNNE.png);background-size: 25%;"> -->
 
-<body class="font-sans leading-normal overflow-hidden tracking-normal">
+<body class="font-sans leading-normal tracking-normal overflow-hidden">
+	
+	
+	<svg class="absolute top-0 -z-10" height="100vh" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<lineargradient gradienttransform="rotate(150, 0.5, 0.5)" id="ffflux-gradient" x1="50%" x2="50%" y1="0%" y2="100%">
+			<stop offset="0%" stop-color="var(--bg-base-bg)" stop-opacity="1"></stop>
+			<stop offset="100%" stop-color="oklch(var(--p))" stop-opacity="1"></stop>
+		</lineargradient>
+		<filter color-interpolation-filters="sRGB" filterunits="objectBoundingBox" height="140%" id="ffflux-filter" primitiveunits="userSpaceOnUse" width="140%" x="-20%" y="-20%">
+			<feturbulence basefrequency="0.005 0.003" height="100%" numoctaves="2" result="turbulence" seed="286" stitchtiles="stitch" type="fractalNoise" width="100%" x="0%" y="0%"></feturbulence>
+			<fegaussianblur edgemode="duplicate" height="100%" in="turbulence" result="blur" stddeviation="20 0" width="100%" x="0%" y="0%"></fegaussianblur>
+			<feblend height="100%" in="SourceGraphic" in2="blur" mode="color-dodge" result="blend" width="100%" x="0%" y="0%"></feblend>
+		</filter>
+	</defs>
+	<rect fill="url(#ffflux-gradient)" filter="url(#ffflux-filter)" height="100%" width="100%"></rect></svg> <!-- <div class="absolute w-full bg-blue-500 dark:bg-cyan-950 min-h-44 top-0 left-0 -z-10"></div> -->
+	<app-root></app-root>
+	
+	<script>
+window.onscroll = function() {myFunction()};
 
-  <app-root></app-root>
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
+
+	 window.addEventListener("resize", function() {
+	   const screenWidth = window.innerWidth;
+	   const breakpoint = 768; // Replace with your desired breakpoint
+
+	   if (screenWidth <= breakpoint) {
+	     document.body.classList.add("collapsed");
+	   }
+	 });
+
+	   const sidebar = document.querySelector(".sidebar");
+	   const expand_btn = document.querySelector(".expand-btn");
+	   const close_btn = document.querySelector(".close-btn");
+	let activeIndex;
+
+	expand_btn.addEventListener("click", () => {
+	 document.body.classList.toggle("collapsed");
+	});
+
+	close_btn.addEventListener("click", () => {
+	 document.body.classList.remove("collapsed");
+	});
+
+	if(screenWidth <= breakpoint) {
+	 sidebar.addEventListener("focusout", () => {
+	   document.body.classList.remove("collapsed");
+	 });
+	}
+
+	const current = window.location.href;
+
+	const allLinks = document.querySelectorAll(".sidebar-links a");
+
+	allLinks.forEach((elem) => {
+	 elem.addEventListener("click", function () {
+	   const hrefLinkClick = elem.href;
+
+	   allLinks.forEach((link) => {
+	     if (link.href == hrefLinkClick) {
+	       link.classList.add("active");
+	     } else {
+	       link.classList.remove("active");
+	     }
+	   });
+	 });
+	});
+
+	</script>
 </body>
 </html>

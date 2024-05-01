@@ -1,11 +1,12 @@
 import type { Config } from 'tailwindcss'
+const { addDynamicIconSelectors } = require('@iconify/tailwind')
 
 export default {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),addDynamicIconSelectors()],
   daisyui: {
     lightTheme:'nord',
     darkTheme: "night", // name of one of the included themes for dark mode
