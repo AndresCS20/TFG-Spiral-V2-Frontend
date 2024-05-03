@@ -1,8 +1,10 @@
-<div class="flex flex-row p-5 h-screen">
+
+@if (isLoggedIn) {
+  <div class="flex flex-row p-5 h-screen">
   <app-sidebar class="sidebar bg-base-100 shadow-lg z-10"></app-sidebar>
   <div class="flex pb-5 ps-3 pe-1 h-screen h-screen-ios w-full">
       <div class="relative flex flex-col grow max-w-full md:pt-18 pb-2 mb-3">
-        <app-header class="flex items-center min-h-[4.5rem] px-10 py-3 bg-base-100 rounded-2xl shadow 2xl:px-6 lg:-mt-18 lg:pr-20 md:pl-5 md:pr-18"></app-header>
+        <app-header class="flex items-center min-h-[4.5rem] px-3 md:px-10 py-3 bg-base-100 rounded-2xl shadow 2xl:px-6 lg:-mt-18 lg:pr-20 md:pl-5 md:pr-18"></app-header>
         <div class="2xl:p-6 grow md:p-5 mt-3 bg-base-100 rounded-2xl shadow overflow-hidden relative scroll-smooth scrollbar-none space-y-10 z-2">
         <div class="overflow-auto h-full ">	
           <router-outlet></router-outlet>
@@ -10,4 +12,10 @@
         </div>
       </div>
   </div>
+  </div>
+} 
+  @else{
+  <router-outlet></router-outlet>
+}
+
   

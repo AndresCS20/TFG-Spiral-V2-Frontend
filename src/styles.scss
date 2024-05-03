@@ -210,12 +210,19 @@
   }
   
   /*? Expand button */
-  
-.expand-btn{
-  transform: rotate(180deg);
+  .closed-btn {
+    position: absolute;
+    display: none;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+    right: 0rem;
+    top: 1rem;
 }
 
-  .expand-btn svg {
+
+
+  .expand-btn i {
     transform: rotate(-180deg);
   }
   
@@ -240,6 +247,15 @@
 
     body.collapsed #btnclose{
       display: none;
+    }
+
+    body.collapsed .sidebar {
+
+      display: none;
+    }
+
+    .closed-btn {
+      display: grid;
     }
 
   }

@@ -42,6 +42,9 @@
       "@helpers/*":[
         "src/app/core/helpers/*"
       ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
 
     }
   },

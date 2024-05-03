@@ -1,3 +1,111 @@
+<div class="min-h-screen w-full flex justify-center">
+    <section class="max-w-screen-xl w-full m-6 sm:m-10 bg-base-100 rounded-2xl shadow md:grid justify-center md:grid-cols-2">
+        <div class="flex items-center justify-center">
+            <div class="mx-auto grid w-full  gap-6 bg-base-100 md:transparent px-10 py-5 rounded-2xl">
+              <a class="flex justify-center" href="/">
+              <img
+              alt="Logo"
+              class="logo-small"
+              [src]="logo_url"
+            />
+            <span class="mt-1 text-4xl font-['Righteous']">Spiral</span>
+              </a>
+                <hr>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">Login</h1>
+                    <p class="text-sm text-slate-500">Enter your details below to login</p>
+                </div>
+                
+                <form
+                class="grid gap-4"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+              >
+                <div class="grid gap-2">
+                  <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nombre de usuario</span>
+                  <label class="input input-bordered flex items-center gap-2"
+                  [ngClass]="{ 'input-error': f.submitted && username.errors }">
+                    <i class="fa-regular fa-user"></i>
+                    <input
+                    type="text"
+                    name="username"
+                    class="grow input-bordered input-error"
+                    placeholder="jhondoe"
+                    [(ngModel)]="form.username"
+                    required
+                    #username="ngModel"
+                  />
+                  </label>
+                  @if (username.errors && f.submitted) {
+                    <div class="alert alert-warning">
+                      <i class="fa-regular fa-circle-exclamation"></i>
+                      Nombre de usuario es requerido!
+                    </div>
+                  }
+                </div>
+                <div class="grid gap-2">
+                  <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Contraseña</span>
+                  <label class="input input-bordered flex items-center gap-2"
+                  [ngClass]="{ 'input-error': f.submitted && password.errors }">
+                    <i class="fa-regular fa-lock"></i>
+                  <input
+                    type="password"
+                    class="grow"
+                    name="password"
+                    placeholder="••••••••••"
+                    [(ngModel)]="form.password"
+                    required
+                    minlength="6"
+                    #password="ngModel"
+                    
+                  /></label>
+                  @if (password.errors && f.submitted) {
+                  <div class="alert alert-warning">
+                    <i class="fa-regular fa-circle-exclamation"></i>
+                    @if (password.errors['required']) {
+                    <span>La contraseña es requerida</span>
+                    }
+                    @if (password.errors['minlength']) {
+                    <span>La contraseña debe de tener al menos 6 caracteres</span>
+                    }
+                  </div>
+                  }
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block"><i class="fa-regular fa-person-to-portal"></i> Iniciar Sesión</button>
+                </div>
+                <div class="form-group">
+                  @if (f.submitted && isLoginFailed) {
+                  <div class="alert alert-error">
+                      <i class="fa-regular fa-circle-xmark"></i>
+                      <span>
+                        <h3 class="font-bold">Fallo en el inicio de sesión</h3>
+                        <div class="text-xs">{{ errorMessage }}</div>
+                      </span>
+                  </div>
+                  }
+                </div>
+              </form>
+                        
+                <hr>
+                        <div class="grid grid-cols-3 gap-2">
+                          <button class="btn btn-outline"><span class="icon-[logos--facebook]"></span> Facebook</button>
+                          <button class="btn btn-outline"><span class="icon-[logos--google-icon]"></span> Google</button>
+                          <button class="btn btn-outline"><span class="icon-[logos--discord-icon]"></span> Discord</button>
+                        </div>
+                        <hr>
+                <div class="flex flex-col gap-4 text-sm">
+                    <p>Don't have an account?<!-- --> <a class="underline" href="#">Sign up</a></p><a class="underline"
+                        href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+            <div class="w-full hidden md:block h-100 bg-neutral bg-contain bg-center bg-no-repeat rounded-2xl" style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');"></div>
+    </section>
+</div>
+<!-- 
 <div class="col-md-12">
     <div class="card card-container">
     <img
@@ -63,8 +171,9 @@
         </div>
       </form>
       } @else {
-      <div class="alert alert-success">Logged in as {{ roles }}.</div>
+      <div class="alert alert-success">Logged in as {{ user.username }}.</div>
+      <button class="btn btn-error" (click)="logout()">Logout </button>
       }
     </div>
   </div>
-  
+   -->

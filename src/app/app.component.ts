@@ -6,21 +6,21 @@ import { StorageService } from './core/services/storage.service';
 import { EventBusService } from './core/shared/event-bus.service';
 import { HeaderComponent } from '@components/layout/header/header.component';
 import { SidebarComponent } from '@components/layout/sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from '@components/pages/auth/login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, CommonModule, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'spiral-v2-frontend';
 
-  private roles : string[] = [];
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+
   username?: string;
 
   eventBusSub?: Subscription;
@@ -36,10 +36,7 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
-      this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      console.log(user)
 
       this.username = user.username;
     }

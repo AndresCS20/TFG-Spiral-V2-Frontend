@@ -20,13 +20,30 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  user : any
 
+  logo_url = 'assets/images/spiral.png';
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit(): void {
+
+    const theme = document.documentElement.getAttribute('data-theme');
+    switch (theme) {
+      case 'cupcake':
+        this.logo_url='assets/images/spiral-pink.png';
+        break;
+    
+      default:
+        break;
+    }
+
+    
+    console.log(theme);
+
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
+      this.user = this.storageService.getUser();
+      console.log(this.user.username)
     }
   }
 
@@ -51,6 +68,20 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+  }
+  logout(): void {        
+    
+    this.storageService.clean();
+    window.location.reload();
+    // this.authService.logout().subscribe({
+    //   next: res => {
+    //     console.log(res);
+
+    //   },
+    //   error: err => {
+    //     console.log(err);
+    //   }
+    // });
   }
 }
 

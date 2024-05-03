@@ -1,13 +1,53 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from '@components/pages/home/home.component';
 import { ProfileComponent } from '@components/pages/profile/profile.component';
-import { LoginComponent } from '@components/pages/auth/login/login.component';
-import { RegisterComponent } from '@components/pages/auth/register/register.component';
+import { homeGuard } from './core/guards/home.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { CommunityComponent } from '@components/pages/community/community.component';
+import { MembersComponent } from '@components/pages/community/members/members.component';
+import { SettingsComponent } from '@components/pages/community/settings/settings.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent},
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
-  ];;
+
+
+    {
+      path: 'home',
+      canActivate: [homeGuard],
+      loadComponent: () => 
+        import('@components/pages/home/home.component').then((c)=> c.HomeComponent)
+    },
+    {
+      path: 'login',
+      canActivate: [authGuard],
+      loadComponent: () => 
+        import('@components/pages/auth/login/login.component').then((c)=> c.LoginComponent)
+    },
+    {
+      path: 'register',
+      canActivate: [authGuard],
+      loadComponent: () => 
+        import('@components/pages/auth/register/register.component').then((c)=> c.RegisterComponent)
+    },
+    {
+      path: 'profile/:username?',
+      canActivate: [homeGuard],
+      loadComponent: () => 
+        import('@components/pages/profile/profile.component').then((c)=> c.ProfileComponent)
+    }, 
+    { path: 'explore',loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent)},
+    { path: 'notifications',loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
+    { path: 'messages',loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
+    { path: 'bookmarks',loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
+    { path: 'communities',loadComponent: () => import('@components/pages/communities/communities.component').then(m => m.CommunitiesComponent)},
+    { path: 'community', redirectTo: ''},
+    { path: 'community', 
+      loadComponent: () => import('@components/pages/community/community.component').then(m => m.CommunityComponent),
+      loadChildren: () => import('@components/pages/community/community.routes')
+      // children: [
+      //   { path: ':shortname', loadComponent: () => import('@components/pages/community/feed/feed.component').then(m => m.FeedComponent)},
+      //   { path: ':shortname/settings', loadComponent: () => import('@components/pages/community/settings/settings.component').then(m => m.SettingsComponent)},
+      //   { path: ':shortname/members', loadComponent: () => import('@components/pages/community/members/members.component').then(m => m.MembersComponent) }
+      // ]
+    },
+    { path: 'community/:shortname', component: CommunityComponent },
+    { path: '**', redirectTo: 'home'}
+  ];

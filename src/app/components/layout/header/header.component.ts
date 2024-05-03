@@ -11,4 +11,21 @@ import { UserzoneComponent } from '../../shared/layout/userzone/userzone.compone
 })
 export class HeaderComponent {
 
+
+  screenfull = false;
+  collapseSidebar() {
+  document.body.classList.toggle('collapsed');
+  }
+
+  fullscreen() {
+  
+    if (document.fullscreenElement) {
+      this.screenfull = false;
+      document.exitFullscreen();
+    } else {
+      this.screenfull = true;
+      document.documentElement.requestFullscreen();
+    }
+
+  }
 }

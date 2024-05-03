@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 	<meta charset="utf-8">
 	<title>SpiralV2Frontend</title>
@@ -44,43 +44,6 @@ function myFunction() {
 	     document.body.classList.add("collapsed");
 	   }
 	 });
-
-	   const sidebar = document.querySelector(".sidebar");
-	   const expand_btn = document.querySelector(".expand-btn");
-	   const close_btn = document.querySelector(".close-btn");
-	let activeIndex;
-
-	expand_btn.addEventListener("click", () => {
-	 document.body.classList.toggle("collapsed");
-	});
-
-	close_btn.addEventListener("click", () => {
-	 document.body.classList.remove("collapsed");
-	});
-
-	if(screenWidth <= breakpoint) {
-	 sidebar.addEventListener("focusout", () => {
-	   document.body.classList.remove("collapsed");
-	 });
-	}
-
-	const current = window.location.href;
-
-	const allLinks = document.querySelectorAll(".sidebar-links a");
-
-	allLinks.forEach((elem) => {
-	 elem.addEventListener("click", function () {
-	   const hrefLinkClick = elem.href;
-
-	   allLinks.forEach((link) => {
-	     if (link.href == hrefLinkClick) {
-	       link.classList.add("active");
-	     } else {
-	       link.classList.remove("active");
-	     }
-	   });
-	 });
-	});
 
 	</script>
 </body>

@@ -1,10 +1,197 @@
+<div class="min-h-screen w-full flex justify-center">
+  <section class="max-w-screen-xl w-full m-6 sm:m-10 bg-base-100 rounded-2xl shadow md:grid justify-center md:grid-cols-2">
+    <div class="w-full hidden md:block h-100 bg-neutral bg-contain bg-center bg-no-repeat rounded-2xl" style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');"></div>
+      <div class="flex items-center justify-center">
+          <div class="mx-auto grid w-full  gap-6 bg-base-100 md:transparent px-10 py-5 rounded-2xl">
+            <a class="flex justify-center" href="/">
+            <img
+            alt="Logo"
+            class="logo-small"
+            src="assets/images/spiral.png"
+          />
+          <span class="mt-1 text-4xl font-['Righteous']">Spiral</span>
+            </a>
+              <hr>
+              <div>
+                  <h1 class="text-xl font-bold tracking-tight">Registrate</h1>
+                  <p class="text-sm text-slate-500">Enter your details below to login</p>
+              </div>
+              <div class="max-w-xl lg:max-w-3xl">       
+                @if (!isSuccessful) {
+                  <form
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                  >
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        [(ngModel)]="form.username"
+                        required
+                        minlength="3"
+                        maxlength="20"
+                        #username="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                      />
+                      @if (username.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (username.errors['required']) {
+                        <div>Username is required</div>
+                        }
+                        @if (username.errors['minlength']) {
+                        <div>Username must be at least 3 characters</div>
+                        }
+                        @if (username.errors['maxlength']) {
+                        <div>Username must be at most 20 characters</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        [(ngModel)]="form.email"
+                        required
+                        email
+                        #email="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                      />
+                      @if (email.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (email.errors['required']) {
+                        <div>Email is required</div>
+                        }
+                        @if (email.errors['email']) {
+                        <div>Email must be a valid email address</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        [(ngModel)]="form.password"
+                        required
+                        minlength="6"
+                        #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                      />
+                      @if (password.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (password.errors['required']) {
+                        <div>Password is required</div>
+                        }
+                        @if (password.errors['minlength']) {
+                        <div>Password must be at least 6 characters</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-block">Sign Up</button>
+                    </div>
+              
+                    @if (f.submitted && isSignUpFailed) {
+                    <div class="alert alert-warning">
+                      Signup failed!<br />{{ errorMessage }}
+                    </div>
+                    }
+                  </form>
+                  } @else {
+                  <div class="alert alert-success">Your registration is successful!</div>
+                  }
+                <!-- <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="FirstName" class="block text-sm font-medium text-gray-700">
+                      First Name
+                    </label>
+        
+                    <input type="text" id="FirstName" name="first_name" class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                  </div>
+        
+                  <div class="col-span-6 sm:col-span-3">
+                    <span for="LastName" class="block text-sm font-medium text-gray-700">
+                      Last Name
+                    </span>
+        
+                    <input type="text" id="LastName" name="last_name" class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                  </div>
+        
+                  <div class="col-span-6">
+                    <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
+        
+                    <input type="email" id="Email" name="email" class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                  </div>
+        
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
+        
+                    <input type="password" id="Password" name="password" class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                  </div>
+        
+                  <div class="col-span-6 sm:col-span-3">
+                    <label for="PasswordConfirmation" class="block text-sm font-medium text-gray-700">
+                      Password Confirmation
+                    </label>
+        
+                    <input type="password" id="PasswordConfirmation" name="password_confirmation" class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
+                  </div>
+        
+                  <div class="col-span-6">
+                    <label for="MarketingAccept" class="flex gap-4">
+                      <input type="checkbox" id="MarketingAccept" name="marketing_accept" class="size-5 rounded-md border-gray-200 bg-white shadow-sm">
+        
+                      <span class="text-sm text-gray-700">
+                        I want to receive emails about events, product updates and company announcements.
+                      </span>
+                    </label>
+                  </div>
+        
+                  <div class="col-span-6">
+                    <p class="text-sm text-gray-500">
+                      By creating an account, you agree to our
+                      <a href="#" class="text-gray-700 underline"> terms and conditions </a>
+                      and
+                      <a href="#" class="text-gray-700 underline">privacy policy</a>.
+                    </p>
+                  </div>
+        
+                  <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+                    <button class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
+                      Create an account
+                    </button>
+        
+                    <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                      Already have an account?
+                      <a href="#" class="text-gray-700 underline">Log in</a>.
+                    </p>
+                  </div>
+                </form> -->
+              </div>
+
+                      <hr>
+              <div class="flex flex-col gap-4 text-sm">
+                  <p>Don't have an account?<!-- --> <a class="underline" href="#">Sign up</a></p><a class="underline"
+                      href="#">Forgot your password?</a>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>
+<!-- 
 <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+
       @if (!isSuccessful) {
       <form
         name="form"
@@ -100,4 +287,4 @@
       }
     </div>
   </div>
-  
+   -->
