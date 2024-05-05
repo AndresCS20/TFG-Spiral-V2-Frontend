@@ -14,167 +14,148 @@
               <hr>
               <div>
                   <h1 class="text-xl font-bold tracking-tight">Registrate</h1>
-                    <p class="text-sm text-slate-500">Por favor, completa todos los campos del formulario de registro.</p>
+                  <p class="text-sm text-slate-500">Enter your details below to login</p>
               </div>
               <img  alt="">
               <div class="max-w-xl lg:max-w-3xl">      
-                <!-- @if (!isSuccessful) { -->
-                  <form  [formGroup]="formRegister">
-                    <div class="md:grid md:grid-cols-2 md:gap-4">
-                      <div class="grid gap-2">
-                        <span class="font-medium leading-none text-sm">Nombre de usuario</span>
-                      <label class="input-md md:input input-bordered flex items-center gap-2">
-                        <!-- <span for="username">Username</span> -->
-                        <i class="fa-regular fa-user"></i>
-                        <input
-                          type="text"
-                          class="grow"
-                          name="username"
-                          placeholder="alfredo"
-                          formControlName="username" />
-
-                      </label>
-                      @if (formRegister.controls['username'].errors && formRegister.controls['username'].touched) {
-                        <div class="invalid-feedback">
-                          @if (formRegister.controls['username'].errors['required']) {
-                          <div>Username is required</div>
-                          }
-                          @if (formRegister.controls['username'].errors['minlength']) {
-                          <div>Username must be at least 3 characters</div>
-                          }
-                          @if (formRegister.controls['username'].errors['maxlength']) {
-                          <div>Username must be at most 20 characters</div>
-                          } 
-                        </div>
+                @if (!isSuccessful) {
+                  <form
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                  >
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        [(ngModel)]="form.username"
+                        required
+                        minlength="3"
+                        maxlength="20"
+                        #username="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                      />
+                      @if (username.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (username.errors['required']) {
+                        <div>Username is required</div>
                         }
-                    </div>
-                    <div class="grid gap-2">
-                      <span class="font-medium leading-none text-sm">Nombre completo</span>
-                      <label class="input-md md:input input-bordered flex items-center gap-2">
-                        <i class="fa-regular fa-user-circle"></i>
-                        <input
-                          type="text"
-                          class="grow"
-                          name="fullname"
-                          placeholder="Alfredo Caracol"
-                          formControlName="fullname"
-                        />
-                      </label>
-                    </div>
-                    <div class="grid gap-2">
-                      <span class="font-medium leading-none text-sm">Email</span>
-                      <label class="input-md md:input input-bordered flex items-center gap-2">
-                        <!-- <label for="email">Email</label> -->
-                        <i class="fa-regular fa-at"></i>
-                        <input
-                          type="email"
-                          class="grow"
-                          placeholder="alfredito@caracoles.com"
-                          name="email"
-                          formControlName="email"
-                        />
-
-                      </label> 
-                      @if (formRegister.controls['email'].errors && formRegister.controls['email'].touched) {
-                        <div class="invalid-feedback">
-                          @if (formRegister.controls['email'].errors['required']) {
-                          <div>Email is required</div>
-                          }
-                          @if (formRegister.controls['email'].errors['email']) {
-                          <div>Email must be a valid email address</div>
-                          }
-                        </div>
+                        @if (username.errors['minlength']) {
+                        <div>Username must be at least 3 characters</div>
                         }
+                        @if (username.errors['maxlength']) {
+                        <div>Username must be at most 20 characters</div>
+                        }
+                      </div>
+                      }
                     </div>
-                    <div class="gap-2 grid">
-                    <span class="font-medium leading-none text-sm">Fecha de nacimiento</span>
-                    <label class="input-md md:input input-bordered flex items-center gap-2">
+                    <div class="form-group">
+                      <label for="fullname">Nombre Completo</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="fullname"
+                        [(ngModel)]="form.fullname"
+                        maxlength="30"
+                        #fullname="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && fullname.errors }"
+                      />
+                      @if (fullname.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (fullname.errors['maxlength']) {
+                        <div>Nombre completo debe tenercomo maximo 30 caracteres</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        [(ngModel)]="form.email"
+                        required
+                        email
+                        #email="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                      />
+                      @if (email.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (email.errors['required']) {
+                        <div>Email is required</div>
+                        }
+                        @if (email.errors['email']) {
+                        <div>Email must be a valid email address</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        [(ngModel)]="form.password"
+                        required
+                        minlength="6"
+                        #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                      />
+                      @if (password.errors && f.submitted) {
+                      <div class="invalid-feedback">
+                        @if (password.errors['required']) {
+                        <div>Password is required</div>
+                        }
+                        @if (password.errors['minlength']) {
+                        <div>Password must be at least 6 characters</div>
+                        }
+                      </div>
+                      }
+                    </div>
+                    <p>{{form.birth_date}}</p>
+                    <div class="form-group">
+                      <label for="password">Fecha de nacimiento</label>
                       <input
                         type="date"
-                        class="grow"
+                        class="input input-bordered"
                         name="birth_date"
-                        formControlName="birth_date"
+                        [(ngModel)]="form.birth_date"
+                        required
+                        min = "1940-01-01"
+                        [max]="currentDate"
+                        #birth_date="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && birth_date.errors }"
                       />
-
-                    </label> 
-                    @if (formRegister.controls['birth_date'].errors && formRegister.controls['birth_date'].touched) {
+                      @if (birth_date.errors && f.submitted) {
                       <div class="invalid-feedback">
-                        @if (formRegister.controls['birth_date'].errors['required']) {
+                        @if (birth_date.errors['required']) {
                         <div>La fecha de nacimiento es requerida</div>
                         }
-                        @if(formRegister.controls['birth_date'].errors['min']) {
+                        @if(birth_date.errors['min']) {
                         <div>La fecha de nacimiento debe ser mayor a 1940-01-01</div>
                         }
-                        @if(formRegister.controls['birth_date'].errors['max']) {
+                        @if(birth_date.errors['max']) {
                         <div>Fecha incorrecta Debes de tener al menos 18 años</div>
-                        } 
-                      </div>
-                      } 
-                    </div>
-                    <div class="grid gap-2">
-                      <span class="font-medium leading-none text-sm">Contraseña</span>
-                      <label class="input-md md:input input-bordered flex items-center gap-2">
-                      <i class="fa-regular fa-lock"></i>
-                      <input
-                        type="password"
-                        class="grow"
-                        placeholder="••••••••••"
-                        name="password"
-                        formControlName="password"
-                      />
-                    </label>
-                    @if (formRegister.controls['password'].errors && formRegister.controls['password'].touched) {
-                      <div class="invalid-feedback">
-                        @if (formRegister.controls['password'].errors['required']) {
-                        <div>Password is required</div>
-                        }
-                        @if (formRegister.controls['password'].errors['minlength']) {
-                        <div>Password must be at least 6 characters</div>
                         }
                       </div>
                       }
                     </div>
-                    <div class="grid gap-2">
-                      <span class="font-medium leading-none text-sm">Repetir contraseña</span>
-                    <label class="input-md md:input input-bordered flex items-center gap-2">
-                      <i class="fa-regular fa-lock-keyhole"></i>
-                      <input
-                        type="password"
-                        class="grow"
-                        placeholder="••••••••••"
-                        name="confirmPassword"
-                        formControlName="confirmPassword"
-                      />                        
-
-                    </label>
-                      @if (formRegister.errors && formRegister.errors['notSame'] && formRegister.touched) {
-                            <div>Passwords must match</div>
-                      }
-                      @if (formRegister.controls['confirmPassword'].errors && formRegister.controls['confirmPassword'].touched) {
-                      <div class="invalid-feedback">
-                        @if (formRegister.controls['confirmPassword'].errors['required']) {
-                        <div>Password is required</div>
-                        }
-                        @if (formRegister.controls['confirmPassword'].errors['minlength']) {
-                        <div>Password must be at least 6 characters</div>
-                        }
-
-                      </div>
-                      }
-                    </div>
-                  </div>
                     <div class="form-group">
-                      <button class="btn btn-primary btn-block" (click)="register()" [disabled]="!formRegister.valid"><i class="fa-regular fa-signature"></i> Registrate</button>
+                      <button class="btn btn-primary btn-block">Sign Up</button>
                     </div>
               
-                    <!-- @if (f.submitted && isSignUpFailed) {
+                    @if (f.submitted && isSignUpFailed) {
                     <div class="alert alert-warning">
                       Signup failed!<br />{{ errorMessage }}
                     </div>
-                    } -->
+                    }
                   </form>
-                  <!-- } -->
-                  
+                  }
                 <!-- <form action="#" class="mt-8 grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="FirstName" class="block text-sm font-medium text-gray-700">
@@ -246,10 +227,8 @@
 
                       <hr>
               <div class="flex flex-col gap-4 text-sm">
-                <p>¿Ya tienes cuenta? ¿Te has equivocado de lugar?&nbsp; 
-                  <a routerLink="/register" class="btn btn-outline btn-accent" >
-                 <i class="fa-regular fa-right-to-bracket"></i> Inicia Sesión
-                </a></p>
+                  <p>Don't have an account?<!-- --> <a class="underline" href="#">Sign up</a></p><a class="underline"
+                      href="#">Forgot your password?</a>
               </div>
           </div>
       </div>
