@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { max } from 'rxjs';
 import Swal from 'sweetalert2'
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

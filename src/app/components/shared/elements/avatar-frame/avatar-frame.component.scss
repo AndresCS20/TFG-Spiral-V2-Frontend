@@ -1,0 +1,79 @@
+.avatarf {
+    box-sizing: border-box;
+    position: relative;
+    padding: 4px;
+  }
+
+.avatar-xsmall{
+    width: 30px;
+    height: 30px;
+}
+  
+.avatar-small {
+    width: 50px;
+    height: 50px;
+  }
+
+  .avatar-large {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .avatar-x-large {
+    width: 144px;
+    width: 144px;
+  }
+  
+  .avatar-image {
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+  
+  .avatar-frame {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .avatar-xsmall .avatar-frame {
+    top: -3.5%;
+    left: -3.5%;
+    max-width: 107%;
+  }
+  .avatar-small .avatar-frame {
+    top: -5%;
+    left: -5%;
+    max-width: 110%;
+  }
+  
+  .avatar-large .avatar-frame {
+    top: -10%;
+    left: -10%;
+    max-width: 120%;
+  }
+  
+  .avatar-x-large .avatar-frame {
+    top: -12.5%;
+    left: -12.5%;
+    max-width: 125%;
+  }
+  
+  .anim-spin {
+    animation: spin 20s linear infinite;
+  }
+  
+  .anim-hue {
+    animation: hue 20s linear infinite;
+  }
+  
+  @keyframes hue {
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

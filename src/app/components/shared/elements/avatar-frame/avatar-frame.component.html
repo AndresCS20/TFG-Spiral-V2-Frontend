@@ -1,0 +1,11 @@
+
+<div class="avatarf "[class]="avatarBodyClass">
+    <img [src]="profile_picture || default_avatar" alt="Avatar" class="avatar-image">
+    
+    @if (frame_name != "none") {
+        <img [src]="selectedFrame?.attributes.image" alt="" 
+        class="avatar-frame absolute"
+        [class]="avatarClass">
+    }
+
+</div>

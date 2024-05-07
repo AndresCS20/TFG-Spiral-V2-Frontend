@@ -33,13 +33,13 @@ export const routes: Routes = [
       loadComponent: () => 
         import('@components/pages/profile/profile.component').then((c)=> c.ProfileComponent)
     }, 
-    { path: 'explore',loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent)},
-    { path: 'notifications',loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
-    { path: 'messages',loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
-    { path: 'bookmarks',loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
-    { path: 'communities',loadComponent: () => import('@components/pages/communities/communities.component').then(m => m.CommunitiesComponent)},
+    { path: 'explore',canActivate: [homeGuard], loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent)},
+    { path: 'notifications',canActivate: [homeGuard], loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
+    { path: 'messages',canActivate: [homeGuard], loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
+    { path: 'bookmarks',canActivate: [homeGuard], loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
+    { path: 'communities',canActivate: [homeGuard], loadComponent: () => import('@components/pages/communities/communities.component').then(m => m.CommunitiesComponent)},
     { path: 'community', redirectTo: ''},
-    { path: 'community', 
+    { path: 'community',canActivate: [homeGuard],  
       loadComponent: () => import('@components/pages/community/community.component').then(m => m.CommunityComponent),
       loadChildren: () => import('@components/pages/community/community.routes')
       // children: [
@@ -48,6 +48,6 @@ export const routes: Routes = [
       //   { path: ':shortname/members', loadComponent: () => import('@components/pages/community/members/members.component').then(m => m.MembersComponent) }
       // ]
     },
-    { path: 'community/:shortname', component: CommunityComponent },
+    { path: 'community/:shortname',canActivate: [authGuard],  component: CommunityComponent },
     { path: '**', redirectTo: 'home'}
   ];

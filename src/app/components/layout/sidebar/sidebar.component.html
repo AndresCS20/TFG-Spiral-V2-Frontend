@@ -115,15 +115,92 @@
       </li>
     }
     </ul>
-
+  
     <ul class="menu content-center"></ul>
   </div>
 </div>
 <div class="sidebar__profile">
-  <button class="btn btn-accent px-5 flex w-full">
+  <button class="btn btn-accent switch px-5 flex w-full" onclick="my_modal_2.showModal()">
     <i class="fa-regular fa-brush text-xl"></i>
     <span class="hide">Personalización</span>
   </button>
+  <dialog id="my_modal_2" class="modal">
+    <div class="modal-box w-10/12 md:w-6/12 max-w-5xl">
+      <h3 class="font-bold text-lg my-2">
+        <i class="fa-solid fa-paint-roller"></i> Temas
+      </h3>
+      <form [formGroup]="themeForm">
+        <div
+          class="rounded-box grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gird-cols-4"
+        >
+        @for (theme of themes; track $index) {
+          <div
+           
+            class="border-base-content/20 hover:border-base-content/40 overflow-hidden rounded-lg border outline outline-2 outline-offset-2 outline-transparent"
+            [attr.data-set-theme]="theme"
+            data-act-class="!outline-base-content"
+          >
+            <label class="label cursor-pointer gap-4 border-0">
+              <input
+                type="radio"
+                class="radio theme-controller hidden"
+                value="{{ theme }}"
+                formControlName="theme"
+              />
+              <div
+                [attr.data-theme]="theme"
+                class="bg-base-100 text-base-content w-full cursor-pointer font-sans overflow-hidden rounded-lg"
+              >
+                <div class="grid grid-cols-5 grid-rows-3">
+                  <div
+                    class="bg-base-200 col-start-1 row-span-2 row-start-1"
+                  ></div>
+                  <div class="bg-base-300 col-start-1 row-start-3"></div>
+                  <div
+                    class="bg-base-100 col-span-4 col-start-2 row-span-3 row-start-1 flex flex-col gap-1 p-2"
+                  >
+                    <div class="font-bold">{{ theme }}</div>
+                    <div class="flex flex-wrap gap-1">
+                      <div
+                        class="bg-primary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                      >
+                        <div class="text-primary-content text-sm font-bold">
+                          C
+                        </div>
+                      </div>
+                      <div
+                        class="bg-secondary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                      >
+                        <div class="text-secondary-content text-sm font-bold">
+                          O
+                        </div>
+                      </div>
+                      <div
+                        class="bg-accent flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                      >
+                        <div class="text-accent-content text-sm font-bold">M</div>
+                      </div>
+                      <div
+                        class="bg-neutral flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                      >
+                        <div class="text-neutral-content text-sm font-bold">
+                          U
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        }
+        </div>
+      </form>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
 </div>
 
 <!--    
@@ -215,3 +292,301 @@
 
       </ul>
     </div> -->
+
+<!-- <div class="sidebar-top-wrapper">
+  <div class="sidebar-top">
+    <a class="logo__wrapper" href="#">
+      <img
+        alt="Logo"
+        class="logo-small"
+        src="https://i.imgur.com/2qCcacN.png"
+      />
+      <span class="hide company-name font-['Righteous']">Spiral</span>
+    </a>
+  </div>
+  <button
+    class="closed-btn btn btn-circle btn-ghost mx-1"
+    (click)="collapseSidebar()"
+    type="button"
+  >
+    <i class="fa-regular fa-circle-xmark text-lg"></i>
+  </button>
+</div>
+<div class="sidebar-links-wrapper overflow-y-scroll menu-bar">
+  <div class="sidebar-links">
+    <ul class="menu content-center">
+      @if (!isLoggedIn) {
+      <li>
+        <a 
+        class="tooltip flex text-left"
+        routerLink="/login" routerLinkActive="active"
+        title="Iniciar Sesión"
+        >
+          <i class="fa-regular fa-person-to-portal icon text-lg"></i>
+          <span class="hide">Iniciar Sesión</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        routerLink="/register" routerLinkActive="active"
+        title="Registrate"
+        >
+          <i class="fa-regular fa-signature text-lg"></i>
+          <span class="hide">Registrate</span>
+        </a>
+      </li>
+      }@else {
+
+      
+      <li>
+        <a
+          class="tooltip flex text-left"
+          [routerLink]="['/home']" [routerLinkActive]="['active']"
+          title="Inicio"
+        >
+          <i class="fa-regular fa-home text-lg"></i>
+          <span class="hide">Inicio</span>
+        </a>
+      </li>
+      <li>
+        <a 
+          class="tooltip flex text-left" 
+          [routerLink]="['/explore']" [routerLinkActive]="['active']"
+          title="Explorar"
+          >
+          <i class="fa-regular fa-planet-moon text-lg"></i>
+          <span class="hide">Explorar</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        [routerLink]="['/communities']" [routerLinkActive]="['active']"
+        title="Comunidades"
+        >
+          <i class="fa-regular fa-people-group text-lg"></i>
+          <span class="hide">Comunidades</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        routerLink="/messages" routerLinkActive="active"
+        title="Mensajes">
+          <div class="indicator">
+            <span class="indicator-item badge badge-secondary badge-xs text-xs z-0">99+</span>
+            <i class="fa-regular fa-message-smile text-lg"></i>
+          </div>
+          <span class="hide">Mensajes</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        routerLink="/marketplace" routerLinkActive="active"
+        >
+          <i class="fa-regular fa-store text-lg"></i>
+          <span class="hide">Mercado</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        routerLink="/bookmark" routerLinkActive="active"
+        title="Guardado">
+          <i class="fa-regular fa-bookmark text-lg"></i>
+          <span class="hide">Guardado</span>
+        </a>
+      </li>
+      <li>
+        <a 
+        class="tooltip flex text-left" 
+        routerLink="/devzone" routerLinkActive="active"
+        title="DevZone">
+          <i class="fa-regular fa-flask text-lg"></i>
+          <span class="hide">DevZone</span>
+        </a>
+      </li>
+    }
+    </ul>
+    
+    <ul class="menu content-center"></ul>
+  </div>
+</div>
+
+
+  <div class="drawer">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        
+        <label for="my-drawer" class="btn btn-primary drawer-button">
+          <i class="fa-regular fa-brush text-xl"></i>
+          <span class="hide">Personalización</span>
+        </label>
+      </div> 
+      <div class="drawer-side">
+        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="menu p-4 w-80 min-h-full bg-base-200 text-base-content z-10">
+          <h1>Hola drawer</h1>
+          <form [formGroup]="themeForm">
+            <div
+              class="rounded-box block gap-2 "
+            >
+            @for (theme of themes; track $index) {
+              <div
+               
+                class="border-base-content/20 hover:border-base-content/40 overflow-hidden rounded-lg border outline outline-2 outline-offset-2 outline-transparent"
+                [attr.data-set-theme]="theme"
+                data-act-class="!outline-base-content"
+              >
+                <label class="label cursor-pointer gap-4 border-0">
+                  <input
+                    type="radio"
+                    class="radio theme-controller hidden"
+                    value="{{ theme }}"
+                    formControlName="theme"
+                  />
+                  <div
+                    [attr.data-theme]="theme"
+                    class="bg-base-100 text-base-content w-full cursor-pointer font-sans overflow-hidden rounded-lg"
+                  >
+                    <div class="grid grid-cols-5 grid-rows-3">
+                      <div
+                        class="bg-base-200 col-start-1 row-span-2 row-start-1"
+                      ></div>
+                      <div class="bg-base-300 col-start-1 row-start-3"></div>
+                      <div
+                        class="bg-base-100 col-span-4 col-start-2 row-span-3 row-start-1 flex flex-col gap-1 p-2"
+                      >
+                        <div class="font-bold">{{ theme }}</div>
+                        <div class="flex flex-wrap gap-1">
+                          <div
+                            class="bg-primary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                          >
+                            <div class="text-primary-content text-sm font-bold">
+                              C
+                            </div>
+                          </div>
+                          <div
+                            class="bg-secondary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                          >
+                            <div class="text-secondary-content text-sm font-bold">
+                              O
+                            </div>
+                          </div>
+                          <div
+                            class="bg-accent flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                          >
+                            <div class="text-accent-content text-sm font-bold">M</div>
+                          </div>
+                          <div
+                            class="bg-neutral flex aspect-square w-5 items-center justify-center rounded lg:w-6"
+                          >
+                            <div class="text-neutral-content text-sm font-bold">
+                              U
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            }
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+   
+    <a href="https://flowbite.com/" class="hidden lg:flex justify-center items-center -ms-3 mb-5">
+      <img src="assets/images/spiral.png" class="h-6 me-3 sm:h-9" alt="Spiral Logo">
+      <span class="self-center text-3xl font-semibold whitespace-nowrap font-['Righteous'] color-logo">Spiral</span>
+   </a> 
+
+<div class="md:relative mx-auto px-0 xl:px-6">
+
+      <app-userzone class="hidden md:block"></app-userzone>
+
+      <ul
+        class="menu menu-horizontal p-0 lg:menu-vertical list-reset flex flex-row md:flex-col text-center md:text-left">
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block active py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-regular fa-home px-0 md:px-3"></i>
+            <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+              Inicio</span>
+          </a>
+        </li>
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-duotone fa-planet-moon px-0 md:px-3"></i>
+            <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+              Explorar</span>
+          </a>
+        </li>
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-duotone fa-people-group px-0 md:px-3"></i>
+            <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+              Comunidades</span>
+          </a>
+        </li>
+        <li class="my-1 flex-1 dropdown dropdown-top sm:dropdown-bottom w-full">
+          <a
+            tabindex="0"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-regular fa-badge-sheriff px-0 md:px-3"></i>
+            <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">Panel Admin</span>
+            <i class="fa-regular fa-down px-0 md:px-3"></i>
+          </a>
+          <ul
+            tabindex="0"
+            class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 mt-4">
+            <li><button>Item 1</button></li>
+            <li><button>Item 2</button></li>
+          </ul>
+      </li>
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-regular fa-bell px-0 md:px-3"></i>
+            <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
+              Notificaciones</span>
+          </a>
+        </li>
+        
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-duotone fa-bookmark px-0 md:px-3"></i
+            ><span
+              class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block"
+              >Guardado</span
+            >
+          </a>
+        </li>
+        <li class="my-1 flex-1">
+          <a
+            href="#"
+            class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
+            <i class="fa-duotone fa-flask px-0 md:px-3"></i
+            ><span
+              class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block"
+              >Test</span
+            >
+          </a>
+        </li>
+
+      </ul>
+    </div> --> 

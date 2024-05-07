@@ -5,11 +5,12 @@ import { StorageService } from '@services/storage.service';
 import { EventBusService } from '@shared/event-bus.service';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
+import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink,UserzoneComponent],
+  imports: [RouterLink,UserzoneComponent, AvatarFrameComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -34,17 +35,8 @@ export class HeaderComponent implements OnInit{
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
-      next: res => {
-        console.log(res);
-        this.storageService.clean();
-
-        window.location.reload();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+    this.storageService.clean();
+    window.location.reload();
   }
 
 

@@ -24,6 +24,7 @@ export class AppComponent {
   username?: string;
 
   eventBusSub?: Subscription;
+  storedTheme!: string | null;
 
   constructor(
     private storageService: StorageService,
@@ -33,7 +34,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-
+    this.storedTheme = localStorage.getItem('theme');
+    this.changeTheme(this.storedTheme? this.storedTheme : 'dark');
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
       console.log(user)
@@ -44,6 +46,11 @@ export class AppComponent {
     this.eventBusSub = this.eventBusService.on('logout', () => {
       this.logout();
     });
+  }
+
+  changeTheme(theme: string) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 
   logout(): void {
