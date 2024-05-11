@@ -1,0 +1,17 @@
+<div class="card card-compact shadow-md text-neutral-content bg-[var(--bg-base-bg)]	mb-2">
+
+ <div class="card-body block: md:flex md:flex-row	items-center">
+
+ <div class="flex-grow flex-1">
+   <h1 class="card-title">
+    <i class="fa-regular {{icon}}"></i> {{title}}</h1>
+   <p>{{subtitle}}</p>
+ </div>   
+ <div class="flex-shrink-0">
+   <img src="{{image}}" alt="title image" class="w-32 h-32">
+   @if(button){
+   <button [routerLink]="buttonLink" class="btn btn-primary -mt-16"><i class="fa-regular {{buttonIcon}}"></i> {{button}}</button>
+   }
+ </div>
+ </div>
+</div>

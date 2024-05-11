@@ -1,0 +1,16 @@
+@if(urlSegment === 'followers'){
+ <h1 class="text-2xl font-semibold leading-tight">
+  <i class="fa-regular fa-person-walking-arrow-right"></i> Seguidores</h1>
+} @else {
+ <h1 class="text-2xl font-semibold leading-tight">
+  <i class="fa-regular fa-person-walking-arrow-loop-left"></i> 
+  Seguidos
+ </h1>
+}<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-3 md:p-4 xl:p-5">
+@for (number of numbers; track $index) {
+ <app-user-box/>
+}
+</div>
+
+
+

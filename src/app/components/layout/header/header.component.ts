@@ -6,11 +6,12 @@ import { EventBusService } from '@shared/event-bus.service';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
+import { CreatePublicationModalComponent } from '../../shared/elements/create-publication-modal/create-publication-modal.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink,UserzoneComponent, AvatarFrameComponent],
+  imports: [RouterLink,UserzoneComponent, AvatarFrameComponent, CreatePublicationModalComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

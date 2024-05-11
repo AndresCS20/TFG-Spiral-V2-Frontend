@@ -1,0 +1,31 @@
+<!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="create_post.showModal()">open modal</button>
+<dialog id="create_post" class="modal">
+  <div class="modal-box w-11/12">
+    <h3 class="font-bold text-lg">Crear publicación</h3>
+    <form >
+    @switch (publicationType) {
+     @case ("text") {
+      <input type="text" class="input input-bordered w-full" placeholder="Escribe algo interesante..."/>
+     }
+     @case ("image") {
+
+     }
+     @case ("url") {
+
+     }
+    }
+
+    <select class="select w-full max-w-xs">
+     <option disabled selected>Elige donde crear la publicación</option>
+     <option>Global</option>
+     <option>BlackMesa</option>
+     <option>Portal</option>
+     <option>Spain</option>
+   </select>
+  </form>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>cerrar</button>
+  </form>
+</dialog>

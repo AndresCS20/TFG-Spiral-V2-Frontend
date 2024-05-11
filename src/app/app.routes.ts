@@ -27,13 +27,7 @@ export const routes: Routes = [
       loadComponent: () => 
         import('@components/pages/auth/register/register.component').then((c)=> c.RegisterComponent)
     },
-    {
-      path: 'profile/:username?',
-      canActivate: [homeGuard],
-      loadComponent: () => 
-        import('@components/pages/profile/profile.component').then((c)=> c.ProfileComponent)
-    }, 
-    { path: 'explore',canActivate: [homeGuard], loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent)},
+
     { path: 'notifications',canActivate: [homeGuard], loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
     { path: 'messages',canActivate: [homeGuard], loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
     { path: 'bookmarks',canActivate: [homeGuard], loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
@@ -42,12 +36,27 @@ export const routes: Routes = [
     { path: 'community',canActivate: [homeGuard],  
       loadComponent: () => import('@components/pages/community/community.component').then(m => m.CommunityComponent),
       loadChildren: () => import('@components/pages/community/community.routes')
-      // children: [
-      //   { path: ':shortname', loadComponent: () => import('@components/pages/community/feed/feed.component').then(m => m.FeedComponent)},
-      //   { path: ':shortname/settings', loadComponent: () => import('@components/pages/community/settings/settings.component').then(m => m.SettingsComponent)},
-      //   { path: ':shortname/members', loadComponent: () => import('@components/pages/community/members/members.component').then(m => m.MembersComponent) }
-      // ]
     },
-    { path: 'community/:shortname',canActivate: [authGuard],  component: CommunityComponent },
+    { path: 'community/:username',canActivate: [authGuard],  component: CommunityComponent },
+    { path: 'profile', redirectTo: ''}, 
+    {
+      path: 'profile/:username',
+      redirectTo: 'profile/:username/feed',
+    },
+    { path: 'profile',canActivate: [homeGuard],  
+      loadComponent: () => import('@components/pages/profile/profile.component').then(m => m.ProfileComponent),
+      loadChildren: () => import('@components/pages/profile/profile.routes')
+    },
+    // { path: 'settings', redirectTo: 'communities'},
+    { path: 'settings',canActivate: [homeGuard],  
+      loadComponent: () => import('@components/pages/settings/settings.component').then(m => m.SettingsComponent),
+      loadChildren: () => import('@components/pages/settings/settings.routes')
+    },
+    { path: 'explore',canActivate: [homeGuard],  
+      loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent),
+      loadChildren: () => import('@components/pages/explore/explore.routes')
+    },
+    // { path: 'settings',canActivate: [authGuard],  component: SettingsComponent },
+    // { path: 'profile/:username',canActivate: [authGuard],  component: CommunityComponent },
     { path: '**', redirectTo: 'home'}
   ];

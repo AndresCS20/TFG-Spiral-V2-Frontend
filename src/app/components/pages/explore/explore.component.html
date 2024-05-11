@@ -1,1 +1,22 @@
-<p>explore works!</p>
+<app-page-title
+  [title]="'Explora'"
+  [subtitle]="'¡Descubre nuevas comunidades, publicaciones y personas en nuestra red social! Explora las últimas publicaciones, comunidades y personas en Spiral y encuentra contenido interesante para ti.'"
+  [icon]="'fa-solid fa-compass'"
+  [image]="'assets/images/explore.svg'"
+></app-page-title>
+
+<div class="card card-bordered shadow-md card-compact items-center my-2">
+ <ul class="menu menu-vertical md:menu-horizontal w-fit rounded-box gap-2">
+  <li><a routerLink="/explore/global-posts" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Publicaciones Globales</a></li>
+  <li><a routerLink="/explore/meet-people" routerLinkActive="active"><i class="fa-solid fa-people"></i>&nbsp;Conoce gente nueva</a></li>
+ </ul>
+ </div>
+ <div tabindex="0" class="collapse md:collapse-open border border-base-300 bg-base-200"> 
+  <div class="collapse-title text-xl font-medium">
+    UTILIZAR ESTO PARA EL ABOUT DE LA COMUNIDAD
+  </div>
+  <div class="collapse-content"> 
+    <p>tabindex="0" attribute is necessary to make the div focusable</p>
+  </div>
+</div>
+ <router-outlet></router-outlet>

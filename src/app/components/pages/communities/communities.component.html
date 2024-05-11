@@ -1,1 +1,21 @@
-<p>communities works!</p>
+<div class="card card-compact shadow-md  text-neutral-content bg-[var(--bg-base-bg)]">
+
+  <div class="card-body block: md:flex md:flex-row	items-center	">
+
+  <div class="flex-grow flex-1">
+    <h1 class="card-title"><i class="fa-solid fa-users"></i> Las <strong>40</strong> comunidades de Spiral</h1>
+    <p>¡Aquí encontrarás comunidades donde poder unirte a discusiones sobre tus temas favoritos y conectar con personas de todo el mundo que comparten tus intereses! Desde tecnología hasta deportes, hay una comunidad para todos. ¡Elige la que más te guste y conversa ahora mismo!</p>
+  </div>   
+  <div class="flex-shrink-0">
+    <img src="assets/images/community.svg" alt="Communities" class="w-32 h-32 -mb-10">
+    <button class="btn btn-primary -mt-16"><i class="fa-regular fa-plus"></i> Crear comunidad</button>
+  </div>
+  </div>
+</div>
+
+
+ <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-0 p-3 md:p-4 xl:p-5">
+ @for (number of numbers; track $index) {
+ <app-community-box></app-community-box>
+ }
+</div>
