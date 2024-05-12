@@ -1,31 +1,72 @@
 <!-- Open the modal using ID.showModal() method -->
-<button class="btn" onclick="create_post.showModal()">open modal</button>
+<button class="btn tooltip tooltip-bottom flex" data-tip="Crear publicación" onclick="create_post.showModal()"><i class="fa-regular fa-circle-plus"></i> <span class="hidden lg:block">Crear publicación</span></button>
 <dialog id="create_post" class="modal">
-  <div class="modal-box w-11/12">
-    <h3 class="font-bold text-lg">Crear publicación</h3>
+  <div class="modal-box w-11/12 max-w-screen-md p-5">
+    <h3 class="font-bold text-lg"><i class="fa-regular fa-circle-plus"></i> Crear publicación</h3>
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
+    </form>
+    <div class="flex flex-col my-5">
+    <span class="text-sm mb-2">Elige el tipo de publicación</span>
+    <div class="bg-base-200 w-full rounded-box justify-center flex">
+      
+    <ul class="menu menu-vertical lg:menu-horizontal gap-3">
+      <li>
+        <a [className]="publicationType == 'text' ? 'active' : ''" (click)="setPublicationType('text')"><i class="fa-regular fa-pen-to-square"></i> Texto</a>
+      </li>
+      <li>
+        <a [className]="publicationType == 'image' ? 'active' : ''" (click)="setPublicationType('image')"><i class="fa-regular fa-image"></i>Imagen</a>
+      </li>
+      <li>
+        <a [className]="publicationType == 'video' ? 'active' : ''" (click)="setPublicationType('video')"><i class="fa-regular fa-video"></i>Video</a>
+      </li>
+      <li>
+        <a [className]="publicationType == 'url' ? 'active' : ''" (click)="setPublicationType('url')"><i class="fa-regular fa-link"></i>URL</a>
+      </li>
+    </ul></div>
+    </div>
     <form >
     @switch (publicationType) {
-     @case ("text") {
-      <input type="text" class="input input-bordered w-full" placeholder="Escribe algo interesante..."/>
-     }
-     @case ("image") {
 
+     @case ("image") {
+      
+      
+      
+      <div class="flex my-5" #imageInput>
+        <input  type="text" class="input input-bordered flex-1 mr-3" placeholder="URL de la imagen" [(ngModel)]="currentImageUrl" [ngModelOptions]="{standalone: true}" name="{{currentImageUrl}}">
+        <button class="btn btn-outline btn-secondary " (click)="addImage()"><i class="fa-regular fa-image"></i> Añadir imagen</button>
+</div>
+      
+      <div id="imageContainer" class="grid grid-cols-2 md:grid-cols-3 gap-3 my-3"></div>
      }
      @case ("url") {
-
-     }
+      <div class="flex my-5">
+        <input type="text" class="input input-bordered flex-1 mr-3" placeholder="URL de la publicación">
+        <button class="btn btn-outline btn-secondary"><i class="fa-regular fa-link-simple"></i>Añadir URL</button>
+      </div>
+     }    
+      @case ("video") {
+        <div class="flex my-5">
+          <input type="text" class="input input-bordered flex-1 mr-3" placeholder="URL del video">
+          <button class="btn btn-outline btn-secondary"><i class="fa-regular fa-video"></i>Añadir video</button>
+        </div>
+      }
+     @default {}
     }
+    <textarea rows="3" class="textarea textarea-bordered textarea-lg w-full" placeholder="¿En que estas pensando" id="text-input"></textarea>
 
-    <select class="select w-full max-w-xs">
-     <option disabled selected>Elige donde crear la publicación</option>
-     <option>Global</option>
-     <option>BlackMesa</option>
-     <option>Portal</option>
-     <option>Spain</option>
-   </select>
+    <label class="form-control w-full">
+      <div class="label">
+        <span class="label-text">Elige donde crear la publicación</span>
+      </div>
+      <select class="select select-bordered"> 
+        <option>Global</option>
+        <option>BlackMesa</option>
+        <option>Portal</option>
+        <option>Spain</option>
+      </select>
+      </label>  
+   <button class="btn btn-primary w-full mt-2">Publicar</button>
   </form>
   </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>cerrar</button>
-  </form>
 </dialog>
