@@ -5,9 +5,9 @@
           class="w-full h-40 bg-cover bg-center rounded-3xl"
           style="background-image:url('https://media.cdn.community.lambdageneration.com/backgrounds/1680017288334BfDICUCdBNBfDf_d.jpg?size=normal')"
         ></div>
-        <div class="flex justify-between items-center w-full px-6">
+        <div class="block md:flex justify-between items-center w-full px-6">
           
-        <div class="flex items-center gap-4">
+        <div class="block md:flex items-center gap-4">
           <div class="w-24 h-24 rounded-full overflow-hidden -mt-16 border-4 border-[var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))]">
             <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Profile Picture" class="w-full h-full object-cover" />
           </div>
@@ -23,235 +23,19 @@
       </div>
       </div>
     </header>
+    <div class="card card-bordered bg-base-200/50 card-compact items-center my-2">
+      <ul class="menu menu-vertical md:menu-horizontal w-fit rounded-box gap-2">
+       <li class="block md:hidden"><a routerLink="/community/{{ communityshortname }}/about" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Sobre blackmesa</a></li>
+       <li><a routerLink="/community/{{ communityshortname }}/feed" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Publicaciones</a></li>
+       <li><a routerLink="/community/{{ communityshortname }}/members" routerLinkActive="active"><i class="fa-solid fa-people"></i>&nbsp;Miembros</a></li>
+      </ul>
+      </div>
     <div class="container mx-auto block md:flex flex-row md:flex-row-reverse gap-8 py-8">
       <div class="w-full md:w-80 flex-shrink-0 mb-3 md:mb-0">
-        <div tabindex="0" class="collapse md:collapse-open bg-base-200 rounded-lg shadow-md"> 
-          <div class="collapse-title text-xl font-medium pb-2">
-            About r/Vercel
-          </div>
-          <div class="collapse-content">
-            <p>
-              The official Vercel community on Reddit. Discuss all things Vercel, including product updates,
-              development tips, and more.
-            </p>
-            <div>
-              <h3 class="text-lg font-medium">Community Rules</h3>
-              <ul class="list-disc pl-6 text-gray-700 mt-2 space-y-2">
-                <li>Be respectful and courteous to others</li>
-                <li>No self-promotion or spam</li>
-                <li>Stay on topic and related to Vercel</li>
-                <li>No illegal or unethical content</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-lg font-medium">Moderators</h3>
-              <div class="flex items-center gap-2 mt-2">
-                <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Moderator Avatar" class="w-8 h-8 rounded-full" />
-                <div>
-                  <h4 class="font-medium">u/vercel</h4>
-                  <p class="text-gray-500 text-sm">Vercel Team</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 mt-2">
-                <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Moderator Avatar" class="w-8 h-8 rounded-full" />
-                <div>
-                  <h4 class="font-medium">u/shadcn</h4>
-                  <p class="text-gray-500 text-sm">Community Manager</p>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+        <app-about-us class="hidden md:block"></app-about-us>
       </div>
       <div class="flex-1">
-        <div class="space-y-6">
-          <div class="bg-base-200 rounded-lg shadow-md p-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Author Avatar" class="w-8 h-8 rounded-full" />
-                <div>
-                  <h3 class="font-medium">Vercel Announcements</h3>
-                  <p class="text-gray-500 text-sm">Posted by u/vercel</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="w-5 h-5"
-                  >
-                    <path d="m5 12 7-7 7 7"></path>
-                    <path d="M12 19V5"></path>
-                  </svg>
-                </button>
-                <span class="text-gray-500">100</span>
-                <button class="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="w-5 h-5"
-                  >
-                    <path d="M12 5v14"></path>
-                    <path d="m19 12-7 7-7-7"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <h2 class="text-xl font-medium mt-4">Introducing Vercel Serverless Functions</h2>
-            <p class="text-gray-700 mt-2">
-              We're excited to announce the launch of Vercel Serverless Functions, a powerful new feature that allows
-              you to run custom code on our edge network.
-            </p>
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center gap-2 text-gray-500 text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                >
-                  <path d="M17 6.1H3"></path>
-                  <path d="M21 12.1H3"></path>
-                  <path d="M15.1 18H3"></path>
-                </svg>
-                <span>50 comments</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-500 text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <span>2 hours ago</span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-base-200 rounded-lg shadow-md p-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Author Avatar" class="w-8 h-8 rounded-full" />
-                <div>
-                  <h3 class="font-medium">Vercel Docs Update</h3>
-                  <p class="text-gray-500 text-sm">Posted by u/vercel</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="w-5 h-5"
-                  >
-                    <path d="m5 12 7-7 7 7"></path>
-                    <path d="M12 19V5"></path>
-                  </svg>
-                </button>
-                <span class="text-gray-500">75</span>
-                <button class="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="w-5 h-5"
-                  >
-                    <path d="M12 5v14"></path>
-                    <path d="m19 12-7 7-7-7"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <h2 class="text-xl font-medium mt-4">Vercel Docs Now Support Dark Mode</h2>
-            <p class="text-gray-700 mt-2">
-              We've just released an update to the Vercel documentation that includes support for dark mode. Check it
-              out and let us know what you think!
-            </p>
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center gap-2 text-gray-500 text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                >
-                  <path d="M17 6.1H3"></path>
-                  <path d="M21 12.1H3"></path>
-                  <path d="M15.1 18H3"></path>
-                </svg>
-                <span>25 comments</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-500 text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-5 h-5"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <span>1 day ago</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
-<router-outlet></router-outlet>

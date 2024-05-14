@@ -1,59 +1,177 @@
 <section class="relative pt-40 pb-24">
-  <div  alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60 rounded-xl" style="background:url(https://i.imgur.com/x0DssE0.jpg); background-size: cover;background-position: center;"></div>
+  <div
+    alt="cover-image"
+    class="w-full absolute top-0 left-0 z-0 h-60 rounded-xl"
+    style="
+      background: url(https://i.imgur.com/x0DssE0.jpg);
+      background-size: cover;
+      background-position: center;
+    "
+  ></div>
   <div class="w-full max-w-9xl mx-auto px-6 md:px-8">
-      <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
-        <app-avatar-frame profile_picture="https://i.imgur.com/gj67wbp.jpg" profile_size="xlarge" frame_name="fire"></app-avatar-frame>
+    <div
+      class="flex items-center justify-center sm:justify-start relative z-10 mb-5"
+    >
+      <app-avatar-frame
+        profile_picture="https://i.imgur.com/gj67wbp.jpg"
+        profile_size="xlarge"
+        frame_name="fire"
+      ></app-avatar-frame>
+    </div>
+    <div
+      class="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5"
+    >
+      <div class="block">
+        <h3 class="font-manrope font-bold text-4xl mb-1">Andres CS</h3>
+        <p class="font-normal text-base leading-7">
+          <i class="fa-regular fa-at mr-1 text-sm"></i>andres
+        </p>
       </div>
-      <div class="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5">
-          <div class="block">
-              <h3 class="font-manrope font-bold text-4xl mb-1">Andres CS</h3>
-              <p class="font-normal text-base leading-7"><i class="fa-regular fa-at mr-1 text-sm"></i>andres</p>
-          </div>
-          <div class="flex items-center gap-4">
-            <span class="py-3.5 px-5 badge badge-outline badge-primary font-semibold text-base leading-7 shadow-sm"><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;4 Seguidores</span>
-            <span class="py-3.5 px-5 badge badge-outline badge-secondary font-semibold text-base leading-7 shadow-sm"><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;4 Seguidos</span>
-        </div>
+      <div class="flex items-center gap-4">
+        <span
+          class="py-3.5 px-5 badge badge-outline badge-primary font-semibold text-base leading-7 shadow-sm"
+          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;4
+          Seguidores</span
+        >
+        <span
+          class="py-3.5 px-5 badge badge-outline badge-secondary font-semibold text-base leading-7 shadow-sm"
+          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;4
+          Seguidos</span
+        >
       </div>
-      <div class="flex flex-col lg:flex-row max-lg:gap-5 items-center justify-between py-0.5">
-          <div class="flex items-center gap-4">
-              <button class="py-3.5 px-5 btn btn-primary"><i class="fa-regular fa-user-pen"></i> Editar Perfil</button>
-              <button class="py-3.5 px-5 btn btn-info"><i class="fa-regular fa-cogs"></i> Ajustes</button>
-          </div>
-          <div role="tablist" class="menu menu-vertical md:menu-horizontal gap-1 w-full md:w-fit">
-            <li><a routerLink="/profile/{{currentUser.username}}/feed" routerLinkActive="active"><i class="fa-regular fa-rectangle-vertical"></i> Publicaciones</a></li>
-            <li><a routerLink="/profile/{{currentUser.username}}/media" routerLinkActive="active"><i class="fa-regular fa-rectangle-history-circle-user"></i> Multimedia</a></li>
-            <li><a routerLink="/profile/{{currentUser.username}}/communities" routerLinkActive="active"><i class="fa-regular fa-users"></i> Comunidades</a></li>
-            <li><a routerLink="/profile/{{currentUser.username}}/followers" routerLinkActive="active"><i class="fa-duotone fa-person-walking-arrow-right"></i> Lista de Seguidores</a></li>
-            <li><a routerLink="/profile/{{currentUser.username}}/following" routerLinkActive="active"><i class="fa-regular fa-person-walking-arrow-loop-left"></i> Lista de Seguidos</a></li>
-          </div>
+    </div>
+    <div
+      class="flex flex-col lg:flex-row max-lg:gap-5 items-center justify-between py-0.5"
+    >
+      <div class="flex items-center gap-4">
+        <button class="py-3.5 px-5 btn btn-primary">
+          <i class="fa-regular fa-user-pen"></i> Editar Perfil
+        </button>
+        <button class="py-3.5 px-5 btn btn-info">
+          <i class="fa-regular fa-cogs"></i> Ajustes
+        </button>
       </div>
+      <div
+        role="tablist"
+        class="menu menu-vertical md:menu-horizontal gap-1 w-full md:w-fit"
+      >
+        <li>
+          <a
+            routerLink="/profile/{{ currentUser.username }}/feed"
+            routerLinkActive="active"
+            ><i class="fa-regular fa-rectangle-vertical"></i> Publicaciones</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/profile/{{ currentUser.username }}/media"
+            routerLinkActive="active"
+            ><i class="fa-regular fa-rectangle-history-circle-user"></i>
+            Multimedia</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/profile/{{ currentUser.username }}/communities"
+            routerLinkActive="active"
+            ><i class="fa-regular fa-users"></i> Comunidades</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/profile/{{ currentUser.username }}/followers"
+            routerLinkActive="active"
+            ><i class="fa-duotone fa-person-walking-arrow-right"></i> Lista de
+            Seguidores</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/profile/{{ currentUser.username }}/following"
+            routerLinkActive="active"
+            ><i class="fa-regular fa-person-walking-arrow-loop-left"></i> Lista
+            de Seguidos</a
+          >
+        </li>
+      </div>
+    </div>
   </div>
 </section>
 
 <div class="w-full max-w-9xl mx-auto px-6 md:px-8 block md:flex gap-3">
   <div class="flex-1">
-      <router-outlet></router-outlet>
-
+    <router-outlet></router-outlet>
   </div>
-  
+
   <div class="w-full md:w-1/4">
-    <div class="flex flex-col w-full p-8 pt-0 filter-info card"><!---->
+    <div class="flex flex-col w-full p-8 pt-0 filter-info card">
+      <!---->
       <div class="text-2xl font-semibold leading-tight">
         <i class="fa-regular fa-info-circle"></i>
-        Sobre mi</div>
-      <div class="mt-4"> 
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus aliquam facilis repellat. Unde, placeat ea? Possimus esse nobis et, deleniti alias optio necessitatibus fuga, ratione reprehenderit doloremque magnam iusto ipsum!
+        Sobre mi
+      </div>
+      <div class="mt-4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+        aliquam facilis repellat. Unde, placeat ea? Possimus esse nobis et,
+        deleniti alias optio necessitatibus fuga, ratione reprehenderit
+        doloremque magnam iusto ipsum!
+      </div>
+      <hr class="w-full border-t my-6" />
+      <div class="flex flex-col">
+        <div class="flex items-center">
+          <i class="fa-regular fa-map-marker-alt mr-3"></i
+          ><span class="leading-none">Madrid, ESPAÑITA</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <i class="fa-regular fa-briefcase mr-3"></i
+          ><span class="leading-none">Junior FrontEnd Developer</span>
+        </div>
+
+        <div class="flex items-center mt-4">
+          <i class="fa-regular fa-calendar-day mr-3"></i
+          ><span class="leading-none">April, 24</span>
+        </div>
       </div>
       <hr class="w-full border-t my-6">
-      <div class="flex flex-col">
-        <div class="flex items-center"><i class="fa-regular fa-map-marker-alt mr-3"></i><span class="leading-none">Madrid, ESPAÑITA</span></div>
-        <div class="flex items-center mt-4">
-          <i class="fa-regular fa-briefcase mr-3"></i><span class="leading-none">Junior FrontEnd Developer</span></div>
-          
-        <div class="flex items-center mt-4">
-          <i class="fa-regular fa-calendar-day mr-3"></i><span class="leading-none">April, 24</span></div>
+        <div>
+          <h3 class="text-2xl font-semibold leading-tight"><i class="fa-regular fa-gamepad-modern"></i> Intereses</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="badge badge-neutral">Travel</span>
+            <span class="badge badge-neutral">Photography</span>
+            <span class="badge badge-neutral">Cooking</span>
+            <span class="badge badge-neutral">Reading</span>
+            <span class="badge badge-neutral">Music</span>
           </div>
-      </div>  
-  
-
+        </div>
+        <hr class="w-full border-t my-6">
+      <div>
+        <div>
+          <h3 class="text-2xl font-semibold leading-tight"><i class="fa-regular fa-link"></i>Enlaces</h3>
+          <!-- Implementar esto con un array de objetos en el backend -->
+          <div class="mt-4 space-y-2">
+            <a
+              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+              href="#"
+              ><i class="fa-regular fa-globe"></i><span>Website</span></a
+            ><a
+              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            
+              href="#"
+              ><i class="fa-brands fa-x-twitter"></i><span>Twitter / X</span></a
+            ><a
+              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            
+              href="#"
+              ><i class="fa-brands fa-instagram"></i><span>Instagram</span></a
+            ><a
+              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            
+              href="#"
+              ><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a
+            >
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
 </div>
