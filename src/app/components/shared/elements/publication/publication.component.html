@@ -1,19 +1,31 @@
-<div class="flex flex-col max-w-140 w-full card card-bordered shadow-md my-5">
+<div class="flex flex-col max-w-140 w-full card hover:card-bordered hover:shadow-md transition-all duration-300 my-5">
   <!---->
-  <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-4">
-    <app-avatar-frame
-      class="mr-4"
-      profile_picture="https://i.imgur.com/gj67wbp.jpg"
+  <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-4 ">
+    <div class="relative mr-3"><a routerLink="/profile/{{publication.author.username}}">
+      <app-avatar-frame
+      [profile_picture]="publication.author.profile_picture"
       profile_size="small"
-      frame_name="flames"
+      [frame_name]="publication.author.profile_picture_frame || 'none'"
     ></app-avatar-frame>
+    </a>
+       @if(publication.community){
+<a href="/community/{{publication.community.shortname}}/feed" class="block -bottom-[8px] -right-[8px] absolute">
+  <app-avatar-frame
+  [profile_picture]="publication.community.profile_picture"
+  profile_size="xsmall"
+  frame_name="none"
+></app-avatar-frame>
+</a> }
+</div>
+    
+ 
     <div class="flex flex-col">
-      <div class="flex"><span class="font-semibold leading-none">AndresCS</span>
+      <div class="flex"><span class="font-semibold leading-none">{{publication.author.fullname}}</span>
         <span class="text-sm text-secondary leading-none ml-1"
-          ><i class="fa-regular fa-at text-sm"></i>andres</span>  
+          ><i class="fa-regular fa-at text-sm"></i>{{publication.author.fullname}}</span>  
         </div>
         <span class="text-sm italic leading-none mt-1"
-        ><i class="fa-regular fa-clock"></i>&nbsp; Hace 4 horas</span
+        ><i class="fa-regular fa-clock"></i>&nbsp; {{dateFormatted()}}</span
       >
     </div>
 
@@ -23,18 +35,25 @@
       <i class="fa-regular fa-ellipsis-v"></i>
     </button>
       <ul tabindex="2" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a><i class="fa-regular fa-pencil"></i> Editar</a></li>
-        <li><a><i class="fa-regular fa-trash-alt"></i> Eliminar</a></li>
-        <li><a><i class="fa-regular fa-flag"></i> Reportar</a></li>
-        <li><a><i class="fa-regular fa-eye-slash"></i> Ocultar</a></li>
+        @if(publication.author._id === user._id){
+          <li><a><i class="fa-regular fa-pencil"></i> Editar</a></li>
+          <li><a><i class="fa-regular fa-trash-alt"></i> Eliminar</a></li>
+        }@else {
+          <li><a><i class="fa-regular fa-flag"></i> Reportar</a></li>
+          <li><a><i class="fa-regular fa-eye-slash"></i> Ocultar</a></li>
+        }
+
+
       </ul>
     </div>
   </div>
   <div class="mx-6 sm:mx-8 mt-2 mb-6">
-    El arco de la isla del futuro de One Piece se está calentando, y los fanáticos están ansiosos por ver qué sucederá a continuación.
+    {{publication.content}}
   </div>
   <div class="relative mb-4">
-    <img src="https://sportshub.cbsistatic.com/i/2023/11/13/ac400fa1-658f-42d6-abe7-8df0ac603629/one-piece-future-island-arc-manga.jpg" alt="Card cover image" class="h-80 w-full object-cover">
+    @if (publication.images.length>0) {
+      <img src="https://sportshub.cbsistatic.com/i/2023/11/13/ac400fa1-658f-42d6-abe7-8df0ac603629/one-piece-future-island-arc-manga.jpg" alt="Card cover image" class="h-80 w-full object-cover">
+    }
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
     <div class="dropdown dropdown-top dropdown-hover">
@@ -92,7 +111,7 @@
       <span class="btn btn-outline border-inherit no-animation join-item">❤️ 12</span>
       <span class="btn btn-outline border-inherit no-animation join-item">😎 3</span>
       <span class="btn btn-outline border-inherit no-animation join-item">😂 5</span> 
-      <button class="btn btn-outline tracking-tight join-item"><i class="fa-regular fa-circle-plus"></i> 25 reacciones</button>
+      <button class="btn btn-outline tracking-tight join-item"><i class="fa-regular fa-circle-plus"></i> {{publication.reactions.length}} reacciones</button>
     </div>
    
   </div>

@@ -31,6 +31,14 @@ export class AvatarFrameComponent implements OnInit{
   }
 
   profile_frame = [
+    {
+      name: "none",
+      attributes: {
+        image:"",
+        rounded: "rounded-lg",
+        animated: ""
+      }
+    },
   {
     name: "glow",
     attributes: {

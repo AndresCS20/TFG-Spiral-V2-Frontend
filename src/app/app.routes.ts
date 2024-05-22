@@ -43,7 +43,7 @@ export const routes: Routes = [
       path: 'profile/:username',
       redirectTo: 'profile/:username/feed',
     },
-    { path: 'profile',canActivate: [homeGuard],  
+    { path: 'profile/:username',canActivate: [homeGuard],  
       loadComponent: () => import('@components/pages/profile/profile.component').then(m => m.ProfileComponent),
       loadChildren: () => import('@components/pages/profile/profile.routes')
     },

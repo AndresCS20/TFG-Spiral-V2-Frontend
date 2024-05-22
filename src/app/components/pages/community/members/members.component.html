@@ -1,1 +1,8 @@
-<p>members works!</p>
+<h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-users"></i> Miembros de la comunidad
+</h1>
+<div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-0 p-3 md:p-4 xl:p-5">
+ @for (member of community.members; track member.user) {
+ <app-user-box [user]="member.user" [communityMemberDate]="member.date"></app-user-box>
+}
+</div>
+

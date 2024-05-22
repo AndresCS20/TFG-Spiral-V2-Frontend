@@ -1,16 +1,19 @@
 <div class="relative flex flex-col items-center card card-bordered p-4 shadow-md">
  <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
-     <img src="https://i.imgur.com/e7vsUO9.jpg" class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"> 
+     <img [src]="user.banner_picture || 'https://picsum.photos/seed/'+user.username+'/1280/720'" class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"> 
      <div class="absolute -bottom-12 flex items-center justify-center rounded-full">
-      <app-avatar-frame profile_picture="https://i.imgur.com/gj67wbp.jpg" profile_size="large" frame_name="tech"></app-avatar-frame>
+      <app-avatar-frame [profile_picture]="user.profile_picture || 'https://api.dicebear.com/8.x/initials/svg?seed=' + user.username + '?backgroundColor=b6e3f4,c0aede,d1d4f9?fontFamily=Arial,Brush%20Script%20MT,Courier%20New'" class="h-24 w-24 rounded-full" profile_size="large" [frame_name]="user.profile_picture_frame || 'none'"></app-avatar-frame>
      </div>
  </div> 
- <div class="mt-16 flex flex-col items-center">
+ <div class="mt-12 flex flex-col items-center">
      <h4 class="text-xl font-bold">
-    AndresCS
+    {{user.fullname}}
      </h4>
-     <p class="text-base font-normal"><i class="fa-regular fa-at mr-1 text-sm"></i>andres</p>
- </div> 
+     <p class="text-base font-normal"><i class="fa-regular fa-at mr-1 text-sm"></i>{{user.username}}</p>
+ </div>  @if(communityMemberDate){
+    <p class="text-sm font-bold">Fecha de unión:</p>
+    <p class="text-sm font-normal">{{communityMemberDate | date : "dd/MM/yyyy"}}</p>
+ }@else {
  <div class="mt-6 mb-3 flex gap-14 md:!gap-14">
      <div class="flex flex-col items-center justify-center">
      <p class="text-2xl font-bold">17</p>
@@ -28,7 +31,7 @@
      </p>
      <p class="text-sm font-normal">Seguidos</p>
      </div>
- </div>
+ </div>}
  <div class="bg-base-200 w-full h-fit p-3 flex items-center justify-center rounded-xl">
-     <button class="btn btn-primary">Seguir</button>
+    <button routerLink="/profile/{{user.username}}/feed"><i class="fa-regular fa-user"></i>Ver Perfil</button>    
 </div>

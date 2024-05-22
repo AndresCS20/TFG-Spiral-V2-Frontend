@@ -1,0 +1,81 @@
+<div class="flex flex-col w-full p-8 pt-0 filter-info card">
+<div class="text-2xl font-semibold leading-tight">
+ <i class="fa-regular fa-info-circle"></i>
+ Sobre mi
+</div>
+<div class="mt-4">@if (userProfile.description) {
+  {{userProfile.description}}
+}@else {
+  <div role="alert" class="alert">
+    <i class="fa-regular fa-empty-set"></i>
+    <span>No hay descripción</span>
+  </div>
+}
+
+</div>
+<hr class="w-full border-t my-6" />
+<div class="flex flex-col">
+ <div class="flex items-center">
+   <i class="fa-regular fa-map-marker-alt mr-3"></i
+   ><span class="leading-none">
+    {{userProfile.ubication ? userProfile.ubication : 'Ups! Ubicación desconocida'}}</span>
+ </div>
+
+ <div class="flex items-center mt-4">
+   <i class="fa-regular fa-cake mr-3"></i
+   ><span class="leading-none">{{userProfile.birth_date ? userProfile.birth_date : 'Ups! Fecha de nacimiento desconocida'}}</span>
+ </div>
+</div>
+<hr class="w-full border-t my-6">
+ 
+<div>
+   <h3 class="text-2xl font-semibold leading-tight"><i class="fa-regular fa-gamepad-modern"></i> Intereses</h3>
+   @if(userProfile.interests.length>0){
+      <div class="mt-4 flex flex-wrap gap-2"></div>
+      @for (interest of userProfile.interests; track $index) {
+        <span class="badge badge-neutral">{{interest}}</span>
+      }
+   }
+   @else {
+      <div role="alert" class="alert">
+        <i class="fa-regular fa-empty-set"></i>
+        <span>No hay intereses</span>
+      </div>
+   }
+   
+ </div>
+ <hr class="w-full border-t my-6">
+<div>
+ <div>
+   <h3 class="text-2xl font-semibold leading-tight">
+    <i class="fa-regular fa-link"></i>Enlaces</h3>
+   <!-- Implementar esto con un array de objetos en el backend -->
+   @if(userProfile.social_networks.length>0 || userProfile.link.length){
+    
+   <div class="mt-4 space-y-2">
+    @if(userProfile.link){
+     <a
+       class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+       [href]="userProfile.link"
+       ><i class="fa-regular fa-globe"></i><span>Pagina Web</span></a>}
+       @for(socialNetwork of userProfile.social_networks; track $index) {
+         <a
+           class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+           href="{{socialNetwork.link}}"
+           ><i [class]="'fa-brands fa-' + socialNetwork.name | lowercase"></i><span>{{socialNetwork.name}}</span></a>
+       }@empty {
+         <div role="alert" class="alert compact">
+           <i class="fa-regular fa-empty-set"></i>
+           <span>No hay redes sociales</span>
+         </div>
+        }
+   </div>  
+   }@else {
+     <div role="alert" class="alert compact">
+       <i class="fa-regular fa-empty-set"></i>
+       <span>No hay enlaces</span>
+     </div>
+   }
+ </div>
+</div>
+</div>

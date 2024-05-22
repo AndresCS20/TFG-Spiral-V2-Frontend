@@ -1,38 +1,51 @@
 <div class="flex flex-col min-h-screen">
-    <header class="relative">
       <div class="container mx-auto flex flex-col items-start justify-center">
+        
+      <header class="w-full relative">
+    
         <div
           class="w-full h-40 bg-cover bg-center rounded-3xl"
-          style="background-image:url('https://media.cdn.community.lambdageneration.com/backgrounds/1680017288334BfDICUCdBNBfDf_d.jpg?size=normal')"
+          [style.background-image]="'url(' + (community.banner_picture || 'https://picsum.photos/seed/' + community.shortname + '/1280/720') + ')'"
         ></div>
         <div class="block md:flex justify-between items-center w-full px-6">
           
         <div class="block md:flex items-center gap-4">
-          <div class="w-24 h-24 rounded-full overflow-hidden -mt-16 border-4 border-[var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))]">
-            <img src="https://media.cdn.community.lambdageneration.com/avatars/1663001799988DLCWBqFBCCbDfCAB.png?size=mega" alt="Profile Picture" class="w-full h-full object-cover" />
+          <div class="w-24 h-24 rounded-full overflow-hidden -mt-16 border-4 bg-base-200 border-[var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)))]">
+            <img [src]="community.profile_picture" alt="Profile Picture" class="w-full h-full object-cover" />
           </div>
           <div>
-            <h1 class="text-2xl font-bold">Black Mesa Research Facility</h1>
-            <p class="text-secondary"><i class="fa-regular fa-circle-s"></i>/BlackMesa</p>
+            <h1 class="text-2xl font-bold">{{ community.fullname }}</h1>
+            <p class="text-secondary"><i class="fa-regular fa-circle-s"></i>/{{community.shortname}}</p>
           </div>
         </div>
         <div class="flex items-center gap-4 mt-4">
-          <button class="btn btn-primary">Crear Publicacion</button>
-          <button class="btn btn-success">Unirse</button>
+          @if (!isMemberOfTheCommunity) {  
+            <button class="btn btn-success" (click)="joinCommunity()"><i class="fa-regular fa-door-open"></i>Unirse</button>
+          }
+          @else if(isMemberOfTheCommunity && !isOwnerOfCommunity){
+            <button class="btn btn-error" (click)="leaveCommunity()"><i class="fa-regular fa-door-closed"></i>Salir</button>
+          }   
+          @else {
+            <button class="btn btn-warning" (click)="changeOwner()"><i class="fa-regular fa-badge-sheriff"></i> Cambiar Dueño</button>
+            <button class="btn btn-error" (click)="deleteCommunity()"><i class="fa-regular fa-trash-can"></i>Eliminar Comunidad</button>
+          }
         </div>
-      </div>
-      </div>
+      </div> 
     </header>
-    <div class="card card-bordered bg-base-200/50 card-compact items-center my-2">
+    <div class="card card-bordered container  bg-base-200/50 card-compact items-center my-2">
       <ul class="menu menu-vertical md:menu-horizontal w-fit rounded-box gap-2">
-       <li class="block md:hidden"><a routerLink="/community/{{ communityshortname }}/about" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Sobre blackmesa</a></li>
-       <li><a routerLink="/community/{{ communityshortname }}/feed" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Publicaciones</a></li>
-       <li><a routerLink="/community/{{ communityshortname }}/members" routerLinkActive="active"><i class="fa-solid fa-people"></i>&nbsp;Miembros</a></li>
+       <li class="block lg:hidden"><a routerLink="/community/{{ communityShortName }}/about" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Sobre la comunidad</a></li>
+       <li><a routerLink="/community/{{ communityShortName }}/feed" routerLinkActive="active"><i class="fa-regular fa-memo"></i>&nbsp;Publicaciones</a></li>
+       <li><a routerLink="/community/{{ communityShortName }}/members" routerLinkActive="active"><i class="fa-solid fa-users"></i>&nbsp;Miembros</a></li>
+       @if(isOwnerOfCommunity){<li><a routerLink="/community/{{ communityShortName }}/settings" routerLinkActive="active"><i class="fa-regular fa-cogs"></i>&nbsp;Ajustes</a></li>}
       </ul>
       </div>
-    <div class="container mx-auto block md:flex flex-row md:flex-row-reverse gap-8 py-8">
+      </div>
+   
+
+    <div class="container mx-auto block lg:flex flex-row md:flex-row-reverse gap-8 py-8">
       <div class="w-full md:w-80 flex-shrink-0 mb-3 md:mb-0">
-        <app-about-us class="hidden md:block"></app-about-us>
+        <app-about-us class="hidden lg:block"></app-about-us>
       </div>
       <div class="flex-1">
         <router-outlet></router-outlet>

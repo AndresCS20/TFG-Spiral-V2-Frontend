@@ -1,1 +1,32 @@
-<p>settings works!</p>
+<h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-cogs"></i> Ajustes</h1>
+
+<div class="container">
+ <!-- Campos: FullName:string, Description:string, Rules (Array Object(title: string y content:string)), Buttons (Array Object(title: string y url:string)) -->
+
+ <form 
+  name="form"
+  class="w-full max-w-3xl mx-auto px-6 md:px-8 block gap-3 justify-center"
+  >
+  <div class="md:flex md:items-center mb-6">
+   <label class="form-control w-full">
+    <div class="label">
+      <span class="label-text"><i class="fa-regular fa-input-text"></i> Nombre completo</span>
+    </div>    
+     <input type="text" class="input input-bordered" placeholder="Reddit">
+  </label>
+</div>
+<div class="md:flex md:items-center mb-6">
+ <label class="form-control w-full">
+  <div class="label">
+    <span class="label-text"> <i class="fa-regular fa-subtitles"></i> Descripcion</span>
+  </div>  
+   <textarea type="text" class="textarea textarea-bordered" placeholder="Agrega una descripción"></textarea></label>
+</div>
+<div class="md:flex md:items-center mb-6">
+ <label class="form-control w-full">
+  <div class="label">
+    <span class="label-text"> <i class="fa-regular fa-file-lines"></i> Reglas</span>
+  </div>  
+   <textarea type="text" class="textarea textarea-bordered" placeholder="Agrega una regla"></textarea></label>
+</div>
+</form> 

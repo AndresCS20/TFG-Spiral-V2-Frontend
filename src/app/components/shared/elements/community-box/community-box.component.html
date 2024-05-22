@@ -1,32 +1,33 @@
 <div class="relative flex flex-col items-center card card-bordered p-4 shadow-md">
  <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
-     <img src="https://r4.wallpaperflare.com/wallpaper/114/1008/41/one-piece-monkey-d-luffy-hd-wallpaper-9ef4b77cec0a1f27d70d79da37c4809a.jpg" class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"> 
-     <div class="absolute -bottom-12 flex items-center justify-center rounded-full">
-      <img src="https://i.pinimg.com/736x/81/b8/1b/81b81b38c72e148ce4ddfcae172733f0.jpg" class="h-24 w-24 rounded-full">
+     <img [src]="community?.banner_picture || 'https://picsum.photos/seed/'+community?.shortname+'/1280/720'" class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"> 
+     <div class="absolute -bottom-12 flex items-center justify-center rounded-full bg-base-200">
+        <img [src]="community?.profile_picture || 'https://api.dicebear.com/8.x/initials/svg?seed=' + community?.shortname + '?backgroundColor=b6e3f4,c0aede,d1d4f9?fontFamily=Arial,Brush%20Script%20MT,Courier%20New'" class="h-24 w-24 rounded-full">
      </div>
  </div> 
  <div class="mt-16 flex flex-col items-center">
      <h4 class="text-xl font-bold">
-    Strawhats Pirates
+    {{community?.fullname | slice:0:20}} 
+     
      </h4>
-     <p class="text-base font-normal"><i class="fa-regular fa-circle-s mr-1 text-sm"></i>strawhats</p>
+     <p class="text-base font-normal"><i class="fa-regular fa-circle-s mr-1 text-sm"></i>{{community?.shortname}}</p>
  </div> 
  <div class="mt-6 mb-3 flex gap-14 md:!gap-14">
      <div class="flex flex-col items-center justify-center">
-     <p class="text-2xl font-normal">17</p>
+     <p class="text-2xl font-normal">{{community?.members?.length | number}}</p>
      <p class="text-sm font-bold">Miembros</p>
      </div>
      <div class="flex flex-col items-center justify-center">
-    <p class="text-sm font-bold">
       @if (communityMember) {
-       Fecha de unión:
+        <p class="text-sm font-bold">Fecha de unión:</p>
+       <p class="text-sm font-normal">11/04/2024</p>
      } @else {
-       Fecha de creacción:
+        <p class="text-sm font-bold">Fecha de creacción:</p>
+       <p class="text-sm font-normal">{{community?.createdAt | date : "dd/MM/yyyy"}}</p>
       }      
-     </p>
-     <p class="text-sm font-normal">11/04/2024</p>
+
      </div>
  </div>
  <div class="bg-base-200 w-full h-fit p-3 flex items-center justify-center rounded-xl">
-     <button class="btn btn-success">Ver Comunidad <i class="fa-regular fa-chevrons-right"></i></button>
+     <button routerLink="/community/{{community?.shortname}}/feed" class="btn btn-success">Ver Comunidad <i class="fa-regular fa-chevrons-right"></i></button>
 </div>

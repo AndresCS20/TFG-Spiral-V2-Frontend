@@ -2,40 +2,45 @@
   <div
     alt="cover-image"
     class="w-full absolute top-0 left-0 z-0 h-60 rounded-xl"
-    style="
-      background: url(https://i.imgur.com/x0DssE0.jpg);
-      background-size: cover;
-      background-position: center;
-    "
+    [style.background]="'url(' + (currentUser.banner_picture || 'https://picsum.photos/seed/' + currentUser.username + '/1280/720') + ')'" 
+    [style.background-size]="'cover'" 
+    [style.background-position]="'center'"
   ></div>
   <div class="w-full max-w-9xl mx-auto px-6 md:px-8">
     <div
       class="flex items-center justify-center sm:justify-start relative z-10 mb-5"
     >
       <app-avatar-frame
-        profile_picture="https://i.imgur.com/gj67wbp.jpg"
+        [profile_picture]="currentUser.profile_picture || 'https://picsum.photos/seed/' + currentUser.username + '/1280/720'"
         profile_size="xlarge"
-        frame_name="fire"
+        profile_frame="tech"
       ></app-avatar-frame>
+      <b>{{currentUser.profile_picture_frame}}</b>
     </div>
     <div
       class="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5"
     >
       <div class="block">
-        <h3 class="font-manrope font-bold text-4xl mb-1">Andres CS</h3>
-        <p class="font-normal text-base leading-7">
-          <i class="fa-regular fa-at mr-1 text-sm"></i>andres
-        </p>
+      @if(currentUser.fullname)
+        {
+          <h3 class="font-manrope font-bold text-4xl mb-1">{{currentUser.fullname}}</h3>
+          <p class="font-normal text-base leading-7">
+            <i class="fa-regular fa-at mr-1 text-sm"></i>{{currentUser.username}}
+          </p>
+        } @else {
+          <h3 class="font-manrope font-bold text-4xl mb-1"><i class="fa-regular fa-at mr-1 text-sm"></i>{{currentUser.username}}</h3>
+        }     
+
       </div>
       <div class="flex items-center gap-4">
         <span
           class="py-3.5 px-5 badge badge-outline badge-primary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;4
+          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;{{currentUser?.followers?.length || 0}}
           Seguidores</span
         >
         <span
           class="py-3.5 px-5 badge badge-outline badge-secondary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;4
+          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;{{currentUser?.following?.length || 0}}
           Seguidos</span
         >
       </div>
@@ -55,6 +60,7 @@
         role="tablist"
         class="menu menu-vertical md:menu-horizontal gap-1 w-full md:w-fit"
       >
+      <li class="block lg:hidden"><a routerLink="/profile/{{ username }}/about" routerLinkActive="active"><i class="fa-regular fa-info"></i>&nbsp;Sobre mi</a></li>
         <li>
           <a
             routerLink="/profile/{{ currentUser.username }}/feed"
@@ -103,75 +109,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div class="w-full md:w-1/4">
-    <div class="flex flex-col w-full p-8 pt-0 filter-info card">
-      <!---->
-      <div class="text-2xl font-semibold leading-tight">
-        <i class="fa-regular fa-info-circle"></i>
-        Sobre mi
-      </div>
-      <div class="mt-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-        aliquam facilis repellat. Unde, placeat ea? Possimus esse nobis et,
-        deleniti alias optio necessitatibus fuga, ratione reprehenderit
-        doloremque magnam iusto ipsum!
-      </div>
-      <hr class="w-full border-t my-6" />
-      <div class="flex flex-col">
-        <div class="flex items-center">
-          <i class="fa-regular fa-map-marker-alt mr-3"></i
-          ><span class="leading-none">Madrid, ESPAÑITA</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <i class="fa-regular fa-briefcase mr-3"></i
-          ><span class="leading-none">Junior FrontEnd Developer</span>
-        </div>
-
-        <div class="flex items-center mt-4">
-          <i class="fa-regular fa-calendar-day mr-3"></i
-          ><span class="leading-none">April, 24</span>
-        </div>
-      </div>
-      <hr class="w-full border-t my-6">
-        <div>
-          <h3 class="text-2xl font-semibold leading-tight"><i class="fa-regular fa-gamepad-modern"></i> Intereses</h3>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="badge badge-neutral">Travel</span>
-            <span class="badge badge-neutral">Photography</span>
-            <span class="badge badge-neutral">Cooking</span>
-            <span class="badge badge-neutral">Reading</span>
-            <span class="badge badge-neutral">Music</span>
-          </div>
-        </div>
-        <hr class="w-full border-t my-6">
-      <div>
-        <div>
-          <h3 class="text-2xl font-semibold leading-tight"><i class="fa-regular fa-link"></i>Enlaces</h3>
-          <!-- Implementar esto con un array de objetos en el backend -->
-          <div class="mt-4 space-y-2">
-            <a
-              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              href="#"
-              ><i class="fa-regular fa-globe"></i><span>Website</span></a
-            ><a
-              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            
-              href="#"
-              ><i class="fa-brands fa-x-twitter"></i><span>Twitter / X</span></a
-            ><a
-              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            
-              href="#"
-              ><i class="fa-brands fa-instagram"></i><span>Instagram</span></a
-            ><a
-              class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-            
-              href="#"
-              ><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a
-            >
-          </div>
-        </div>
-      </div>
-      </div>
+  <div class="w-full md:w-1/4 hidden lg:block">
+    <app-about/>
   </div>
 </div>

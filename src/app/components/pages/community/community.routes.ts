@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 
 import { homeGuard } from 'src/app/core/guards/home.guard';
+import { communityOwner } from '../../../core/guards/communityOwner.guard.spect';
 
 
 const routes: Routes = [
   { path: ':shortname/feed', canActivate: [homeGuard], loadComponent: () => import('@components/pages/community/feed/feed.component').then(m => m.FeedComponent)},
-  { path: ':shortname/settings', canActivate: [homeGuard], loadComponent: () => import('@components/pages/community/settings/settings.component').then(m => m.SettingsComponent)},
+  { path: ':shortname/settings', canActivate: [homeGuard, communityOwner], loadComponent: () => import('@components/pages/community/settings/settings.component').then(m => m.SettingsComponent)},
   { path: ':shortname/members', canActivate: [homeGuard], loadComponent: () => import('@components/pages/community/members/members.component').then(m => m.MembersComponent) },
   { path: ':shortname/about', canActivate: [homeGuard], loadComponent: () => import('@components/pages/community/about-us/about-us.component').then(m => m.AboutUsComponent) }
   ];
