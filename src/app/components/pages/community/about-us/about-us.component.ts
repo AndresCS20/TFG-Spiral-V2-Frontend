@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Community } from '@interfaces/communities.interface';
-import { CommuniyDataService } from '@services/communiy-data.service';
+import { CommuniyDataService } from '@services/data/communiy-data.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

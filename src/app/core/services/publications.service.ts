@@ -18,4 +18,14 @@ export class PublicationsService {
  getCommunityPublications(communityShortname: string):Observable<AllPublications> {
   return this.http.get<AllPublications>(API_URL + 'publication/' + communityShortname);
  }
+
+ getUserPublications(username: string): Observable<AllPublications> {
+  return this.http.get<AllPublications>(API_URL + 'publication/user/' + username);
+ }
+
+ getFollowingPublications(username: string): Observable<AllPublications> {
+  return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/following');
+ }
+
+
 }

@@ -16,4 +16,12 @@ export interface FollowUser {
  profile_picture_frame?: string;
  profile_picture?:       string;
  banner_picture?:        string;
+ following:              Follow[];
+ followers:              Follow[];
+}
+
+export interface Follow {
+ user: string;
+ date: Date;
+ _id:  string;
 }

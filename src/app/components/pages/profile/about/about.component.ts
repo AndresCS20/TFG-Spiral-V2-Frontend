@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { ProfileDataService } from '@services/profile-data.service';
+import { ProfileDataService } from '@services/data/profile-data.service';
 import { User } from '@interfaces/users.interface';
 @Component({
   selector: 'app-about',

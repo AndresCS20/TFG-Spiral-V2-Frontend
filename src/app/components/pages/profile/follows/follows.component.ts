@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FollowInfo, FollowList, FollowUser } from '@interfaces/follows.interface';
 import { User } from '@interfaces/users.interface';
-import { ProfileDataService } from '@services/profile-data.service';
+import { ProfileDataService } from '@services/data/profile-data.service';
 import { UserService } from '@services/user.service';
 import { UserBoxComponent } from 'src/app/components/shared/elements/user-box/user-box.component';
 @Component({

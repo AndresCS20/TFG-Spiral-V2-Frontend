@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Community } from '@interfaces/communities.interface';
-import { CommuniyDataService } from '@services/communiy-data.service';
+import { CommuniyDataService } from '@services/data/communiy-data.service';
 import { UserBoxComponent } from 'src/app/components/shared/elements/user-box/user-box.component';
 
 @Component({

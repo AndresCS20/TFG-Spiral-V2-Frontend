@@ -5,8 +5,10 @@ import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-
 import { UserService } from '@services/user.service';
 import { AllUsers, OneUser, User } from '@interfaces/users.interface';
 import { AboutComponent } from './about/about.component';
-import { ProfileDataService } from '@services/profile-data.service';
+import { ProfileDataService } from '@services/data/profile-data.service';
 import { Subscription } from 'rxjs';
+import { AllPublications } from '@interfaces/publications.interface';
+import { PublicationsService } from '@services/publications.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,12 +21,16 @@ export class ProfileComponent implements OnInit, OnDestroy{
   currentUser!: User;
   username!: string | null;
   private routeSub!: Subscription;
-
+  loggedUser!: User;
   constructor(private storageService: StorageService, 
     private _userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-  private profileDataService:ProfileDataService) { }
+    private profileDataService:ProfileDataService,
+    private storage : StorageService,
+    private _publicationService: PublicationsService  
+  ) 
+    { }
 
   // ngOnInit(): void {
   //   this.currentUser = this.storageService.getUser();
@@ -47,7 +53,10 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this.username = paramMap.get('username');
       if (this.username) {
         this.getUser(this.username);
+        console.log("USERNAMEPARAM", this.username);
+        console.log("CURRENTUSER", this.currentUser.username);
         this.profileDataService.changeUsername(this.username);
+        this.getPublications(this.username);
       }
     });
   }
@@ -57,6 +66,18 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this.routeSub.unsubscribe();
     }
   }
+
+  private getPublications(username: string) {
+    this._publicationService.getUserPublications(username).subscribe({
+      next: (data: AllPublications) => {
+        this.profileDataService.changeProfilePublications(data.body);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
   private getUser(username: string) {
     console.log("hola mundo",username)
     this._userService.getOneUser(username).subscribe({

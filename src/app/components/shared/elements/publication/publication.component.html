@@ -8,25 +8,28 @@
       [frame_name]="publication.author.profile_picture_frame || 'none'"
     ></app-avatar-frame>
     </a>
-       @if(publication.community){
-<a href="/community/{{publication.community.shortname}}/feed" class="block -bottom-[8px] -right-[8px] absolute">
-  <app-avatar-frame
-  [profile_picture]="publication.community.profile_picture"
-  profile_size="xsmall"
-  frame_name="none"
-></app-avatar-frame>
-</a> }
 </div>
     
  
     <div class="flex flex-col">
-      <div class="flex"><span class="font-semibold leading-none">{{publication.author.fullname}}</span>
-        <span class="text-sm text-secondary leading-none ml-1"
-          ><i class="fa-regular fa-at text-sm"></i>{{publication.author.fullname}}</span>  
+      <div class="flex"><span class="font-semibold">{{publication.author.fullname}}</span>
+        <a href="/profile/{{publication.author.username}}/feed"><span class="text-sm text-secondary leading-none ml-1"
+          ><i class="fa-regular fa-at text-sm"></i>{{publication.author.username}}</span>  </a>
         </div>
-        <span class="text-sm italic leading-none mt-1"
-        ><i class="fa-regular fa-clock"></i>&nbsp; {{dateFormatted()}}</span
-      >
+        <div class="join mt-2"> @if(publication.community){
+             <a href="/community/{{publication.community.shortname}}/feed">
+              <span class="badge badge-lg badge-info join-item">      
+                <app-avatar-frame
+                [profile_picture]="publication.community.profile_picture"
+                profile_size="xsmall"
+                frame_name="none"
+              ></app-avatar-frame>
+               {{publication.community.shortname}}</span></a>}     
+              <span class="text-sm italic badge badge-lg badge-ghost join-item"
+        ><i class="fa-regular fa-clock"></i>&nbsp; {{dateFormatted()}}</span>
+        </div>
+
+      
     </div>
 
     <div class="dropdown dropdown-end ml-auto -mr-4">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommuniyDataService } from '@services/communiy-data.service';
+import { CommuniyDataService } from '@services/data/communiy-data.service';
 
 @Component({
   selector: 'app-settings',

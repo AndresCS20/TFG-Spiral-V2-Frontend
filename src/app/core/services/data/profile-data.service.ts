@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Community } from '@interfaces/communities.interface';
+import { AllPublications, Publication } from '@interfaces/publications.interface';
 import { User } from '@interfaces/users.interface';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,13 +10,23 @@ import { BehaviorSubject } from 'rxjs';
 export class ProfileDataService {
   constructor() {}
   private username = new BehaviorSubject<string>('');
-  private userProfile = new BehaviorSubject<User | null>(null);
-  private followers = new BehaviorSubject<User[] | null>(null);
-  private following = new BehaviorSubject<User[] | null>(null);
   currentUsername = this.username.asObservable();
-  currentFollowers = this.followers.asObservable();
-  currentFollowing = this.following.asObservable();
+
+  private userProfile = new BehaviorSubject<User | null>(null);
   currentUserProfile = this.userProfile.asObservable();
+
+  private followers = new BehaviorSubject<User[] | null>(null); 
+  currentFollowers = this.followers.asObservable();
+
+  private following = new BehaviorSubject<User[] | null>(null);
+  currentFollowing = this.following.asObservable();
+
+  private profilePublications = new BehaviorSubject<Publication[] | null>(null);
+  currentProfilePublications = this.profilePublications.asObservable();
+  
+ changeProfilePublications(publications: Publication[]) {
+    this.profilePublications.next(publications);
+  }
 
   changeUsername(username: string) {
     this.username.next(username);

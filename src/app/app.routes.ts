@@ -9,12 +9,13 @@ import { SettingsComponent } from '@components/pages/community/settings/settings
 export const routes: Routes = [
 
 
-    {
-      path: 'home',
-      canActivate: [homeGuard],
-      loadComponent: () => 
-        import('@components/pages/home/home.component').then((c)=> c.HomeComponent)
+    //------------------------- Home Routes -------------------------//
+    { path: 'home',canActivate: [homeGuard],  
+      loadComponent: () => import('@components/pages/home/home.component').then(m => m.HomeComponent),
+      loadChildren: () => import('@components/pages/home/home.routes')
     },
+
+    //------------------------- Auth Routes -------------------------//
     {
       path: 'login',
       canActivate: [authGuard],
@@ -27,10 +28,8 @@ export const routes: Routes = [
       loadComponent: () => 
         import('@components/pages/auth/register/register.component').then((c)=> c.RegisterComponent)
     },
-
-    { path: 'notifications',canActivate: [homeGuard], loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
-    { path: 'messages',canActivate: [homeGuard], loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
-    { path: 'bookmarks',canActivate: [homeGuard], loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
+   
+    //------------------------- Community Routes -------------------------//
     { path: 'communities',canActivate: [homeGuard], loadComponent: () => import('@components/pages/communities/communities.component').then(m => m.CommunitiesComponent)},
     { path: 'community', redirectTo: ''},
     { path: 'community',canActivate: [homeGuard],  
@@ -38,6 +37,8 @@ export const routes: Routes = [
       loadChildren: () => import('@components/pages/community/community.routes')
     },
     { path: 'community/:username',canActivate: [authGuard],  component: CommunityComponent },
+
+    //------------------------- Profile Routes -------------------------//
     { path: 'profile', redirectTo: ''}, 
     {
       path: 'profile/:username',
@@ -47,16 +48,21 @@ export const routes: Routes = [
       loadComponent: () => import('@components/pages/profile/profile.component').then(m => m.ProfileComponent),
       loadChildren: () => import('@components/pages/profile/profile.routes')
     },
-    // { path: 'settings', redirectTo: 'communities'},
+
+    //------------------------- Settings Routes -------------------------//
     { path: 'settings',canActivate: [homeGuard],  
       loadComponent: () => import('@components/pages/settings/settings.component').then(m => m.SettingsComponent),
       loadChildren: () => import('@components/pages/settings/settings.routes')
     },
+
+    //------------------------- Explore Routes -------------------------//
     { path: 'explore',canActivate: [homeGuard],  
       loadComponent: () => import('@components/pages/explore/explore.component').then(m => m.ExploreComponent),
       loadChildren: () => import('@components/pages/explore/explore.routes')
     },
-    // { path: 'settings',canActivate: [authGuard],  component: SettingsComponent },
-    // { path: 'profile/:username',canActivate: [authGuard],  component: CommunityComponent },
+    //------------------------- Other Pages Routes -------------------------//
+    { path: 'notifications',canActivate: [homeGuard], loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
+    { path: 'messages',canActivate: [homeGuard], loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
+    { path: 'bookmarks',canActivate: [homeGuard], loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},
     { path: '**', redirectTo: 'home'}
   ];

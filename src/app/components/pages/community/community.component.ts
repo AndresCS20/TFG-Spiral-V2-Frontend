@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CommunitiesService } from '@services/communities.service';
 import { Community, OneCommunity } from '@interfaces/communities.interface';
-import { CommuniyDataService } from '@services/communiy-data.service';
+import { CommuniyDataService } from '@services/data/communiy-data.service';
 import { StorageService } from '@services/storage.service';
 import Swal from 'sweetalert2';
 @Component({
