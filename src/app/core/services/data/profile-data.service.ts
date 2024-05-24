@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Community } from '@interfaces/communities.interface';
 import { AllPublications, Publication } from '@interfaces/publications.interface';
-import { User } from '@interfaces/users.interface';
+import { CommunityList, User } from '@interfaces/users.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -23,6 +23,14 @@ export class ProfileDataService {
 
   private profilePublications = new BehaviorSubject<Publication[] | null>(null);
   currentProfilePublications = this.profilePublications.asObservable();
+
+  private profileCommunities = new BehaviorSubject<CommunityList[] | null>(null);
+  currentProfileCommunities = this.profileCommunities.asObservable();
+
+  changeProfileCommunities(communities: CommunityList[]) {
+    console.log("PEPEPEPEPEP",communities);
+    this.profileCommunities.next(communities);
+  }
   
  changeProfilePublications(publications: Publication[]) {
     this.profilePublications.next(publications);

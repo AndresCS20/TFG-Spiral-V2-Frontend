@@ -21,10 +21,13 @@
       @if (communityMember) {
         <p class="text-sm font-bold">Fecha de unión:</p>
        <p class="text-sm font-normal">11/04/2024</p>
-     } @else {
+     } @else if (userDateJoined) {
+        <p class="text-sm font-bold">Fecha de union:</p>
+       <p class="text-sm font-normal">{{userDateJoined | date : "dd/MM/yyyy"}}</p>
+      } @else {
         <p class="text-sm font-bold">Fecha de creacción:</p>
-       <p class="text-sm font-normal">{{community?.createdAt | date : "dd/MM/yyyy"}}</p>
-      }      
+        <p class="text-sm font-normal">{{community?.createdAt | date : "dd/MM/yyyy"}}</p>
+      }     
 
      </div>
  </div>

@@ -27,5 +27,9 @@ export class PublicationsService {
   return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/following');
  }
 
+ getUserCommunitiesPublications(username: string): Observable<AllPublications> {
+  return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/communities');
+ }
+
 
 }

@@ -13,6 +13,7 @@ export class CommunitiesService {
  
   constructor(private http: HttpClient) {}
 
+
   getCommunities(): Observable<AllCommunities> {
     return this.http.get<AllCommunities>(API_URL + 'community');
   }

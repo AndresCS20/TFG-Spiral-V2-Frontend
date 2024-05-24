@@ -30,7 +30,22 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.storage.getUser();
     this.getFollowingPublications();
+    this.getUserCommunitiesPublications();
   }
+
+  private getUserCommunitiesPublications(): void {
+      this._publicationService.getUserCommunitiesPublications(this.user.username).subscribe({
+        next: (data: AllPublications) => {
+          this._homeDataService.changeCommunitiesPublications(data.body);
+          console.log(data);
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
+    
+  }
+
 
   private getFollowingPublications(): void {
     this._publicationService.getFollowingPublications(this.user.username).subscribe({

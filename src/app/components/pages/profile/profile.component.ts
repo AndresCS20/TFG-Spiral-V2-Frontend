@@ -3,12 +3,13 @@ import { StorageService } from '../../../core/services/storage.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 import { UserService } from '@services/user.service';
-import { AllUsers, OneUser, User } from '@interfaces/users.interface';
+import { AllUsers, CommunityList, OneUser, User } from '@interfaces/users.interface';
 import { AboutComponent } from './about/about.component';
 import { ProfileDataService } from '@services/data/profile-data.service';
 import { Subscription } from 'rxjs';
 import { AllPublications } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
+import { Community } from '@interfaces/communities.interface';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,7 @@ import { PublicationsService } from '@services/publications.service';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   currentUser!: User;
+  paramUser !: User;
   username!: string | null;
   private routeSub!: Subscription;
   loggedUser!: User;
@@ -28,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
     private router: Router,
     private profileDataService:ProfileDataService,
     private storage : StorageService,
-    private _publicationService: PublicationsService  
+    private _publicationService: PublicationsService,  
   ) 
     { }
 
@@ -44,8 +46,10 @@ export class ProfileComponent implements OnInit, OnDestroy{
   // }
 
   ngOnInit(): void {
-    this.currentUser = this.storageService.getUser();
+    this.currentUser = this.storage.getUser();
     this.subscribeToRouteParams();
+    console.log("Batalla", `${this.username} vs ${this.paramUser.username}`);
+
   }
 
   private subscribeToRouteParams(): void {
@@ -67,6 +71,10 @@ export class ProfileComponent implements OnInit, OnDestroy{
     }
   }
 
+  sendCommunities(communities: CommunityList[]) {
+    console.log("quelo")
+    this.profileDataService.changeProfileCommunities(communities);
+  }
   private getPublications(username: string) {
     this._publicationService.getUserPublications(username).subscribe({
       next: (data: AllPublications) => {
@@ -82,9 +90,12 @@ export class ProfileComponent implements OnInit, OnDestroy{
     console.log("hola mundo",username)
     this._userService.getOneUser(username).subscribe({
       next: (data: OneUser) => {
-        this.currentUser = data.body;
-        this.profileDataService.changeUserProfile(this.currentUser);
-        console.log(this.currentUser);
+        this.paramUser = data.body;
+        this.profileDataService.changeUserProfile(this.paramUser);
+        console.log(this.paramUser);
+        if(this.paramUser.communities){
+          this.sendCommunities(this.paramUser.communities);
+        }
       },
       error: (error: any) => {
         console.log(error);

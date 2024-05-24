@@ -48,6 +48,8 @@ export interface OneUserCommunity {
  fullname:        string;
  banner_picture:  string;
  profile_picture: string;
+ members:         Member[];
+ createdAt:       Date;
 }
 
 export interface Follow {
@@ -57,4 +59,10 @@ export interface Follow {
  profile_picture_frame?: string;
  profile_picture?:       string;
  banner_picture?:        string;
+}
+
+export interface Member {
+ user: string;
+ date: Date;
+ _id:  string;
 }
