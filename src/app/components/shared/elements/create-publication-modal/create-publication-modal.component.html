@@ -20,12 +20,12 @@
       <li>
         <a [className]="publicationType == 'video' ? 'active' : ''" (click)="setPublicationType('video')"><i class="fa-regular fa-video"></i>Video</a>
       </li>
-      <li>
-        <a [className]="publicationType == 'url' ? 'active' : ''" (click)="setPublicationType('url')"><i class="fa-regular fa-link"></i>URL</a>
+      <li class="disabled">
+        <a><i class="fa-regular fa-link"></i>URL</a>
       </li>
     </ul></div>
     </div>
-    <form >
+    <form  [formGroup]="profileForm">
     @switch (publicationType) {
 
      @case ("image") {
@@ -78,9 +78,11 @@
       </div>
       <select class="select select-bordered"> 
         <option>Global</option>
-        <option>BlackMesa</option>
-        <option>Portal</option>
-        <option>Spain</option>
+          @if(user.communities){
+            @for (community of user.communities; track community._id) {
+              <option value="{{community.community._id}}">{{community.community.shortname}}: {{community.community.fullname}}</option>
+            }
+          }
       </select>
       </label>  
    <button class="btn btn-primary w-full mt-2">Publicar</button>

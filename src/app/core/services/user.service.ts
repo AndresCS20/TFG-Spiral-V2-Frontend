@@ -25,6 +25,10 @@ export class UserService {
   getFollows(username : string, followType:string): Observable<FollowList> {
     return this.http.get<FollowList>(API_URL + 'user/' + username + '/'+followType);
   }
+
+  getGlobalUsers(username:string): Observable<AllUsers> {
+    return this.http.get<AllUsers>(API_URL + 'user/'+username+'/global/');
+  }
   
  
 }

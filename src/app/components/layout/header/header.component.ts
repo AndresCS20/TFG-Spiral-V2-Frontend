@@ -7,6 +7,7 @@ import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 import { CreatePublicationModalComponent } from '../../shared/elements/create-publication-modal/create-publication-modal.component';
+import { User } from '@interfaces/users.interface';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit{
 
   isLoggedIn = false;
   eventBusSub?: Subscription;
-  user : any;
+  user !: User;
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
 

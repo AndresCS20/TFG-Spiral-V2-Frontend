@@ -1,24 +1,54 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageEntryComponent } from './image-entry/image-entry.component';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { CommunitiesService } from '@services/communities.service';
+import { AllCommunities } from '@interfaces/communities.interface';
+import { OneUser, User } from '@interfaces/users.interface';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-create-publication-modal',
   standalone: true,
-  imports: [FormsModule, ImageEntryComponent],
+  imports: [FormsModule, ImageEntryComponent,ReactiveFormsModule],
   templateUrl: './create-publication-modal.component.html',
   styleUrl: './create-publication-modal.component.scss'
 })
 
-export class CreatePublicationModalComponent {
+export class CreatePublicationModalComponent implements OnInit{
   publicationType = 'text';
   imageUrls: string[] = [];
   inputURL = '';
   youtubeUrl = '';
   isYoutubeUrlValid = false;
+  
+  @Input() username: string = '';
+  user!: User;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  profileForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
+
+  constructor(private sanitizer: DomSanitizer, private userService: UserService) {}
+
+  ngOnInit(): void {
+
+    this.getUser(this.username);
+
+  }
+
+  private getUser(username: string) {
+    this.userService.getOneUser(username).subscribe({
+      next: (data: OneUser) => {
+        this.user = data.body;
+        console.log("user",this.user);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+}
+    )};
 
   // Cuando las imágenes cambien en el componente ImageEntryComponent, actualiza tus imágenes
   onImagesChange(newImages: string[]) {

@@ -31,5 +31,9 @@ export class PublicationsService {
   return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/communities');
  }
 
+ getGlobalPublications(username: string): Observable<AllPublications> {
+  return this.http.get<AllPublications>(API_URL + 'publication/'+username+'/global');
+ }
+
 
 }
