@@ -26,6 +26,8 @@ export interface Author {
  fullname:        string;
  profile_picture: string;
  profile_picture_frame: string
+ banner_picture: string
+ description:    string;
 }
 
 export interface Comment {
@@ -48,4 +50,13 @@ export interface Community {
  shortname:       string;
  fullname:        string;
  profile_picture: string;
+}
+
+
+export interface PublicationCreator{
+  author: string;
+  content: string;
+  community?: string;
+  images?: string[];
+  video?: string;
 }

@@ -5,7 +5,9 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { AllCommunities } from '@interfaces/communities.interface';
 import { OneUser, User } from '@interfaces/users.interface';
 import { UserService } from '@services/user.service';
-import { Publication } from '@interfaces/publications.interface';
+import { Publication, PublicationCreator } from '@interfaces/publications.interface';
+import { PublicationsService } from '@services/publications.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-publication-modal',
@@ -21,7 +23,7 @@ export class CreatePublicationModalComponent implements OnInit{
   inputURL = '';
   youtubeUrl = '';
   isYoutubeUrlValid = false;
-  constructor(private sanitizer: DomSanitizer, private userService: UserService,private formBuilder: FormBuilder) {}
+  constructor(private sanitizer: DomSanitizer, private userService: UserService,private formBuilder: FormBuilder, private publicationService: PublicationsService) {}
 
   @Input() username: string = '';
   user!: User;
@@ -74,6 +76,33 @@ export class CreatePublicationModalComponent implements OnInit{
     }
 
     console.log('Publicación:', publication);
+    this.createPublication(publication);
+  }
+
+  private createPublication(publication: any) {
+    
+    this.publicationService.createPublication(publication).subscribe({
+      next: (data: any) => {
+        document.getElementById('close-createpost-modal')?.click();
+        Swal.fire({
+          icon: 'success',
+          title: 'Publicación creada con éxito',
+          text: 'Seras redirigido en 3 segundos',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          customClass: {
+            popup: 'bg-base-200',
+            title: 'modal-color',
+          }
+        })
+        console.log(data);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+
 
   }
 
@@ -88,6 +117,8 @@ export class CreatePublicationModalComponent implements OnInit{
       next: (data: OneUser) => {
         this.user = data.body;
         console.log("user",this.user);
+        
+        // create_post.close()
       },
       error: (error) => {
         console.log(error);

@@ -1,1 +1,14 @@
-<p>publication-view works!</p>
+
+<div class="container max-w-4xl mx-auto px-6 md:px-8"><h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-memo"></i> Publicacion abierta</h1>
+
+<app-publication [publication]="publication"></app-publication>
+<div class="card card-bordered shadow min-w-xl h-fit">
+ <div class="card-body">
+  @if(publication.community){
+
+  }
+  <h2 class="card-title"><i class="fa-regular fa-comments"></i>Comentarios</h2>
+  </div>
+ </div>
+</div>
+

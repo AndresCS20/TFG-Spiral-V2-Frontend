@@ -61,6 +61,7 @@ export const routes: Routes = [
       loadChildren: () => import('@components/pages/explore/explore.routes')
     },
     //------------------------- Other Pages Routes -------------------------//
+    { path: 'publication/:publicationId',canActivate: [homeGuard], loadComponent: () => import('@components/pages/publication-view/publication-view.component').then(m => m.PublicationViewComponent)},
     { path: 'notifications',canActivate: [homeGuard], loadComponent: () => import('@components/pages/notifications/notifications.component').then(m => m.NotificationsComponent)},
     { path: 'messages',canActivate: [homeGuard], loadComponent: () => import('@components/pages/messages/messages.component').then(m => m.MessagesComponent)},
     { path: 'bookmarks',canActivate: [homeGuard], loadComponent: () => import('@components/pages/bookmarks/bookmarks.component').then(m => m.BookmarksComponent)},

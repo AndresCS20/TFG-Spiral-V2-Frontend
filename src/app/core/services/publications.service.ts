@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllPublications } from '@interfaces/publications.interface';
+import { AllPublications, OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -12,6 +12,15 @@ const API_URL = environment.API_URL;
 export class PublicationsService {
  
  constructor(private http: HttpClient) {}
+
+ createPublication(publication: PublicationCreator) {
+  return this.http.post<PublicationCreator>(API_URL + 'publication/', publication);
+ }
+
+ getPublicationById(publicationId: string): Observable<OnePublication> {
+  return this.http.get<OnePublication>(API_URL + 'publication/one/' + publicationId);
+ }
+
  getAllPublications(): Observable<AllPublications> {
   return this.http.get<AllPublications>(API_URL + 'publication/');
  }
