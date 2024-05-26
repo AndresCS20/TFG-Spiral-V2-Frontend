@@ -1,11 +1,11 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule,FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ImageEntryComponent } from './image-entry/image-entry.component';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { CommunitiesService } from '@services/communities.service';
 import { AllCommunities } from '@interfaces/communities.interface';
 import { OneUser, User } from '@interfaces/users.interface';
 import { UserService } from '@services/user.service';
+import { Publication } from '@interfaces/publications.interface';
 
 @Component({
   selector: 'app-create-publication-modal',
@@ -21,16 +21,61 @@ export class CreatePublicationModalComponent implements OnInit{
   inputURL = '';
   youtubeUrl = '';
   isYoutubeUrlValid = false;
-  
+  constructor(private sanitizer: DomSanitizer, private userService: UserService,private formBuilder: FormBuilder) {}
+
   @Input() username: string = '';
   user!: User;
-
-  profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+  profileForm = this.formBuilder.group({
+    postInfo: ['', Validators.required],
+    postCommunity: ['', Validators.required],
   });
+  // profileForm = new FormGroup({
+  //   textinfo: new FormControl('Validator.required'),
+  // });
 
-  constructor(private sanitizer: DomSanitizer, private userService: UserService) {}
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
+
+    const postInfo = this.profileForm.value.postInfo;
+    const postCommunity = this.profileForm.value.postCommunity;
+    let publication = {}
+    publication  = {
+      author: this.user._id,
+      content: this.profileForm.value.postInfo,
+    }
+    if(postCommunity !== 'global'){
+      publication = {
+      ...publication,
+      community: postCommunity,
+    }
+    }
+ 
+    switch (this.publicationType) {
+      case 'text':
+        console.log('Texto:', this.profileForm.value.postInfo);
+        break;
+      case 'image':
+        publication = {
+          ...publication,
+          images: this.imageUrls,
+        }
+        console.log('Imagen:', this.imageUrls);
+        break;
+      case 'video':
+        publication = {
+          ...publication,
+          video: this.youtubeUrl,
+        }
+        console.log('Video:', this.youtubeUrl);
+        break;
+      default:
+        console.log('Tipo de publicación no reconocido:', this.publicationType);
+    }
+
+    console.log('Publicación:', publication);
+
+  }
 
   ngOnInit(): void {
 
