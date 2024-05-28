@@ -51,7 +51,8 @@
 
     <span class="flex-1-auto"></span>
     <app-create-publication-modal [username]="user.username"/>
-    <div class="dropdown">
+    <app-language-selector/>
+    <!-- <div class="dropdown">
       <button class="btn btn-circle mx-1 tooltip tooltip-bottom" data-tip="Idiomas">
       <span class="icon-[emojione--flag-for-spain] w-7 h-7"></span>
     </button>
@@ -63,7 +64,7 @@
         <li><a><span class="icon-[emojione--flag-for-france] w-7 h-7"></span> Frances</a></li>
         <li><a><span class="icon-[material-symbols--flag-circle-rounded] w-7 h-7"></span> Más Idiomas</a></li>
       </ul>
-    </div>
+    </div> -->
 
     <button class="btn btn-circle mx-1 hidden md:block tooltip tooltip-bottom" data-tip="Pantalla Completa" (click)="fullscreen()">
       @if (screenfull) {

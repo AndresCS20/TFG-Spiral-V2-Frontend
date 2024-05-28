@@ -8,11 +8,12 @@ import { Subscription } from 'rxjs';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 import { CreatePublicationModalComponent } from '../../shared/elements/create-publication-modal/create-publication-modal.component';
 import { User } from '@interfaces/users.interface';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink,UserzoneComponent, AvatarFrameComponent, CreatePublicationModalComponent],
+  imports: [RouterLink,UserzoneComponent, AvatarFrameComponent, CreatePublicationModalComponent, LanguageSelectorComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit{
   isLoggedIn = false;
   eventBusSub?: Subscription;
   user !: User;
+  
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
 

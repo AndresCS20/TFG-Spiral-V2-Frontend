@@ -1,0 +1,12 @@
+<div class="dropdown">
+ <div tabindex="0" role="button" class="btn m-1">
+  <span [class]="'icon-[circle-flags--' + languageSelected().code+'] w-7 h-7'"></span></div>
+ <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+   
+   @for (language of languages; track language.code) {
+     <li (click)="changeLanguage(language)" ><a [class]="languageSelected().name == language.name ? 'active' : ''">
+      <span class="w-7 h-7" [class]="language.svg"></span>{{ language.name }}</a></li>
+   }
+   <li><a><span class="icon-[material-symbols--flag-circle-rounded] w-7 h-7"></span>&nbsp;Más Idiomas</a></li>
+ </ul>
+</div>
