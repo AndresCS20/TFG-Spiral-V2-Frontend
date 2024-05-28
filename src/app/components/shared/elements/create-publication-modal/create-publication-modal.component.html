@@ -77,14 +77,35 @@
       <div class="label">
         <span class="label-text">Elige donde crear la publicación</span>
       </div>
-      <select class="select select-bordered" formControlName="postCommunity"> 
+      <div class="dropdown dropdown-top">
+        <div tabindex="0" role="button" class="btn m-1">
+         <img [src]="postCommunity().profile_picture" class="w-8 h-8 rounded-full mr-2" alt="profile picture"> {{postCommunity().fullname}} 
+        </div>
+        <ul tabindex="0" class="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a (click)="updateCommunity(globalPostInfo)">
+              <img [src]="globalPostInfo.profile_picture"> {{globalPostInfo.fullname}}
+            </a>
+          </li>
+          @if (user.communities) {
+            @for (community of user.communities; track community._id) {
+              <li>
+                <a (click)="updateCommunity(community.community)">
+                  <img [src]="community.community.profile_picture" class="w-8 h-8 rounded-full mr-2" alt="profile picture"> {{community.community.fullname}}
+                </a>
+              </li>
+            }
+          }
+        </ul>
+      </div>
+      <!-- <select class="select select-bordered" formControlName="postCommunity"> 
         <option value="global">Global</option>
           @if(user.communities){
             @for (community of user.communities; track community._id) {
               <option value="{{community.community._id}}">{{community.community.shortname}}: {{community.community.fullname}}</option>
             }
           }
-      </select>
+      </select> -->
       </label>  
    <button class="btn btn-primary w-full mt-2" type="submit" [disabled]="!profileForm.valid">Publicar</button>
   </form>

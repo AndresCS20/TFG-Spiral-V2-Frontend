@@ -1,9 +1,9 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule,FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ImageEntryComponent } from './image-entry/image-entry.component';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { AllCommunities } from '@interfaces/communities.interface';
-import { OneUser, User } from '@interfaces/users.interface';
+import { OneUser, OneUserCommunity, User } from '@interfaces/users.interface';
 import { UserService } from '@services/user.service';
 import { Publication, PublicationCreator } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
@@ -29,27 +29,42 @@ export class CreatePublicationModalComponent implements OnInit{
   user!: User;
   profileForm = this.formBuilder.group({
     postInfo: ['', Validators.required],
-    postCommunity: ['', Validators.required],
+    // postCommunity: ['', Validators.required],
   });
-  // profileForm = new FormGroup({
-  //   textinfo: new FormControl('Validator.required'),
-  // });
+
+  globalPostInfo : OneUserCommunity = {
+    _id: '',
+    shortname: 'global',
+    fullname: 'Publicación Global',
+    profile_picture: 'assets/earth.svg'
+  }
+
+ postCommunity = signal(this.globalPostInfo)
+
+  updateCommunity(community: OneUserCommunity){
+    this.postCommunity.set(community)
+  }
+
+
+  //TODO: Implementar metodo para limpiar el formulario al crear la publicacion correctamente
+
+  //TODO: Estudiar la opción de reutilizar el componente de creación de publicaciones para la edición de publicaciones
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
 
     const postInfo = this.profileForm.value.postInfo;
-    const postCommunity = this.profileForm.value.postCommunity;
+
+
     let publication = {}
     publication  = {
       author: this.user._id,
       content: this.profileForm.value.postInfo,
     }
-    if(postCommunity !== 'global'){
+    if(this.postCommunity().shortname !== 'global'){
       publication = {
       ...publication,
-      community: postCommunity,
+      community: this.postCommunity()._id,
     }
     }
  
