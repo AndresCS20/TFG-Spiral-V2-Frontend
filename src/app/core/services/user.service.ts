@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { AllUsers, OneUser } from '@interfaces/users.interface';
+import { AllUsers, OneUser, UpdateUser, User } from '@interfaces/users.interface';
 import { FollowList } from '@interfaces/follows.interface';
 
 const API_URL = environment.API_URL;
@@ -12,6 +12,11 @@ const API_URL = environment.API_URL;
 })
 export class UserService {
   constructor(private http: HttpClient) {}
+
+
+  updateUser(username:string, user : UpdateUser): Observable<UpdateUser> {
+    return this.http.patch<UpdateUser>(API_URL + 'user/' + username + '', user);
+  }
 
   
   getAllUsers(): Observable<AllUsers> {

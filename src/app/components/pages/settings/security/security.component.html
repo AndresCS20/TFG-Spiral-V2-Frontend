@@ -1,1 +1,39 @@
-<p>security works!</p>
+<div class="container max-w-4xl mx-auto mt-4"><h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-camera-security"></i>&nbsp;Ajustes de Seguridad</h1>
+
+ <form  [formGroup]="securityForm" (ngSubmit)="onSubmit()">
+  <label class="form-control w-full my-2">
+  <span class="label-text">Contraeña actual</span>
+  <div class="input input-bordered flex items-center gap-2 my-2">
+   <i class="fa-regular fa-key-skeleton"></i>
+   <input type="password" class="grow" placeholder="•••••••••••" formControlName="oldPassword"/>
+ </div>
+</label>
+<label class="form-control w-full my-2">
+ <span class="label-text">Contraeña nueva</span>
+ <div class="input input-bordered flex items-center gap-2 my-2">
+  <i class="fa-regular fa-key"></i>
+  <input type="password" class="grow" placeholder="•••••••••••" formControlName="newPassword"/>
+</div>
+</label>
+<label class="form-control w-full my-2">
+ <span class="label-text">Repite la contraseña nueva</span>
+ <div class="input input-bordered flex items-center gap-2 my-2">
+  <i class="fa-solid fa-key"></i>
+  <input type="password" class="grow" placeholder="•••••••••••" formControlName="confirmPassword"/>
+</div>
+</label>
+ <button type="submit" class="btn btn-primary btn-block my-2" [disabled]="!securityForm.valid">
+  <i class="fa-solid fa-floppy-disk"></i>&nbsp;
+  Actualizar datos de seguridad
+ </button>
+
+</form>
+<div class="divider my-4"></div>
+
+<div class="card bg-base-200 p-4">
+<h2 class="card-title"><i class="fa-solid fa-signature-lock"></i>&nbsp;Autenticación de dos factores (Proximamente)</h2>
+<button class="btn btn-info btn-disabled w-fit mx-auto my-2" type="button">Habilitar la autenticación de dos factores</button>
+<p class="text-xs text-muted mt-2"> La autenticación de dos factores agrega una capa adicional de seguridad a su cuenta al requerir más que una contraseña para iniciar sesión. </p>
+</div>
+
+</div>

@@ -119,17 +119,17 @@ body.collapsed .hide {
   width: 100%;
 }
 
-.divider {
-  display: none;
-}
+// .divider {
+//   display: none;
+// }
 
-body.collapsed .divider {
-  width: 100%;
-  display: block;
-  background: var(--divider-bg);
-  height: 2px;
-  margin: 0.5rem 0;
-}
+// body.collapsed .divider {
+//   width: 100%;
+//   display: block;
+//   background: var(--divider-bg);
+//   height: 2px;
+//   margin: 0.5rem 0;
+// }
 
 /*? profile part */
 .sidebar__profile {

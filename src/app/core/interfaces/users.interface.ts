@@ -30,6 +30,21 @@ export interface User {
 }
 
 
+export interface UpdateUser{
+ fullname?: string;
+ email?: string;
+ password?: string;
+ profile_picture?: string;
+ profile_picture_frame?: string;
+ banner_picture?: string;
+ description?: string;
+ interests?: string[];
+ birth_date?: Date;
+ link?: string;
+ ubicaion?: string;
+ social_networks?: SocialNetworks[];
+}
+
 export interface SocialNetworks {
  name: string;
  link:    string;
