@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { StorageService } from '../../../core/services/storage.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
@@ -10,22 +10,26 @@ import { Subscription } from 'rxjs';
 import { AllPublications } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
 import { Community } from '@interfaces/communities.interface';
+import { CommonModule } from '@angular/common';
+import { FollowsService } from '@services/follows.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterModule, AvatarFrameComponent, AboutComponent],
+  imports: [RouterModule, AvatarFrameComponent, AboutComponent, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   currentUser!: User;
-  paramUser !: User;
+  isFollowingUser: boolean = false;
+  paramUser = signal({} as User);
   username!: string | null;
   private routeSub!: Subscription;
   loggedUser!: User;
   constructor(private storageService: StorageService, 
     private _userService: UserService,
+    private _followService: FollowsService,
     private route: ActivatedRoute,
     private router: Router,
     private profileDataService:ProfileDataService,
@@ -34,33 +38,22 @@ export class ProfileComponent implements OnInit, OnDestroy{
   ) 
     { }
 
-  // ngOnInit(): void {
-  //   this.currentUser = this.storageService.getUser();
-  //   let route = this.route;
-  //   while (route.firstChild) route = route.firstChild;
-  //   this.username = route.snapshot.paramMap.get('username');
-
-  //   if (this.username) {
-  //       this.getUser(this.username);
-  //   }
-  // }
-
   ngOnInit(): void {
-    this.currentUser = this.storage.getUser();
     this.subscribeToRouteParams();
-    console.log("Batalla", `${this.username} vs ${this.paramUser.username}`);
-
   }
 
   private subscribeToRouteParams(): void {
     this.routeSub = this.route.paramMap.subscribe(paramMap => {
       this.username = paramMap.get('username');
+      this.currentUser = this.storage.getUser();
+      console.log("quehay", this.currentUser)
       if (this.username) {
         this.getUser(this.username);
-        console.log("USERNAMEPARAM", this.username);
-        console.log("CURRENTUSER", this.currentUser.username);
         this.profileDataService.changeUsername(this.username);
         this.getPublications(this.username);
+        console.log("paramUser", this.paramUser);
+        console.log("currentUser", this.currentUser);
+        // this.isFollowing(this.currentUser._id , this.paramUser()._id);
       }
     });
   }
@@ -71,8 +64,49 @@ export class ProfileComponent implements OnInit, OnDestroy{
     }
   }
 
+  followUser(){
+    this._followService.followUser({userId: this.currentUser._id, followId: this.paramUser()._id}).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.isFollowingUser = true;
+        if(this.username){
+            this.getUser(this.username);
+        }
+      },  
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+  isFollowing(userId: string, followId: string){
+    this._followService.checkIsFollowing({userId: userId, followId: followId}).subscribe({
+      next: (data: any) => {
+        this.isFollowingUser = data.result;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+  unFollowUser(){
+    this._followService.unFollowUser({userId: this.currentUser._id, followId: this.paramUser()._id}).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.isFollowingUser = false;
+        if(this.username){
+          this.getUser(this.username);
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+
   sendCommunities(communities: CommunityList[]) {
-    console.log("quelo")
     this.profileDataService.changeProfileCommunities(communities);
   }
   private getPublications(username: string) {
@@ -90,12 +124,15 @@ export class ProfileComponent implements OnInit, OnDestroy{
     console.log("hola mundo",username)
     this._userService.getOneUser(username).subscribe({
       next: (data: OneUser) => {
-        this.paramUser = data.body;
-        this.profileDataService.changeUserProfile(this.paramUser);
+        this.paramUser.set(data.body);
+        this.profileDataService.changeUserProfile(this.paramUser());
         console.log(this.paramUser);
-        if(this.paramUser.communities){
-          this.sendCommunities(this.paramUser.communities);
+        if(this.paramUser().communities){
+          this.sendCommunities(this.paramUser().communities);
         }
+
+        this.isFollowing(this.currentUser._id, this.paramUser()._id);
+
       },
       error: (error: any) => {
         console.log(error);

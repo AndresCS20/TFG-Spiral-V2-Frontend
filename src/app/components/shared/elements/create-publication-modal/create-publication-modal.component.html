@@ -87,7 +87,7 @@
               <img [src]="globalPostInfo.profile_picture"> {{globalPostInfo.fullname}}
             </a>
           </li>
-          @if (user.communities) {
+          @if (user?.communities) {
             @for (community of user.communities; track community._id) {
               <li>
                 <a (click)="updateCommunity(community.community)">

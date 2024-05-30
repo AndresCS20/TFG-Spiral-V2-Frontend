@@ -1,44 +1,55 @@
 <section class="relative pt-40 pb-24">
-  <div
+ 
+  @if(paramUser().banner_picture != undefined){
+    <div
     alt="cover-image"
     class="w-full absolute top-0 left-0 z-0 h-60 rounded-xl"
-    [attr.style]="'background: url(' + (paramUser.banner_picture || 'https://picsum.photos/seed/' + paramUser.username + '/1280/720') + '); background-size: cover; background-position: center;'"
+    [attr.style]="'background: url(' + paramUser().banner_picture + '); background-size: cover; background-position: center;'"
   ></div>
+  }@else{
+      <div
+    alt="cover-image"
+    class="w-full absolute top-0 left-0 z-0 h-60 rounded-xl"
+    [attr.style]="'background: url(' + ('https://picsum.photos/seed/' + paramUser().username + '/1280/720') + '); background-size: cover; background-position: center;'"
+  ></div>
+  }
+
+
   <div class="w-full max-w-9xl mx-auto px-6 md:px-8">
     <div
       class="flex items-center justify-center sm:justify-start relative z-10 mb-5"
     >
       <app-avatar-frame
-        [profile_picture]="paramUser.profile_picture || 'https://picsum.photos/seed/' + paramUser.username + '/1280/720'"
+        [profile_picture]="paramUser().profile_picture || 'https://picsum.photos/seed/' + paramUser().username + '/1280/720'"
         profile_size="xlarge"
         profile_frame="tech"
       ></app-avatar-frame>
-      <b>{{paramUser.profile_picture_frame}}</b>
+      <b>{{paramUser().profile_picture_frame}}</b>
     </div>
     <div
       class="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5"
     >
       <div class="block">
-      @if(paramUser.fullname)
+      @if(paramUser().fullname)
         {
-          <h3 class="font-manrope font-bold text-4xl mb-1">{{paramUser.fullname}}</h3>
+          <h3 class="font-manrope font-bold text-4xl mb-1">{{paramUser().fullname}}</h3>
           <p class="font-normal text-base leading-7">
-            <i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser.username}}
+            <i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser().username}}
           </p>
         } @else {
-          <h3 class="font-manrope font-bold text-4xl mb-1"><i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser.username}}</h3>
+          <h3 class="font-manrope font-bold text-4xl mb-1"><i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser().username}}</h3>
         }     
 
       </div>
       <div class="flex items-center gap-4">
         <span
           class="py-3.5 px-5 badge badge-outline badge-primary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;{{paramUser?.followers?.length || 0}}
+          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;{{paramUser().followers?.length || 0}}
           Seguidores</span
         >
         <span
           class="py-3.5 px-5 badge badge-outline badge-secondary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;{{paramUser?.following?.length || 0}}
+          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;{{paramUser().following?.length || 0}}
           Seguidos</span
         >
       </div>
@@ -46,17 +57,28 @@
     <div
       class="flex flex-col lg:flex-row max-lg:gap-5 items-center justify-between py-0.5"
     >
-    @if(paramUser.username === username) {
-      <p>{{paramUser.username}} | {{username}}</p>
-
+    @if(paramUser().username === currentUser.username) {
       <div class="flex items-center gap-4">
-        <button class="py-3.5 px-5 btn btn-primary">
+        <button class="py-3.5 px-5 btn btn-primary" routerLink="/settings/profile">
           <i class="fa-regular fa-user-pen"></i> Editar Perfil
         </button>
-        <button class="py-3.5 px-5 btn btn-info">
-          <i class="fa-regular fa-cogs"></i> Ajustes
-        </button>
       </div> 
+       }
+       @else { 
+        
+        <div class="flex items-center gap-4">
+        @if (!isFollowingUser) {
+          <button class="py-3.5 px-5 btn btn-primary" (click)="followUser()">
+            <i class="fa-regular fa-user-check"></i> Seguir
+          </button>
+        }@else {
+          <button class="py-3.5 px-5 btn btn-error" (click)="unFollowUser()">
+            <i class="fa-regular fa-user-xmark"></i> Dejar de Seguir
+          </button>
+        }
+        </div>
+        
+
        }
       <div
         role="tablist"
@@ -65,14 +87,14 @@
       <li class="block lg:hidden"><a routerLink="/profile/{{ username }}/about" routerLinkActive="active"><i class="fa-regular fa-info"></i>&nbsp;Sobre mi</a></li>
         <li>
           <a
-            routerLink="/profile/{{ paramUser.username }}/feed"
+            routerLink="/profile/{{ paramUser().username }}/feed"
             routerLinkActive="active"
             ><i class="fa-regular fa-rectangle-vertical"></i> Publicaciones</a
           >
         </li>
         <li>
           <a
-            routerLink="/profile/{{ paramUser.username }}/media"
+            routerLink="/profile/{{ paramUser().username }}/media"
             routerLinkActive="active"
             ><i class="fa-regular fa-rectangle-history-circle-user"></i>
             Multimedia</a
@@ -80,14 +102,14 @@
         </li>
         <li>
           <a
-            routerLink="/profile/{{ paramUser.username }}/communities"
+            routerLink="/profile/{{ paramUser().username }}/communities"
             routerLinkActive="active"
             ><i class="fa-regular fa-users"></i> Comunidades</a
           >
         </li>
         <li>
           <a
-            routerLink="/profile/{{ paramUser.username }}/followers"
+            routerLink="/profile/{{ paramUser().username }}/followers"
             routerLinkActive="active"
             ><i class="fa-duotone fa-person-walking-arrow-right"></i> Lista de
             Seguidores</a
@@ -95,7 +117,7 @@
         </li>
         <li>
           <a
-            routerLink="/profile/{{ paramUser.username }}/following"
+            routerLink="/profile/{{ paramUser().username }}/following"
             routerLinkActive="active"
             ><i class="fa-regular fa-person-walking-arrow-loop-left"></i> Lista
             de Seguidos</a

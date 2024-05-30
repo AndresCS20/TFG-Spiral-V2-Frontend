@@ -1,1 +1,53 @@
-<p>personal works!</p>
+<div class="container max-w-4xl mx-auto mt-4">
+ <h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-cog"></i>&nbsp;Ajustes Personales</h1>
+
+ <form>
+
+  <!-- Nombre Completo -->
+  <div class="card bg-base-200 p-5 mb-5">
+   <h2 class="card-title"><i class="fa-regular fa-input-text"></i> Nombre Completo</h2>
+   <label class="form-control w-full my-2">
+    <span class="label-text">Introduce tu Nombre Completo</span>
+    
+    <div class="input input-bordered flex items-center gap-2 my-2">
+     <i class="fa-solid fa-input-text"></i>
+     <input type="text" class="grow" placeholder="Adolfo Caracoles" formControlName="fullName"/>
+   </div>
+   </label>
+  </div>
+
+  <!-- Email -->
+  <div class="card bg-base-200 p-5 mb-5">
+   <h2 class="card-title"><i class="fa-regular fa-envelope"></i> Email</h2>
+   <div class="form-control w-full my-2">
+    <label class="label-text">Introduce tu Email</label>
+    <div class="input input-bordered flex items-center gap-2 my-2">
+     <i class="fa-solid fa-envelope"></i>
+     <input type="email" class="grow" placeholder="VJpRj@example.com" formControlName="email"/>
+    </div>
+    <label class="label-text-alt">Tu correo no se publicará</label>
+   </div>
+  </div>
+
+  <!-- Fecha de Nacimiento -->
+  <div class="card bg-base-200 p-5 mb-5">
+   <h2 class="card-title"><i class="fa-regular fa-calendar"></i> Fecha de Nacimiento</h2>
+   <div class="form-control w-full my-2">
+    <label class="label-text">Introduce tu fecha de nacimiento</label>
+    <div class="input input-bordered flex items-center gap-2 my-2">
+     <i class="fa-solid fa-calendar"></i>
+     <input type="date" class="grow" formControlName="birthDate"/>
+    </div>
+   </div>
+  </div>
+
+  
+
+ <!-- Guardar -->
+  
+  <div class="card bg-base-200 p-4 my-5 flex justify-center">
+   <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button>
+  </div>
+
+  </form>
+  </div>

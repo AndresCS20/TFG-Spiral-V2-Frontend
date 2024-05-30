@@ -3,7 +3,7 @@
  <i class="fa-regular fa-info-circle"></i>
  Sobre mi
 </div>
-<div class="mt-4">@if (userProfile.description) {
+<div class="mt-4">@if (userProfile?.description) {
   {{userProfile.description}}
 }@else {
   <div role="alert" class="alert">
@@ -18,12 +18,12 @@
  <div class="flex items-center">
    <i class="fa-regular fa-map-marker-alt mr-3"></i
    ><span class="leading-none">
-    {{userProfile.ubication ? userProfile.ubication : 'Ups! Ubicación desconocida'}}</span>
+    {{userProfile?.ubication ? userProfile.ubication : 'Ups! Ubicación desconocida'}}</span>
  </div>
 
  <div class="flex items-center mt-4">
    <i class="fa-regular fa-cake mr-3"></i
-   ><span class="leading-none">{{userProfile.birth_date ? userProfile.birth_date : 'Ups! Fecha de nacimiento desconocida'}}</span>
+   ><span class="leading-none">{{userProfile?.birth_date ? userProfile.birth_date : 'Ups! Fecha de nacimiento desconocida'}}</span>
  </div>
 </div>
 <hr class="w-full border-t my-6">
@@ -50,13 +50,13 @@
    <h3 class="text-2xl font-semibold leading-tight">
     <i class="fa-regular fa-link"></i>Enlaces</h3>
    <!-- Implementar esto con un array de objetos en el backend -->
-   @if(userProfile.social_networks.length>0 || userProfile.link.length){
+   @if(userProfile?.social_networks || userProfile?.link){
     
    <div class="mt-4 space-y-2">
     @if(userProfile.link){
      <a
        class="flex items-center space-x-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-       [href]="userProfile.link"
+       [href]="userProfile?.link"
        ><i class="fa-regular fa-globe"></i><span>Pagina Web</span></a>}
        @for(socialNetwork of userProfile.social_networks; track $index) {
          <a

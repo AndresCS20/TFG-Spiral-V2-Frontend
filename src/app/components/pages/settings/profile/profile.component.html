@@ -1,1 +1,113 @@
-<p>profile works!</p>
+<div class="container max-w-4xl mx-auto mt-4">
+ <h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-user"></i>&nbsp;Ajustes del Perfil</h1>
+
+ <form>
+  <div class="card bg-base-200 p-4 mb-5">
+  <h2 class="card-title"><i class="fa-solid fa-head-side"></i>&nbsp;Foto de perfil</h2>
+  <div class="block md:flex items-center gap-3 my-2">
+   <div class="avatar items-center">
+    <div class="w-28 rounded-full">
+     <img src="https://i.imgur.com/wX5XykY.png?1" />
+    </div>
+   </div>
+   <label class="form-control w-full my-2">
+    <span class="label-text">Introduce el enlace de una imagen</span>
+    
+    <div class="input input-bordered flex items-center gap-2 my-2">
+     <i class="fa-regular fa-head-side"></i>
+     <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profilePicture"/>
+   </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
+   </label>
+  </div>
+  </div>
+
+  <div class="card bg-base-200 p-4 my-5">
+   <h2 class="card-title"><i class="fa-regular fa-image"></i> Foto de portada</h2>
+   <div class="block md:flex items-center gap-3 my-2">
+    <div class="w-full md:w-64 h-24 rounded-lg" style="background: url('https://i.imgur.com/e7vsUO9.jpg') center center / cover;">
+
+    </div>
+    <label class="form-control w-full my-2">
+     <span class="label-text">Introduce el enlace de una imagen</span>
+     
+     <div class="input input-bordered flex items-center gap-2 my-2">
+      <i class="fa-solid fa-image"></i>
+      <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="bannerPicture"/>
+    </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
+    </label>
+   </div>
+   </div>
+
+
+   <!-- Ubicacion -->
+   <div class="card bg-base-200 p-4 my-5">
+    <h2 class="card-title"><i class="fa-regular fa-map-marker"></i> Ubicación</h2>
+    <label class="form-control w-full my-2">
+     <span class="label-text">Introduce tu ubicación</span>
+     
+     <div class="input input-bordered flex items-center gap-2 my-2">
+      <i class="fa-solid fa-map"></i>
+      <input type="text" class="grow" placeholder="Madrid, Españita" formControlName="ubication"/>
+    </div>
+    </label>
+   </div>
+
+   <div class="card bg-base-200 p-4 my-5">
+    <h2 class="card-title"><i class="fa-regular fa-book-user"></i> Biografía</h2>
+    <label class="form-control">
+     <div class="label">
+       <span class="label-text">Introduce tu biografia</span>
+     </div>
+     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción" formControlName="descripcion"></textarea>
+   </label>
+   </div>
+
+   <!-- Intereses -->
+  <div class="card bg-base-200 p-5 mb-5">
+   <h2 class="card-title"><i class="fa-regular fa-gamepad"></i> Intereses / Hobbies</h2>
+   <div class="form-control w-full my-2">
+    <label class="label-text">Introduce tus intereses / hobbies</label>
+    <div class="flex gap-3 my-2">
+    <div class="input input-bordered flex flex-1 items-center gap-2">
+     <i class="fa-solid fa-gamepad"></i>
+     <input type="text" class="grow" placeholder="Hacer ejercicio, jugar videojuegos, leer" [(ngModel)]="interestInput"/>
+    </div>
+    <button class="btn btn-primary" (click)="addInterest()"><i class="fa-regular fa-plus"></i>&nbsp;Añadir</button>
+   </div>
+ 
+   <div class="flex gap-3 my-2">
+    <div class="join">
+     <span class="badge join-item badge-lg badge-secondary">Escuchar musica</span>
+     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
+    </div>
+    <div class="join">
+     <span class="badge join-item badge-lg badge-secondary">Informatica</span>
+     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
+    </div>
+    <div class="join">
+     <span class="badge join-item badge-lg badge-secondary">Videojuegos</span>
+     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
+    </div>
+   </div>
+  
+  </div>
+   </div>
+
+   <!-- Redes Sociales -->
+   <div class="card bg-base-200 p-4 my-5">
+    <h2 class="card-title"><i class="fa-regular fa-share-nodes"></i> Redes Sociales</h2>
+    <label class="form-control w-full my-2">
+     <div class="label">
+       <span class="label-text">Introduce tus redes</span>
+     </div>
+     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción" formControlName="social"></textarea>
+   </label>
+   </div>
+
+<!-- Boton de guardar -->
+   <div class="card bg-base-200 p-4 my-5 flex justify-center">
+    <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button>
+   </div>
+
+ </form>
+ </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { OnePublication, Publication } from '@interfaces/publications.interface';
+import { OnePublication, Publication, Comment } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 import { User } from '@interfaces/users.interface';
@@ -8,11 +8,13 @@ import { CommonModule } from '@angular/common';
 import { StorageService } from '@services/storage.service';
 import { PageTitleComponent } from '../../shared/elements/page-title/page-title.component';
 import { PublicationComponent } from '../../shared/elements/publication/publication.component';
+import { FormsModule } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-publication-view',
   standalone: true,
-  imports: [AvatarFrameComponent, RouterModule, CommonModule, PublicationComponent],
+  imports: [AvatarFrameComponent, RouterModule, CommonModule, PublicationComponent, FormsModule],
   templateUrl: './publication-view.component.html',
   styleUrl: './publication-view.component.scss'
 })
@@ -22,10 +24,16 @@ export class PublicationViewComponent implements OnInit{
     private storageService : StorageService,
     private publicationService: PublicationsService,     
     private route: ActivatedRoute, 
-    private router: Router,) { }
+    private router: Router) { }
 
     publicationId!: string | null;
     publication !: Publication
+    isLoading = true; 
+
+    comments = signal<Comment[]>([]);
+
+    commentBox : string = ""
+
     user !: User
     ngOnInit(): void {
       let route = this.route;
@@ -43,6 +51,8 @@ export class PublicationViewComponent implements OnInit{
         next: (data: OnePublication) => {
           this.publication = data.body;
           console.log("weoeoeoeo",this.publication);
+          this.isLoading = false;          
+          this.comments.set(this.publication.comments);
         },
         error: (error: any) => {
           console.log(error);
@@ -50,7 +60,7 @@ export class PublicationViewComponent implements OnInit{
       })
     }
 
-    dateFormatted(){
-
+    dateFormatted(date: Date){
+      return new Date(date).toLocaleDateString();
     }
 }

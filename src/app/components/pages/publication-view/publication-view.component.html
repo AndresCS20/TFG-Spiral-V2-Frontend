@@ -1,14 +1,82 @@
 
-<div class="container max-w-4xl mx-auto px-6 md:px-8"><h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-memo"></i> Publicacion abierta</h1>
+<div class="container max-w-4xl mx-auto px-6 md:px-8">
+ <h1 class="text-2xl font-semibold leading-tight my-5">
+  <i class="fa-regular fa-memo"></i> Publicacion abierta
+ </h1>
+
+ @if(!isLoading){
+
 
 <app-publication [publication]="publication"></app-publication>
 <div class="card card-bordered shadow min-w-xl h-fit">
  <div class="card-body">
-  @if(publication.community){
+  <h2 class="card-title"><i class="fa-regular fa-comments"></i>Comentarios</h2>
+
+
+   <div class="form-control">
+    <textarea class="textarea textarea-bordered" placeholder="Agrega un comentario" [(ngModel)]="commentBox"></textarea>
+   </div>
+   <div class="form-control mt-3">
+    <button class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>&nbsp;Enviar comentario</button>
+   </div>
+
+ @if(comments().length > 0){
+  <div class="divider">Comentarios <span class="badge badge-secondary">{{comments().length}}</span></div>
+  @for (comment of comments(); track $index) {
+  <div class="flex items-center space-x-2">
+   <div class="relative flex flex-shrink-0 self-start cursor-pointer">
+    <app-avatar-frame
+    [profile_picture]="comment.user.profile_picture"
+    profile_size="small"
+    [frame_name]="comment.user.profile_picture_frame || 'none'"
+  ></app-avatar-frame>
+   </div>
+ 
+   <div class="flex items-center justify-center space-x-2">
+    <div class="block">
+     <div class="flex justify-center items-center space-x-2">
+      <div class="bg-base-200 w-auto rounded-xl px-2 pb-2">
+       <div class="font-medium">
+        <a class="hover:underline text-sm" [routerLink]="'/profile/'+comment.user.username+'/feed'" target="_blank">
+         {{comment.user.fullname}} 
+         <span class="text-sm text-secondary leading-none ml-1"><i class="fa-regular fa-at text-sm"></i>{{comment.user.username}}</span>
+        </a>
+       </div>
+       <div class="text-md">
+        {{comment.content}}
+       </div>
+      </div>
+  
+     </div>
+     <div class="flex justify-start items-center text-xs w-full">
+      <div class="font-semibold px-2 flex items-center justify-center space-x-1">
+       <a class="hover:underline" target="_blank">
+        <small>{{dateFormatted(comment.date)}}</small>
+       </a>
+      </div>
+     </div>
+  
+  
+  
+  
+  
+  
+    </div>
+   </div>
+  
+  </div>
+ }
 
   }
-  <h2 class="card-title"><i class="fa-regular fa-comments"></i>Comentarios</h2>
   </div>
- </div>
+ </div> 
+} @else {
+  <div class="card card-bordered shadow min-w-xl h-fit">
+   <div class="card-body">
+    <i class="fa-solid fa-spinner"></i> Cargando publicacion
+   </div>
+  </div>
+  
+}
 </div>
 

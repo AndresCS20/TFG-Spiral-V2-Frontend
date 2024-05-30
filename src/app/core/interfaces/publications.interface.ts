@@ -29,9 +29,16 @@ export interface Author {
  banner_picture: string
  description:    string;
 }
+export interface UserComment {
+  _id:                   string;
+  username:              string;
+  profile_picture:       string;
+  fullname:              string;
+  profile_picture_frame: string;
+}
 
 export interface Comment {
- user:     string;
+ user:     UserComment;
  content?: string;
  date:     Date;
  _id:      string;
