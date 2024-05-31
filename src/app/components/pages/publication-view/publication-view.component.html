@@ -17,7 +17,7 @@
     <textarea class="textarea textarea-bordered" placeholder="Agrega un comentario" [(ngModel)]="commentBox"></textarea>
    </div>
    <div class="form-control mt-3">
-    <button class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>&nbsp;Enviar comentario</button>
+    <button class="btn btn-primary" (click)="createComment()"><i class="fa-regular fa-paper-plane"></i>&nbsp;Enviar comentario</button>
    </div>
 
  @if(comments().length > 0){

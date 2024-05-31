@@ -17,6 +17,10 @@ export class PublicationsService {
   return this.http.post<PublicationCreator>(API_URL + 'publication/', publication);
  }
 
+ createComment(publicationId:string,body: { userId: string, content: string }): Observable<OnePublication> {
+  return this.http.post<OnePublication>(API_URL + 'publication/'+publicationId+'/comments/', body);
+ }
+
  getPublicationById(publicationId: string): Observable<OnePublication> {
   return this.http.get<OnePublication>(API_URL + 'publication/one/' + publicationId);
  }

@@ -9,7 +9,6 @@ import { StorageService } from '@services/storage.service';
 import { PageTitleComponent } from '../../shared/elements/page-title/page-title.component';
 import { PublicationComponent } from '../../shared/elements/publication/publication.component';
 import { FormsModule } from '@angular/forms';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-publication-view',
@@ -45,6 +44,24 @@ export class PublicationViewComponent implements OnInit{
       }
     }
 
+    createComment(){
+      let commentBody ={
+        userId: this.user._id,
+        content: this.commentBox
+      }
+      this.publicationService.createComment(this.publication._id ,{userId: this.user._id, content: this.commentBox}).subscribe({
+        next: (data: OnePublication) => {
+          this.comments.set(data.body.comments);
+          this.commentBox = "";
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      })
+
+
+    }
+
     getPublicationById(publicationId: string){
 
       this.publicationService.getPublicationById(publicationId).subscribe({
@@ -61,6 +78,6 @@ export class PublicationViewComponent implements OnInit{
     }
 
     dateFormatted(date: Date){
-      return new Date(date).toLocaleDateString();
+      return new Date(date).toDateString();
     }
 }

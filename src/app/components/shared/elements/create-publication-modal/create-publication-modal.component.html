@@ -98,14 +98,6 @@
           }
         </ul>
       </div>
-      <!-- <select class="select select-bordered" formControlName="postCommunity"> 
-        <option value="global">Global</option>
-          @if(user.communities){
-            @for (community of user.communities; track community._id) {
-              <option value="{{community.community._id}}">{{community.community.shortname}}: {{community.community.fullname}}</option>
-            }
-          }
-      </select> -->
       </label>  
    <button class="btn btn-primary w-full mt-2" type="submit" [disabled]="!profileForm.valid">Publicar</button>
   </form>
