@@ -76,17 +76,22 @@
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
     <div class="dropdown dropdown-top dropdown-hover">
-      <div tabindex="0" role="button" class="btn m-1"><span class="font-bold text-red-600">❤️ Me encanta</span></div>
+      <div tabindex="0" role="button" class="btn m-1">
+        @if(activeReaction()!== null){
+          <span class="font-bold ">{{activeReaction()?.icon}} {{activeReaction()?.name}}</span>
+        }@else {
+          <span><i class="fa-regular fa-thumbs-up"></i>&nbsp; Reaccionar</span>
+        }
+
+        
+      </div>
       <div tabindex="0" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100 text-primary-content">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-          <button class="btn btn-md text-xl">👍</button>
-          <button class="btn btn-md btn-active text-xl">❤️</button>
-          <button class="btn btn-md text-xl">🥰</button>
-          <button class="btn btn-md text-xl">😎</button>
-          <button class="btn btn-md text-xl">😂</button>
-          <button class="btn btn-md text-xl">😲</button>
-          <button class="btn btn-md text-xl">😭</button>
-          <button class="btn btn-md text-xl">😡</button>
+          @for (reaction of reactions(); track reaction._id) {
+            <button class="btn btn-md text-xl">{{reaction.icon}}</button>
+          }
+          
+   
         </div>
       </div>
     </div>
@@ -127,10 +132,13 @@
   <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6" />
   <div class="flex  sm:items-center mx-6 sm:mx-8 mb-4 sm:mb-6">
     <div class="flex items-center join w-full md:w-fit">
-      <span class="btn btn-outline border-inherit no-animation join-item">❤️ 12</span>
-      <span class="btn btn-outline border-inherit no-animation join-item">😎 3</span>
-      <span class="btn btn-outline border-inherit no-animation join-item">😂 5</span> 
-      <button class="btn btn-outline tracking-tight join-item"><i class="fa-regular fa-circle-plus"></i> {{publication.reactions.length}} reacciones</button>
+
+      @if(reactionCount() > 0){
+        @for (mostReaction of mostReacted(); track mostReaction._id) {
+          <span class="btn btn-outline border-inherit no-animation join-item">{{mostReaction.icon}} {{mostReaction.reactions.length}}</span>
+      }
+    }
+      <button class="btn btn-outline tracking-tight join-item"><i class="fa-regular fa-circle-plus"></i> {{reactionCount()}} reacciones</button>
     </div>
    
   </div>
