@@ -13,7 +13,7 @@ export interface Publication {
  community: Community;
  content:   string;
  author:    Author;
- reactions: Reaction[];
+ reactions: BodyReaction[];
  comments:  Comment[];
  images: string[];
  video: string;
@@ -45,13 +45,26 @@ export interface Comment {
  type?:    string;
 }
 
-export interface Reaction {
- user: string;
- type: string;
- date: Date;
- _id:  string;
+// export interface Reaction {
+//  user: string;
+//  type: string;
+//  date: Date;
+//  _id:  string;
+// }
+
+export interface BodyReaction {
+  type:      string;
+  name:      string;
+  icon:      string;
+  reactions: ReactionReaction[];
+  _id:       string;
 }
 
+export interface ReactionReaction {
+  user: Author;
+  date: Date;
+  _id:  string;
+}
 export interface Community {
  _id:             string;
  shortname:       string;

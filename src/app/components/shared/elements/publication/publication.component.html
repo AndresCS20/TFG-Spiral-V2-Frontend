@@ -56,51 +56,22 @@
   <div class="relative mb-4">
     @if (publication.images.length>0) {
 
-      @switch (publication.images.length) {
-        @case (1) {
-          <img src="https://sportshub.cbsistatic.com/i/2023/11/13/ac400fa1-658f-42d6-abe7-8df0ac603629/one-piece-future-island-arc-manga.jpg" alt="Card cover image" class="h-80 w-full object-cover">
-        }
-
-        @case (2) {
-          <div class="flex mx-6 sm:mx-8 mb-4">
-            <div class="flex w-80 h-80 pr-1"><img [src]="publication.images[0]" alt="Card cover image"
-                class="rounded object-cover"></div>
-                <div class="flex w-80 h-80 pr-1"><img [src]="publication.images[1]" alt="Card cover image"
-                  class="rounded object-cover"></div>
-          </div>
-        } 
-        @case (3) {
-          <div class="flex mx-6 sm:mx-8 mb-4">
-            <div class="flex h-80 pr-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/17-640x480.jpg" alt="Card cover image"
-                class="rounded object-cover"></div>
-            <div class="flex flex-col pl-1">
-              <div class="flex h-40 pb-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/18-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-              <div class="flex h-40 pt-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/19-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-            </div>
-          </div>
-        }
-      
-        @default {
-          <div class="flex mx-6 sm:mx-8 mb-4">
-            <div class="flex flex-col pr-1">
-              <div class="flex h-40 pb-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/20-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-              <div class="flex h-40 pt-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/21-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-            </div>
-            <div class="flex flex-col pl-1">
-              <div class="flex h-40 pb-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/22-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-              <div class="flex h-40 pt-1"><img src="https://angular-material.fusetheme.com/assets/images/cards/23-640x480.jpg" alt="Card cover image"
-                  class="rounded object-cover"></div>
-            </div>
-          </div>
-        }
-
-      
-    }
+      @if(publication.images.length>1){
+        <owl-carousel-o class="w-24" [options]="customOptions">
+          @for (image of publication.images; track $index) {  
+          <ng-template carouselSlide>
+            <div class="w-full h-80 bg-cover bg-center "
+             [style]="{'background-image': 'url(' + image + ')'}"
+            ></div>
+          </ng-template>  
+          } 
+        </owl-carousel-o> 
+      }
+      @else {
+        <div class="w-full h-80 bg-cover bg-center "
+        [style]="{'background-image': 'url(' + publication.images[0] + ')'}"
+       ></div>
+      }
   }
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
