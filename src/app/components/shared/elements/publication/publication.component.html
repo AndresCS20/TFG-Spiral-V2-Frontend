@@ -88,7 +88,12 @@
       <div tabindex="0" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100 text-primary-content">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
           @for (reaction of reactions(); track reaction._id) {
-            <button class="btn btn-md text-xl">{{reaction.icon}}</button>
+            <button class="btn btn-md text-xl"
+            [class.btn-disabled]="activeReaction()?.name !== null && activeReaction()?.name !== reaction.name"
+            [class.btn-primary]="activeReaction()?.name === reaction.name"
+            [attr.data-tip]="reaction.name"
+            (click)="updateReaction(reaction)"
+            >{{reaction.icon}}</button>
           }
           
    

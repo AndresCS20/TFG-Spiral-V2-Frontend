@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { AvatarFrameComponent } from '../avatar-frame/avatar-frame.component';
-import { BodyReaction, Publication, ReactionReaction } from '@interfaces/publications.interface';
+import { BodyReaction, OnePublication, Publication, ReactionReaction } from '@interfaces/publications.interface';
 import { StorageService } from '@services/storage.service';
 import { RouterLink } from '@angular/router';
 import moment from 'moment';
 import 'moment/locale/es'
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { PublicationsService } from '@services/publications.service';
  @Component({
   selector: 'app-publication',
   standalone: true,
@@ -15,7 +16,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class PublicationComponent implements OnInit{
 
-  constructor(private storageServie: StorageService) {}
+  constructor(private storageServie: StorageService, private publicationService: PublicationsService) {}
   @Input() publication!: Publication
   user : any
   reactions = signal<BodyReaction[]>([])
@@ -39,22 +40,26 @@ export class PublicationComponent implements OnInit{
   ngOnInit(): void {
     this.user = this.storageServie.getUser()
     if(this.publication){
-      let reactCount=0
       this.reactions.set(this.publication.reactions)
  
-      this.publication.reactions.sort((a, b) => b.reactions.length - a.reactions.length);
-      this.mostReacted.set(this.publication.reactions.slice(0, 3))
+      this.updateReactionsSats()
+
+      // this.publication.reactions.sort((a, b) => b.reactions.length - a.reactions.length);
+      // this.mostReacted.set(this.publication.reactions.slice(0, 3))
       
-      for(let i = 0; i < this.reactions().length; i++){
-        reactCount+=this.reactions()[i].reactions.length
-      }
-      this.reactionCount.set(reactCount)
+      // for(let i = 0; i < this.reactions().length; i++){
+      //   reactCount+=this.reactions()[i].reactions.length
+      // }
+      // this.reactionCount.set(reactCount)
       this.activeReaction.set(this.hasUserReacted())
      if(this.activeReaction()){
       console.log("this.activeReaction()", this.activeReaction())
      }
     }
   }
+
+
+
   hasUserReacted(): BodyReaction | null {
     console.log("ID USU:", this.user._id)
     for (let reaction of this.publication.reactions) {
@@ -68,6 +73,68 @@ export class PublicationComponent implements OnInit{
     }
     return null;
   }
+
+  addReactionBackend(reaction: BodyReaction): void {
+    const body = {
+      userId: this.user._id,
+      reactionType: reaction.type
+    }
+    this.publicationService.addReaction(this.publication._id, body).subscribe({
+      next: (data: OnePublication) => {
+        this.publication = data.body
+        this.reactions.set(this.publication.reactions)
+        this.activeReaction.set(reaction)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  deleteReactionBackend(reaction: BodyReaction): void {
+  
+    this.publicationService.deleteReaction(this.publication._id, this.user._id,reaction._id).subscribe({
+      next: (data: OnePublication) => {
+        this.publication = data.body
+        this.reactions.set(this.publication.reactions)
+        this.activeReaction.set(null)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  updateReaction(reaction : any){
+    console.log("activeReaction", this.activeReaction())
+    if(this.activeReaction() == null){
+      // if (this.activeReaction()?.name != reaction.name) {
+      // Add your code here    
+      // reaction.count.update((value: number) => value + 1)
+      // this.activeReaction.set(reaction)
+      
+      this.addReactionBackend(reaction)
+      this.updateReactionsSats()
+
+      console.log("Yo me ejecuto para agregar una reaccion al post")
+    // }
+  //   else{
+  //     // Add your code here
+  //     reaction.count.update((value: number) => value - 1)
+  //     this.activeReaction.set(reaction)
+  //     console.log("¿Me ejecuto alguna vez?")
+  //  }
+  }
+    else if(this.activeReaction()?.name == reaction.name){
+      // reaction.count.update((value: number) => value - 1)
+      // this.activeReaction.set(null)
+      this.deleteReactionBackend(reaction)
+      this.updateReactionsSats()
+      //TODO: Revisar el update del stats de reactions
+      console.log("Yo me ejecuto para quitar la reaccion seleccionada")
+    }
+    
+  };
   
   // hasUserReacted(type: string): boolean {
   //   return this.publication.reactions.some(reaction => 
@@ -77,6 +144,18 @@ export class PublicationComponent implements OnInit{
 
   dateFormatted(): string {
     return moment(this.publication.createdAt).locale('es').fromNow();
+  }
+
+  updateReactionsSats(){
+    let reactCount=0
+
+    this.publication.reactions.sort((a, b) => b.reactions.length - a.reactions.length);
+      this.mostReacted.set(this.publication.reactions.slice(0, 3))
+      
+      for(let i = 0; i < this.reactions().length; i++){
+        reactCount+=this.reactions()[i].reactions.length
+      }
+      this.reactionCount.set(reactCount)
   }
   
 

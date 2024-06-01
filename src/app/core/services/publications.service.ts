@@ -13,6 +13,16 @@ export class PublicationsService {
  
  constructor(private http: HttpClient) {}
 
+ addReaction(publicationId: string, body:{userId: string, reactionType:string}): Observable<OnePublication> {
+  return this.http.post<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/',body);
+ }
+
+ deleteReaction(publicationId: string, userId: string, reactionId:string): Observable<OnePublication> {
+  return this.http.delete<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/'+reactionId, {body: {userId: userId}});
+  
+ }
+
+
  createPublication(publication: PublicationCreator) {
   return this.http.post<PublicationCreator>(API_URL + 'publication/', publication);
  }
