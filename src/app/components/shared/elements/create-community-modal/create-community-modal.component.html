@@ -1,0 +1,113 @@
+<button class="btn" onclick="create_community_modal.showModal()">
+ <i class="fa fa-regular fa-plus"></i> Crear comunidad
+</button>
+<dialog id="create_community_modal" class="modal">
+ <div class="modal-box w-4/6 max-w-5xl">
+  <form method="dialog">
+    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+  </form>
+  <h3 class="font-bold text-lg"><i class="fa-regular fa-circle-plus"></i> Crear comunidad</h3>
+  <p class="py-2">Rellena los campos los campos obligatorios (*) para poder crear la comunidad</p>
+  <div class="divider my-0"></div>
+  <form class="form-control"  [formGroup]="createCommunityForm" (ngSubmit)="onSubmit()">
+   <!-- Campos obligatorios: shortname, fullname | Campos opcionales: Description, Profile pic, Banner pic  -->
+   <div class="card p-4 bg-base-200 my-2">
+   <h2 class="card-title"><i class="fa-solid fa-input-text"></i>&nbsp; Nombre corto (<strong class="text-red-500">*</strong>)</h2>
+   <div class="form-control w-full my-2">
+    <span class="label-text">Introduce el nombre corto</span>
+    <div class="input input-bordered flex items-center gap-2 my-2"><i class="fa-solid fa-input-text"></i>
+     <input type="text" placeholder="spiral" class="grow" formControlName="shortname">
+    </div>
+    </div>
+    @if (createCommunityForm.controls['shortname'].errors && createCommunityForm.controls['shortname'].touched) {
+     <div class="alert alert-error my-2">   
+      <i class="fa fa-exclamation-circle"></i>
+     @if (createCommunityForm.controls['shortname'].errors['required']) {
+      El nombre corto es obligatorio
+     }
+     @if(createCommunityForm.controls['shortname'].errors['minlength']) {
+      El nombre corto debe tener al menos 3 caracteres
+     }
+     @if(createCommunityForm.controls['shortname'].errors['maxlength']) {
+      El nombre corto debe tener como máximo 20 caracteres
+     }
+     </div>
+    }
+   </div>
+   <div class="card p-4 bg-base-200 my-2">
+   <h2 class="card-title"><i class="fa-solid fa-input-text"></i>&nbsp; Nombre completo (<strong class="text-red-500">*</strong>)</h2>
+   <div class="form-control w-full my-2">
+    <span class="label-text">Introduce el nombre completo</span>
+    <div class="input input-bordered flex items-center gap-2 my-2"><i class="fa-solid fa-input-text"></i>
+     <input type="text" placeholder="Spiral Community" class="grow" formControlName="fullname">
+    </div>
+    </div>
+    @if(createCommunityForm.controls['fullname'].errors && createCommunityForm.controls['fullname'].touched) {
+     <div class="alert alert-error my-2">
+      <i class="fa fa-exclamation-circle"></i>
+     @if(createCommunityForm.controls['fullname'].errors['required']) {
+      El nombre completo es obligatorio
+     }
+     @if(createCommunityForm.controls['fullname'].errors['minlength']) {
+      El nombre completo debe tener al menos 3 caracteres
+     }
+     @if(createCommunityForm.controls['fullname'].errors['maxlength']) {
+      El nombre completo debe tener como máximo 40 caracteres
+     }
+     </div>
+    }
+   </div>
+   <div class="card p-4 bg-base-200 my-2">
+    <h2 class="card-title"><i class="fa-solid fa-image"></i>&nbsp; Imagen de perfil</h2>
+    <label class="form-control w-full my-2"><span class="label-text">Introduce el enlace de una imagen</span><div class="input input-bordered flex items-center gap-2 my-2"><i class="fa-regular fa-head-side"></i><input type="text" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profile_picture" class="grow">
+    </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span></label>
+    @if(createCommunityForm.controls['profile_picture'].errors && createCommunityForm.controls['profile_picture'].touched) {
+     <div class="alert alert-error my-2">
+      <i class="fa fa-exclamation-circle"></i>
+      @if(createCommunityForm.controls['profile_picture'].errors['maxlength']) {
+       El enlace de la imagen de perfil debe tener como máximo 40 caracteres
+      } @else { 
+       El tamaño minimo de la imagen de perfil es de 6 caracteres 
+       <br>
+       El formato de la imagen de perfil no es valido
+      }
+     </div>
+    }
+   </div>
+   <div class="card p-4 bg-base-200 my-2">
+    <h2 class="card-title"><i class="fa-solid fa-image"></i>&nbsp; Imagen de portada</h2>
+    <label class="form-control w-full my-2"><span class="label-text">Introduce el enlace de una imagen</span><div class="input input-bordered flex items-center gap-2 my-2"><i class="fa-regular fa-head-side"></i><input type="text" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="banner_picture" class="grow"></div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span></label>
+    @if(createCommunityForm.controls['banner_picture'].errors && createCommunityForm.controls['banner_picture'].touched) {
+     <div class="alert alert-error my-2">
+      <i class="fa fa-exclamation-circle"></i>
+      @if(createCommunityForm.controls['banner_picture'].errors['maxlength']) {
+       El enlace de la imagen de portada debe tener como máximo 40 caracteres
+      } @else {
+       El tamaño minimo de la imagen de portada es de 6 caracteres
+       <br>
+       El formato de la imagen de portada no es valido
+      }
+     </div>
+    }
+   </div>
+   <div class="card bg-base-200 p-4 my-5">
+    <h2 class="card-title">
+     <i class="fa-regular fa-memo"></i> 
+     Descripcion</h2
+     ><label class="form-control"><div class="label"><span class="label-text">Introduce la descripción de la comunidad</span></div><textarea placeholder="Agrega una descripción" formControlName="description" class="textarea textarea-bordered h-24"></textarea></label>
+    @if(createCommunityForm.controls['description'].errors && createCommunityForm.controls['description'].touched) {
+     <div class="alert alert-error my-2">
+      <i class="fa fa-exclamation-circle"></i>
+      @if(createCommunityForm.controls['description'].errors['maxlength']) {
+       La descripción debe tener como máximo 200 caracteres
+      }
+     </div>
+    }
+    </div>
+   <div class="card p-4 bg-base-200 my-2">
+    <button class="btn btn-primary" [disabled]="!createCommunityForm.valid"><i class="fa-solid fa-circle-plus"></i> Crear Comunidad</button>
+   </div>
+
+  </form>
+</div>
+</dialog>

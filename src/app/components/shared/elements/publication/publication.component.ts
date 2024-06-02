@@ -84,6 +84,7 @@ export class PublicationComponent implements OnInit{
         this.publication = data.body
         this.reactions.set(this.publication.reactions)
         this.activeReaction.set(reaction)
+        this.updateReactionsSats()
       },
       error: (error) => {
         console.log(error)
@@ -98,6 +99,7 @@ export class PublicationComponent implements OnInit{
         this.publication = data.body
         this.reactions.set(this.publication.reactions)
         this.activeReaction.set(null)
+        this.updateReactionsSats()
       },
       error: (error) => {
         console.log(error)
@@ -114,7 +116,7 @@ export class PublicationComponent implements OnInit{
       // this.activeReaction.set(reaction)
       
       this.addReactionBackend(reaction)
-      this.updateReactionsSats()
+      
 
       console.log("Yo me ejecuto para agregar una reaccion al post")
     // }
@@ -129,7 +131,7 @@ export class PublicationComponent implements OnInit{
       // reaction.count.update((value: number) => value - 1)
       // this.activeReaction.set(null)
       this.deleteReactionBackend(reaction)
-      this.updateReactionsSats()
+      
       //TODO: Revisar el update del stats de reactions
       console.log("Yo me ejecuto para quitar la reaccion seleccionada")
     }
@@ -148,7 +150,7 @@ export class PublicationComponent implements OnInit{
 
   updateReactionsSats(){
     let reactCount=0
-
+    console.log("me he actualizado")
     this.publication.reactions.sort((a, b) => b.reactions.length - a.reactions.length);
       this.mostReacted.set(this.publication.reactions.slice(0, 3))
       

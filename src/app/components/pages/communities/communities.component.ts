@@ -3,11 +3,12 @@ import { CommunityBoxComponent } from '../../shared/elements/community-box/commu
 import { PageTitleComponent } from '../../shared/elements/page-title/page-title.component';
 import { CommunitiesService } from '@services/communities.service';
 import { AllCommunities, Community } from '@interfaces/communities.interface';
+import { CreateCommunityModalComponent } from '../../shared/elements/create-community-modal/create-community-modal.component';
 
 @Component({
   selector: 'app-communities',
   standalone: true,
-  imports: [CommunityBoxComponent, PageTitleComponent],
+  imports: [CommunityBoxComponent, PageTitleComponent, CreateCommunityModalComponent],
   templateUrl: './communities.component.html',
   styleUrl: './communities.component.scss'
 })
