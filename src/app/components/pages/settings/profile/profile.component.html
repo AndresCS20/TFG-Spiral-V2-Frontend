@@ -1,21 +1,25 @@
 <div class="container max-w-4xl mx-auto mt-4">
  <h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-user"></i>&nbsp;Ajustes del Perfil</h1>
+@if(!isLoading){
 
- <form>
+
+ <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="card bg-base-200 p-4 mb-5">
   <h2 class="card-title"><i class="fa-solid fa-head-side"></i>&nbsp;Foto de perfil</h2>
   <div class="block md:flex items-center gap-3 my-2">
-   <div class="avatar items-center">
+   @if(complectUser.profile_picture){
+    <div class="avatar items-center">
     <div class="w-28 rounded-full">
-     <img src="https://i.imgur.com/wX5XykY.png?1" />
+     <img [src]="complectUser.profile_picture" />
     </div>
    </div>
+  }
    <label class="form-control w-full my-2">
     <span class="label-text">Introduce el enlace de una imagen</span>
     
     <div class="input input-bordered flex items-center gap-2 my-2">
      <i class="fa-regular fa-head-side"></i>
-     <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profilePicture"/>
+     <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profile_picture"/>
    </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
    </label>
   </div>
@@ -24,15 +28,19 @@
   <div class="card bg-base-200 p-4 my-5">
    <h2 class="card-title"><i class="fa-regular fa-image"></i> Foto de portada</h2>
    <div class="block md:flex items-center gap-3 my-2">
-    <div class="w-full md:w-64 h-24 rounded-lg" style="background: url('https://i.imgur.com/e7vsUO9.jpg') center center / cover;">
-
-    </div>
+    @if(complectUser.banner_picture){
+      <div class="w-full md:w-64 h-24 rounded-lg" 
+      [style.background-image]="'url(' + complectUser.banner_picture + ')' "
+      [style.background-size]="'cover'"
+      [style.background-position]="'center'"
+      ></div>
+    }
     <label class="form-control w-full my-2">
      <span class="label-text">Introduce el enlace de una imagen</span>
      
      <div class="input input-bordered flex items-center gap-2 my-2">
       <i class="fa-solid fa-image"></i>
-      <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="bannerPicture"/>
+      <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="banner_picture"/>
     </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
     </label>
    </div>
@@ -58,7 +66,7 @@
      <div class="label">
        <span class="label-text">Introduce tu biografia</span>
      </div>
-     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción" formControlName="descripcion"></textarea>
+     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción" formControlName="description"></textarea>
    </label>
    </div>
 
@@ -70,26 +78,26 @@
     <div class="flex gap-3 my-2">
     <div class="input input-bordered flex flex-1 items-center gap-2">
      <i class="fa-solid fa-gamepad"></i>
-     <input type="text" class="grow" placeholder="Hacer ejercicio, jugar videojuegos, leer" [(ngModel)]="interestInput"/>
+     <input type="text" class="grow" placeholder="Hacer ejercicio, jugar videojuegos, leer" [ngModelOptions]="{standalone: true}" [(ngModel)]="interestInput"/>
     </div>
     <button class="btn btn-primary" (click)="addInterest()"><i class="fa-regular fa-plus"></i>&nbsp;Añadir</button>
    </div>
  
    <div class="flex gap-3 my-2">
-    <div class="join">
-     <span class="badge join-item badge-lg badge-secondary">Escuchar musica</span>
-     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
-    </div>
-    <div class="join">
-     <span class="badge join-item badge-lg badge-secondary">Informatica</span>
-     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
-    </div>
-    <div class="join">
-     <span class="badge join-item badge-lg badge-secondary">Videojuegos</span>
-     <span class="btn join-item btn-xs btn-neutral"><i class="fa-regular fa-bucket text-xs"></i></span>
-    </div>
+    @if(interests().length > 0){
+      @for (interest of interests(); track $index) {
+        <div class="join">
+          <span class="badge join-item badge-lg badge-secondary">{{interest}}</span>
+          <span class="btn join-item btn-xs btn-neutral" (click)="removeInterest($index)"><i class="fa-regular fa-bucket text-xs"></i></span>
+        </div>
+      }
+
+    }
+    @else {
+      <p>No hay intereses... que aburrido/a/e</p>
+    }
+
    </div>
-  
   </div>
    </div>
 
@@ -100,14 +108,21 @@
      <div class="label">
        <span class="label-text">Introduce tus redes</span>
      </div>
-     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción" formControlName="social"></textarea>
+     <textarea class="textarea textarea-bordered h-24" placeholder="Agrega una descripción"></textarea>
    </label>
    </div>
 
 <!-- Boton de guardar -->
    <div class="card bg-base-200 p-4 my-5 flex justify-center">
-    <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button>
+    <button class="btn btn-primary" [disabled]="!profileForm.valid"><i class="fa-solid fa-floppy-disk"></i> Guardar ajustes del perfil</button>
+    <!-- <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button> -->
    </div>
 
  </form>
+}
+@else {
+  <div class="card bg-base-200 p-4 my-5 flex justify-center">
+    <i class="fa-regular fa-spinner text-2xl animate-spin"></i>
+  </div>
+}
  </div>
