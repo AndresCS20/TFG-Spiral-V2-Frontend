@@ -22,6 +22,7 @@ export class MembersComponent {
       if (community) {
         this.community = community;
         console.log("Comunidad",this.community);
+        console.log("Miembros",this.community.members)
       }
     });
 

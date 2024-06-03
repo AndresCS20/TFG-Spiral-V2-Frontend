@@ -14,11 +14,13 @@ export class AboutComponent implements OnInit {
 
   constructor(private router: Router,private profileDataService: ProfileDataService) {}
   userProfile!: User;
+  isLoading = true;
   ngOnInit(): void {
     this.profileDataService.currentUserProfile.subscribe(user => {
       if (user) {
         this.userProfile = user;
         console.log("Usuario",this.userProfile);
+        this.isLoading = false;
       }
     });
     this.checkScreenSizeAndRedirect();

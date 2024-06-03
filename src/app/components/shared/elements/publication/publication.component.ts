@@ -61,7 +61,7 @@ export class PublicationComponent implements OnInit{
 
 
   hasUserReacted(): BodyReaction | null {
-    console.log("ID USU:", this.user._id)
+    // console.log("ID USU:", this.user._id)
     for (let reaction of this.publication.reactions) {
       reaction.reactions.some(userReaction => {
         console.log(userReaction.user._id, this.user._id)

@@ -1,3 +1,6 @@
+@if(!isLoading){
+
+
 <div class="flex flex-col min-h-screen">
       <div class="container mx-auto flex flex-col items-start justify-center">
         
@@ -43,12 +46,23 @@
       </div>
    
 
-    <div class="container mx-auto block lg:flex flex-row md:flex-row-reverse gap-8 py-8">
-      <div class="w-full md:w-80 flex-shrink-0 mb-3 md:mb-0">
-        <app-about-us class="hidden lg:block"></app-about-us>
-      </div>
-      <div class="flex-1">
+      <!-- TODO: Revisar responsive  -->
+    <!-- <div class="container mx-auto block lg:flex flex-row md:flex-row-reverse gap-8 py-8">
+       -->
+       <div class="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
+      <!-- <div class="w-full md:w-80 flex-shrink-0 mb-3 md:mb-0"> -->
+        <div class="lg:col-span-12 xl:col-span-8">
         <router-outlet></router-outlet>
+      </div>
+      <!-- <div class="flex-1 max-w-3xl"> -->
+        <div class="hidden xl:col-span-4 xl:block">
+        <app-about-us class="hidden lg:block"></app-about-us>
+        
       </div>
     </div>
   </div>
+} @else {
+  <div class="flex items-center justify-center h-screen">
+    <div class="fa-regular fa-spinner animate-spin"></div>
+  </div>
+}

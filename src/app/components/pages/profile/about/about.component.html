@@ -3,6 +3,9 @@
  <i class="fa-regular fa-info-circle"></i>
  Sobre mi
 </div>
+@if(!isLoading){
+
+
 <div class="mt-4">@if (userProfile?.description) {
   {{userProfile.description}}
 }@else {
@@ -78,4 +81,10 @@
    }
  </div>
 </div>
+}
+@else {
+<div class="flex items-center justify-center h-screen">
+ <div class="fa-regular fa-spinner text-2xl animate-spin"></div>
+</div>
+}
 </div>

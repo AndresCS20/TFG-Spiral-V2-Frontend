@@ -6,6 +6,7 @@ import { Community, OneCommunity } from '@interfaces/communities.interface';
 import { CommuniyDataService } from '@services/data/communiy-data.service';
 import { StorageService } from '@services/storage.service';
 import Swal from 'sweetalert2';
+import { User } from '@interfaces/users.interface';
 @Component({
   selector: 'app-community',
   standalone: true,
@@ -26,7 +27,8 @@ export class CommunityComponent implements OnInit {
   communityShortName!: string | null;
   isOwnerOfCommunity = false;
   community!: Community;
-  user : any
+  user !:User
+  isLoading = true;
   ngOnInit(): void {
     let route = this.route;
     while (route.firstChild) route = route.firstChild;
@@ -39,8 +41,8 @@ export class CommunityComponent implements OnInit {
 
       // Verifica si el usuario está definido antes de llamar a checkIsMember
       if (this.user) {
-        this.checkIsMember(this.communityShortName, this.user.id);
-        this.checkIsOwner(this.communityShortName, this.user.id);
+        this.checkIsMember(this.communityShortName, this.user._id);
+        this.checkIsOwner(this.communityShortName, this.user._id);
       } else {
         console.error('User is undefined');
       }
@@ -58,7 +60,7 @@ export class CommunityComponent implements OnInit {
   }
   leaveCommunity(){
     if(this.communityShortName !== null){
-      this._communitiesService.leaveCommunity(this.communityShortName, this.user.id).subscribe({
+      this._communitiesService.leaveCommunity(this.communityShortName, this.user._id).subscribe({
         next: (data) => {
           Swal.fire({
             icon: 'success',
@@ -83,7 +85,7 @@ export class CommunityComponent implements OnInit {
 
   joinCommunity(){
     if(this.communityShortName !== null){
-    this._communitiesService.joinCommunity(this.communityShortName, this.user.id).subscribe({
+    this._communitiesService.joinCommunity(this.communityShortName, this.user._id).subscribe({
       next: (data) => {
         Swal.fire({
           icon: 'success',
@@ -136,6 +138,7 @@ export class CommunityComponent implements OnInit {
       next: (data: OneCommunity) => {
         this.community = data.body;
         this.communityDataService.changeCommunity(this.community);
+        this.isLoading = false;
       },
       error: (error) => {
         this.router.navigate(['/communities']);
