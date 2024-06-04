@@ -4,7 +4,7 @@
 <dialog id="create_community_modal" class="modal">
  <div class="modal-box w-4/6 max-w-5xl">
   <form method="dialog">
-    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    <button id="close-create-community-modal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
   </form>
   <h3 class="font-bold text-lg"><i class="fa-regular fa-circle-plus"></i> Crear comunidad</h3>
   <p class="py-2">Rellena los campos los campos obligatorios (*) para poder crear la comunidad</p>
@@ -23,13 +23,16 @@
      <div class="alert alert-error my-2">   
       <i class="fa fa-exclamation-circle"></i>
      @if (createCommunityForm.controls['shortname'].errors['required']) {
-      El nombre corto es obligatorio
+      El nombre corto es obligatorio.
      }
      @if(createCommunityForm.controls['shortname'].errors['minlength']) {
-      El nombre corto debe tener al menos 3 caracteres
+      El nombre corto debe tener al menos 3 caracteres.
      }
      @if(createCommunityForm.controls['shortname'].errors['maxlength']) {
-      El nombre corto debe tener como máximo 20 caracteres
+      El nombre corto debe tener como máximo 20 caracteres.
+     }
+     @if (createCommunityForm.controls['shortname'].errors['invalidCharacters']) {
+      El nombre corto solo puede contener letras, números, guiones bajos y guiones.
      }
      </div>
     }
@@ -65,7 +68,7 @@
      <div class="alert alert-error my-2">
       <i class="fa fa-exclamation-circle"></i>
       @if(createCommunityForm.controls['profile_picture'].errors['maxlength']) {
-       El enlace de la imagen de perfil debe tener como máximo 40 caracteres
+       El enlace de la imagen de perfil debe tener como máximo 100 caracteres
       } @else { 
        El tamaño minimo de la imagen de perfil es de 6 caracteres 
        <br>
@@ -81,7 +84,7 @@
      <div class="alert alert-error my-2">
       <i class="fa fa-exclamation-circle"></i>
       @if(createCommunityForm.controls['banner_picture'].errors['maxlength']) {
-       El enlace de la imagen de portada debe tener como máximo 40 caracteres
+       El enlace de la imagen de portada debe tener como máximo 1040 caracteres
       } @else {
        El tamaño minimo de la imagen de portada es de 6 caracteres
        <br>

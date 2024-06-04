@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllCommunities, Community, OneCommunity } from '@interfaces/communities.interface';
+import { AllCommunities, Community, CommunityCreate, OneCommunity } from '@interfaces/communities.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -13,6 +13,9 @@ export class CommunitiesService {
  
   constructor(private http: HttpClient) {}
 
+  createCommunity(community: CommunityCreate): Observable<Community> {
+    return this.http.post<Community>(API_URL + 'community', community);
+  }
 
   getCommunities(): Observable<AllCommunities> {
     return this.http.get<AllCommunities>(API_URL + 'community');

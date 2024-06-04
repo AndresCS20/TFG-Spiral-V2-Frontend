@@ -3,11 +3,12 @@ import { Router, RouterLink } from '@angular/router';
 import { Community } from '@interfaces/communities.interface';
 import { CommuniyDataService } from '@services/data/communiy-data.service';
 import { CommonModule } from '@angular/common';
+import { AvatarFrameComponent } from 'src/app/components/shared/elements/avatar-frame/avatar-frame.component';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, AvatarFrameComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })

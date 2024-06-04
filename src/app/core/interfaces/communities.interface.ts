@@ -8,6 +8,15 @@ export interface AllCommunities {
  body:   Community[];
 }
 
+export interface CommunityCreate {
+ shortname:        string;
+ fullname:         string;
+ owner:            string;
+ description?:     string;
+ profile_picture?: string;
+ banner_picture?:  string;
+}
+
 export interface Community {
  _id:              string;
  shortname:        string;

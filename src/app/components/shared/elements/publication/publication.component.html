@@ -73,6 +73,9 @@
        ></div>
       }
   }
+  @else if (publication.video) {
+    <iframe class="w-full h-80" [src]="getEmbedLink(publication.video)" frameborder="0" allowfullscreen></iframe>
+  }
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
     <div class="dropdown dropdown-top dropdown-hover">

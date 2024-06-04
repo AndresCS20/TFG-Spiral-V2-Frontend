@@ -81,7 +81,7 @@
         <div tabindex="0" role="button" class="btn m-1">
          <img [src]="postCommunity().profile_picture" class="w-8 h-8 rounded-full mr-2" alt="profile picture"> {{postCommunity().fullname}} 
         </div>
-        <ul tabindex="0" class="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52">
+        <ul tabindex="0" class="dropdown-content z-999 menu p-2 shadow bg-base-100 rounded-box w-fit max-h-52 scroll-y-auto">
           <li>
             <a (click)="updateCommunity(globalPostInfo)">
               <img [src]="globalPostInfo.profile_picture"> {{globalPostInfo.fullname}}

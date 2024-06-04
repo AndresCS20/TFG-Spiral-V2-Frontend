@@ -58,7 +58,22 @@ export class PublicationComponent implements OnInit{
     }
   }
 
-
+  getEmbedLink(videoUrl: string): string | null {
+    const longUrlPattern = /https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
+    const shortUrlPattern = /https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)/;
+    
+    let match = videoUrl.match(longUrlPattern);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+    
+    match = videoUrl.match(shortUrlPattern);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}`;
+    }
+    
+    return null; // Return null if the URL doesn't match any known pattern
+  }    
 
   hasUserReacted(): BodyReaction | null {
     // console.log("ID USU:", this.user._id)
