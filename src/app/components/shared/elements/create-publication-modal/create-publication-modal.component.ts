@@ -95,7 +95,7 @@ export class CreatePublicationModalComponent implements OnInit{
   }
 
   private createPublication(publication: any) {
-    
+    //TODO: Revisar al añadir enlace de youtube, que hace que se cree la publicacion
     this.publicationService.createPublication(publication).subscribe({
       next: (data: any) => {
         document.getElementById('close-createpost-modal')?.click();
