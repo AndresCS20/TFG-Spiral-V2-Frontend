@@ -8,11 +8,12 @@
   <h2 class="card-title"><i class="fa-solid fa-head-side"></i>&nbsp;Foto de perfil</h2>
   <div class="block md:flex items-center gap-3 my-2">
    @if(complectUser.profile_picture){
-    <div class="avatar items-center">
+    <app-avatar-frame [profile_picture]="complectUser.profile_picture" profile_size="large" [frame_name]="complectUser.profile_picture_frame"/>
+    <!-- <div class="avatar items-center">
     <div class="w-28 rounded-full">
      <img [src]="complectUser.profile_picture" />
     </div>
-   </div>
+   </div> -->
   }
    <label class="form-control w-full my-2">
     <span class="label-text">Introduce el enlace de una imagen</span>
@@ -23,6 +24,19 @@
    </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
    </label>
   </div>
+  <div class="divider my-0.5"><i class="fa-regular fa-frame"></i> Marco del Avatar</div>
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+
+
+  
+  <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text">Red pill</span> 
+      <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
+    </label>
+  </div>
+ 
+</div>
   </div>
 
   <div class="card bg-base-200 p-4 my-5">
@@ -85,13 +99,14 @@
  
    <div class="flex gap-3 my-2">
     @if(interests().length > 0){
+      <ul>
       @for (interest of interests(); track $index) {
-        <div class="join">
+        <li class="join m-1">
           <span class="badge join-item badge-lg badge-secondary">{{interest}}</span>
           <span class="btn join-item btn-xs btn-neutral" (click)="removeInterest($index)"><i class="fa-regular fa-bucket text-xs"></i></span>
-        </div>
+        </li>
       }
-
+    </ul>
     }
     @else {
       <p>No hay intereses... que aburrido/a/e</p>

@@ -30,6 +30,10 @@ export class AvatarFrameComponent implements OnInit{
     return this.profile_frame.find(frame => frame.name === frameName);
   }
 
+  public getProfileFrameNames(){
+    return this.profile_frame.map(frame => frame.name);
+  }
+
   profile_frame = [
     {
       name: "none",

@@ -3,7 +3,7 @@
 
 <!-- <div tabindex="0" role="button" class="btn mx-1 rounded-3xl"> -->
   <div class="flex align-items-center">
-  <app-avatar-frame [profile_picture]="user.profile_picture" profile_size="small" frame_name="flames"></app-avatar-frame>
+  <app-avatar-frame [profile_picture]="user.profile_picture" profile_size="small" [frame_name]="user.profile_picture_frame"></app-avatar-frame>
 </div>
 <ul class="p-2 shadow gap-2 menu dropdown-content z-[1] bg-base-100 rounded-box m-w-52">
   <li><a class="flex items-center p-3 text-sm" target="_blank">

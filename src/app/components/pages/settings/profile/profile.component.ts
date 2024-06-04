@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   userStorage !: User
   complectUser !: User
   isLoading = true
+  profilePictureFrames = []
   constructor (private formBuilder: FormBuilder, private storageService: StorageService, private userService: UserService) { }
 
   ngOnInit(): void { 
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     if(this.userStorage){
       this.getUser(this.userStorage.username);
     }
+    this.profilePictureFrames
   }
 
   profileForm = this.formBuilder.group({
