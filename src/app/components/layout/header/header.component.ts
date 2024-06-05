@@ -9,6 +9,7 @@ import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-
 import { CreatePublicationModalComponent } from '../../shared/elements/create-publication-modal/create-publication-modal.component';
 import { User } from '@interfaces/users.interface';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,7 @@ import { LanguageSelectorComponent } from './language-selector/language-selector
 export class HeaderComponent implements OnInit{
 
 
-  constructor(private storageService: StorageService, private authService: AuthService ,private eventBusService: EventBusService) { }
+  constructor(private storageService: StorageService, private authService: AuthService ,private eventBusService: EventBusService, private userService: UserService) { }
 
   isLoggedIn = false;
   eventBusSub?: Subscription;

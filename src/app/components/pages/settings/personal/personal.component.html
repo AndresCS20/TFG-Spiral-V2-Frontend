@@ -1,7 +1,7 @@
 <div class="container max-w-4xl mx-auto mt-4">
  <h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-cog"></i>&nbsp;Ajustes Personales</h1>
 
- <form>
+ <form [formGroup]="personalSettingsForm" (ngSubmit)="onSubmit()">
 
   <!-- Nombre Completo -->
   <div class="card bg-base-200 p-5 mb-5">
@@ -11,9 +11,24 @@
     
     <div class="input input-bordered flex items-center gap-2 my-2">
      <i class="fa-solid fa-input-text"></i>
-     <input type="text" class="grow" placeholder="Adolfo Caracoles" formControlName="fullName"/>
+     <input type="text" class="grow" placeholder="Adolfo Caracoles" formControlName="fullname"/>
    </div>
    </label>
+   @if(personalSettingsForm.controls['fullname'].errors && personalSettingsForm.controls['fullname'].touched) {
+    <div class="alert alert-error my-2">
+     <i class="fa fa-exclamation-circle"></i>
+     @if(personalSettingsForm.controls['fullname'].errors['required']) {
+      El nombre completo es obligatorio
+     }
+     @if(personalSettingsForm.controls['fullname'].errors['minlength']) {
+      El nombre completo debe tener al menos 3 caracteres
+     }
+     @if(personalSettingsForm.controls['fullname'].errors['maxlength']) {
+      El nombre completo debe tener como máximo 40 caracteres
+     }
+    </div>
+
+   }
   </div>
 
   <!-- Email -->
@@ -27,6 +42,17 @@
     </div>
     <label class="label-text-alt">Tu correo no se publicará</label>
    </div>
+   @if(personalSettingsForm.controls['email'].errors && personalSettingsForm.controls['email'].touched) {
+    <div class="alert alert-error my-2">
+     <i class="fa fa-exclamation-circle"></i>
+     @if(personalSettingsForm.controls['email'].errors['required']) {
+      El email es obligatorio
+     }
+     @if(personalSettingsForm.controls['email'].errors['email']) {
+      El email no es valido
+     }
+    </div>
+   }
   </div>
 
   <!-- Fecha de Nacimiento -->
@@ -36,9 +62,24 @@
     <label class="label-text">Introduce tu fecha de nacimiento</label>
     <div class="input input-bordered flex items-center gap-2 my-2">
      <i class="fa-solid fa-calendar"></i>
-     <input type="date" class="grow" formControlName="birthDate"/>
+     <input type="date" class="grow" formControlName="birth_date"/>
     </div>
    </div>
+   @if(personalSettingsForm.controls['birth_date'].errors && personalSettingsForm.controls['birth_date'].touched) {
+    <div class="alert alert-error my-2">
+     <i class="fa fa-exclamation-circle"></i>
+     @if(personalSettingsForm.controls['birth_date'].errors['required']) {
+      La fecha de nacimiento es obligatoria
+     }
+     @if(personalSettingsForm.controls['birth_date'].errors['minDate']) {
+      La fecha de nacimiento no puede ser anterior a 1900-01-01
+    }
+    @if(personalSettingsForm.controls['birth_date'].errors['maxDate']) {
+      La fecha de nacimiento no puede ser posterior a {{ currentDate }}. 
+      Debes de tener al menos 18 años
+    }
+    </div>
+   }
   </div>
 
   
@@ -46,7 +87,7 @@
  <!-- Guardar -->
   
   <div class="card bg-base-200 p-4 my-5 flex justify-center">
-   <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button>
+   <button class="btn btn-primary" [disabled]="!personalSettingsForm.valid"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button>
   </div>
 
   </form>
