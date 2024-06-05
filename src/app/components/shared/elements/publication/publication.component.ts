@@ -165,7 +165,7 @@ export class PublicationComponent implements OnInit{
 
   updateReactionsSats(){
     let reactCount=0
-    console.log("me he actualizado")
+    // cons7ole.log("me he actualizado")
     this.publication.reactions.sort((a, b) => b.reactions.length - a.reactions.length);
       this.mostReacted.set(this.publication.reactions.slice(0, 3))
       
