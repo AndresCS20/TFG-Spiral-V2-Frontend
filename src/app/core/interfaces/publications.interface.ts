@@ -8,6 +8,18 @@ export interface OnePublication {
  body:   Publication;
 }
 
+export interface AllPublicationsPaginated {
+  status:     string;
+  body:       Publication[];
+  pagination: Pagination;
+}
+export interface Pagination {
+  currentPage:  number;
+  pageSize:     number;
+  totalPages:   number;
+  previousPage: number;
+  nextPage:     null;
+}
 export interface Publication {
  _id:       string;
  community: Community;

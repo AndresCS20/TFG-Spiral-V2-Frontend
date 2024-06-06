@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllPublications, OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
+import { AllPublications, AllPublicationsPaginated, OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -13,6 +13,14 @@ export class PublicationsService {
  
  constructor(private http: HttpClient) {}
 
+ getFollowingPublicationsPaginated(username: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/' + username + '/following', { params });
+}
+
  addReaction(publicationId: string, body:{userId: string, reactionType:string}): Observable<OnePublication> {
   return this.http.post<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/',body);
  }
@@ -21,7 +29,6 @@ export class PublicationsService {
   return this.http.delete<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/'+reactionId, {body: {userId: userId}});
   
  }
-
 
  createPublication(publication: PublicationCreator) {
   return this.http.post<PublicationCreator>(API_URL + 'publication/', publication);
