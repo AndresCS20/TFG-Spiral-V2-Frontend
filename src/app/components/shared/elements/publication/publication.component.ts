@@ -8,10 +8,11 @@ import 'moment/locale/es'
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PublicationsService } from '@services/publications.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { YouTubePlayerModule } from '@angular/youtube-player';
  @Component({
   selector: 'app-publication',
   standalone: true,
-  imports: [AvatarFrameComponent, RouterLink, CarouselModule],
+  imports: [AvatarFrameComponent, RouterLink, CarouselModule, YouTubePlayerModule],
   templateUrl: './publication.component.html',
   styleUrl: './publication.component.scss'
 })
@@ -58,6 +59,27 @@ export class PublicationComponent implements OnInit{
      }
     }
   }
+  obtenerIdVideoYoutube(url: string): string | null {
+    // Expresión regular para extraer la ID del video de una URL de YouTube en el formato "https://youtu.be/ID" 
+    const regExp1 = /^https?:\/\/youtu\.be\/([A-Za-z0-9_-]+)\??.*$/;
+    // Expresión regular para extraer la ID del video de una URL de YouTube en el formato "https://www.youtube.com/watch?v=ID"
+    const regExp2 = /^https?:\/\/(?:www\.)?youtube\.com\/watch\?.*v=([A-Za-z0-9_-]+).*$/;
+
+    // Intentar hacer coincidir con el primer formato de URL
+    let match = url.match(regExp1);
+    if (match && match[1]) {
+        return match[1]; 
+    }
+
+    // Si no coincide con el primer formato, intentar hacer coincidir con el segundo formato de URL
+    match = url.match(regExp2);
+    if (match && match[1]) {
+        return match[1]; 
+    }
+
+    // Si no coincide con ninguno de los formatos, retorna null
+    return null;
+}
   obtenerEnlaceEmbed(url: string): SafeResourceUrl | null {
     const regExp1 = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]+)\??.*$/;
     const regExp2 = /^https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]+).*$/;
@@ -81,7 +103,7 @@ export class PublicationComponent implements OnInit{
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
     }
 
-    return null;
+    return "null";
   }
 
   hasUserReacted(): BodyReaction | null {
@@ -184,5 +206,26 @@ export class PublicationComponent implements OnInit{
       this.reactionCount.set(reactCount)
   }
   
+
+
+  onReady(event: any) {
+    console.log('Reproductor de YouTube listo');
+  }
+
+  onChange(event: any) {
+    console.log('Estado del reproductor de YouTube cambiado');
+  }
+
+  onStart(event: any) {
+    console.log('Reproducción iniciada');
+  }
+
+  onPause(event: any) {
+    console.log('Reproducción pausada');
+  }
+
+  onEnd(event: any) {
+    console.log('Reproducción finalizada');
+  }
 
 }

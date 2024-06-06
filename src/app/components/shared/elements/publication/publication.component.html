@@ -73,8 +73,14 @@
        ></div>
       }
   }
-  @else if (publication.video && obtenerEnlaceEmbed(publication.video)) {
-    <iframe class="w-full h-96" [src]="obtenerEnlaceEmbed(publication.video)" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  @else if (publication.video && obtenerIdVideoYoutube(publication.video) !== null) {
+    <!-- <iframe class="w-full h-96" [src]="obtenerEnlaceEmbed(publication.video)" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+    <div class="w-fit mx-auto">
+          <youtube-player class="w-full h-80"
+  [videoId]="obtenerIdVideoYoutube(publication.video) || ''">
+</youtube-player>
+    </div>
+
   }
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
