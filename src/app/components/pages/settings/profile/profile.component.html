@@ -25,16 +25,19 @@
    </label>
   </div>
   <div class="divider my-0.5"><i class="fa-regular fa-frame"></i> Marco del Avatar</div>
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mt-2">
 
 
-  
-  <div class="form-control">
-    <label class="label cursor-pointer">
-      <span class="label-text">Red pill</span> 
-      <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked />
-    </label>
-  </div>
+  @for (avatarFrame of profilePictureFrames; track $index) {
+    <div class="form-control bg-base-100 rounded">
+      <label class="label cursor-pointer">
+        <app-avatar-frame [profile_picture]="complectUser.profile_picture" profile_size="small" [frame_name]="avatarFrame"/>
+        <span class="label-text">{{avatarFrame}}</span> 
+        <input type="radio" name="avatarFrame" class="radio checked:bg-primary" checked />
+      </label>
+    </div>
+  }
+
  
 </div>
   </div>

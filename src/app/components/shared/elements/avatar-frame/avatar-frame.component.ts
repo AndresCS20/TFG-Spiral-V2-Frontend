@@ -1,6 +1,8 @@
 import { animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-
+import { Component, Injectable, Input, OnInit } from '@angular/core';
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-avatar-frame',
   standalone: true,

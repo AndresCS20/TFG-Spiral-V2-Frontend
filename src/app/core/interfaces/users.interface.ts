@@ -14,7 +14,7 @@ export interface User {
  fullname:              string;
  email:                 string;
  profile_picture_frame: string; 
- profile_picture?:      string;
+ profile_picture:      string;
  banner_picture?:       string;
  following:             Follow[];
  followers:             Follow[];
