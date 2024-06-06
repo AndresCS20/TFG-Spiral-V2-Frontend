@@ -23,7 +23,7 @@ export class FollowingFeedComponent implements OnInit {
   nextPage : number | null = null
   totalPages = 0
 
-  constructor(private homeDataService: HomeDataService, private publicationsService: PublicationsService, private storageService:StorageService) { }
+  constructor(private publicationsService: PublicationsService, private storageService:StorageService) { }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser()

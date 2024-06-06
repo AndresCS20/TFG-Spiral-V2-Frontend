@@ -42,8 +42,11 @@ export class PublicationsService {
   return this.http.get<OnePublication>(API_URL + 'publication/one/' + publicationId);
  }
 
- getAllPublications(): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/');
+ getAllPublications(page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/', { params });
  }
  getCommunityPublications(communityShortname: string):Observable<AllPublications> {
   return this.http.get<AllPublications>(API_URL + 'publication/' + communityShortname);
@@ -57,8 +60,11 @@ export class PublicationsService {
   return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/following');
  }
 
- getUserCommunitiesPublications(username: string): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/communities');
+ getUserCommunitiesPublications(username: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/' + username + '/communities', { params });
  }
 
  getGlobalPublications(username: string): Observable<AllPublications> {
