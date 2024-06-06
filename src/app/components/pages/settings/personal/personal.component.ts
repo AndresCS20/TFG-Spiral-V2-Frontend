@@ -39,7 +39,9 @@ export class PersonalComponent implements OnInit{
     if(this.personalSettingsForm.valid){
       const {fullname, email, birth_date} = this.personalSettingsForm.value;
       console.log(fullname, email, birth_date);
-      // this.updateUser(fullname, email, birth_date); //! FIX ME
+      if (fullname && email && birth_date) {
+        this.updateUser(fullname, email, new Date(birth_date));
+      }
       // this.storageService.updateProfile({fullname, email, birth_date})
     }
   }
