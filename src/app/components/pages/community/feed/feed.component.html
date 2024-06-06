@@ -1,4 +1,32 @@
-<h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-memo"></i> Publicaciones de la comunidad</h1>
-@for (publication of publications; track publication._id) {
+<h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-memo"></i> Publicaciones de la comunidad <span class="badge badge-primary">{{publications.length}}</span></h1>
+@if(!isLoading){
+  @for (publication of publications; track publication._id) {
   <app-publication [publication]="publication"></app-publication>
-}
+ }
+ @if(nextPage !== null){
+  <button class="btn btn-primary btn-block" (click)="loadMorePublications()"><i class="fa-regular fa-plus-large"></i>Cargar más publicaciones | {{nextPage}} - {{totalPages}}</button>
+ 
+ }
+ @else {
+  <div class="card bg-base-200">
+    <div class="card-body">
+      <div class="flex justify-center items-center">
+        <i class="fa-regular fa-info-circle text-2xl"></i>
+        <div class="ml-2">No hay más publicaciones para mostrar</div>
+      </div>
+    </div>
+  </div>
+ }
+ 
+ }@else {
+  <div class="flex justify-center items-center h-96">
+    <div class="flex flex-col items-center">
+      <i class="fa-regular fa-spinner text-4xl animate-spin"></i>
+      <div class="text-xs mt-2">Cargando...</div>
+    </div>
+  </div>
+ }
+ 
+ 
+ 
+ 

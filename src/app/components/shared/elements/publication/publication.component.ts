@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'moment/locale/es'
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PublicationsService } from '@services/publications.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
  @Component({
   selector: 'app-publication',
   standalone: true,
@@ -16,7 +17,7 @@ import { PublicationsService } from '@services/publications.service';
 })
 export class PublicationComponent implements OnInit{
 
-  constructor(private storageServie: StorageService, private publicationService: PublicationsService) {}
+  constructor(private storageServie: StorageService, private publicationService: PublicationsService, private sanitizer: DomSanitizer) {}
   @Input() publication!: Publication
   user : any
   reactions = signal<BodyReaction[]>([])
@@ -57,23 +58,31 @@ export class PublicationComponent implements OnInit{
      }
     }
   }
+  obtenerEnlaceEmbed(url: string): SafeResourceUrl | null {
+    const regExp1 = /^https:\/\/youtu\.be\/([A-Za-z0-9_-]+)\??.*$/;
+    const regExp2 = /^https:\/\/www\.youtube\.com\/watch\?v=([A-Za-z0-9_-]+).*$/;
+    let match;
+    let videoId = null;
 
-  getEmbedLink(videoUrl: string): string | null {
-    const longUrlPattern = /https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
-    const shortUrlPattern = /https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)/;
-    
-    let match = videoUrl.match(longUrlPattern);
+    match = url.match(regExp1);
     if (match && match[1]) {
-      return `https://www.youtube.com/embed/${match[1]}`;
+      videoId = match[1];
     }
-    
-    match = videoUrl.match(shortUrlPattern);
-    if (match && match[1]) {
-      return `https://www.youtube.com/embed/${match[1]}`;
+
+    if (!videoId) {
+      match = url.match(regExp2);
+      if (match && match[1]) {
+        videoId = match[1];
+      }
     }
-    
-    return null; // Return null if the URL doesn't match any known pattern
-  }    
+
+    if (videoId) {
+      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    }
+
+    return null;
+  }
 
   hasUserReacted(): BodyReaction | null {
     // console.log("ID USU:", this.user._id)

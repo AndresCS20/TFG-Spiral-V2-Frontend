@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllPublications, OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
+import { AllPublications, AllPublicationsPaginated, OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -13,6 +13,14 @@ export class PublicationsService {
  
  constructor(private http: HttpClient) {}
 
+ getFollowingPublicationsPaginated(username: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/' + username + '/following', { params });
+}
+
  addReaction(publicationId: string, body:{userId: string, reactionType:string}): Observable<OnePublication> {
   return this.http.post<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/',body);
  }
@@ -21,7 +29,6 @@ export class PublicationsService {
   return this.http.delete<OnePublication>(API_URL + 'publication/' + publicationId + '/reactions/'+reactionId, {body: {userId: userId}});
   
  }
-
 
  createPublication(publication: PublicationCreator) {
   return this.http.post<PublicationCreator>(API_URL + 'publication/', publication);
@@ -35,27 +42,42 @@ export class PublicationsService {
   return this.http.get<OnePublication>(API_URL + 'publication/one/' + publicationId);
  }
 
- getAllPublications(): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/');
+ getAllPublications(page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/', { params });
  }
- getCommunityPublications(communityShortname: string):Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/' + communityShortname);
+ getCommunityPublications(communityShortname: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/' + communityShortname, { params });
  }
 
- getUserPublications(username: string): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/user/' + username);
+ getUserPublications(username: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/user/' + username, { params });
  }
 
  getFollowingPublications(username: string): Observable<AllPublications> {
   return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/following');
  }
 
- getUserCommunitiesPublications(username: string): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/' + username + '/communities');
+ getUserCommunitiesPublications(username: string, page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/' + username + '/communities', { params });
  }
 
- getGlobalPublications(username: string): Observable<AllPublications> {
-  return this.http.get<AllPublications>(API_URL + 'publication/'+username+'/global');
+ getGlobalPublications(username: string , page: number, limit: number): Observable<AllPublicationsPaginated> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<AllPublicationsPaginated>(API_URL + 'publication/'+username+'/global', { params });
  }
 
 

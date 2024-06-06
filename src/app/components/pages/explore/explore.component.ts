@@ -25,20 +25,20 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageService.getUser();
-    this.getGlobalPublications(this.user.username);
+    // this.getGlobalPublications(this.user.username);
     this.getMeetPeopleList(this.user.username);
   }
 
-  private getGlobalPublications(username:string): void {
-    this.publicationsService.getGlobalPublications("sete").subscribe({
-      next: (data: AllPublications) => {
-        this.exploreDataService.changeGlobalPublicationsList(data.body);
-      },
-      error: (error : any) => {
-        console.log(error);
-      }
-    })
-  }
+  // private getGlobalPublications(username:string): void {
+  //   this.publicationsService.getGlobalPublications("sete").subscribe({
+  //     next: (data: AllPublications) => {
+  //       this.exploreDataService.changeGlobalPublicationsList(data.body);
+  //     },
+  //     error: (error : any) => {
+  //       console.log(error);
+  //     }
+  //   })
+  // }
 
   private getMeetPeopleList(username:string): void {
     this.userService.getGlobalUsers(username).subscribe({

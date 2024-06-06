@@ -73,10 +73,9 @@
        ></div>
       }
   }
-  <!-- TODO: Arreglar el video no se muestra bien -->
-  <!-- @else if (publication.video) {
-    <iframe class="w-full h-80" [src]="getEmbedLink(publication.video)" frameborder="0" allowfullscreen></iframe>
-  } -->
+  @else if (publication.video && obtenerEnlaceEmbed(publication.video)) {
+    <iframe class="w-full h-96" [src]="obtenerEnlaceEmbed(publication.video)" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  }
   </div>
   <div class="flex items-center mx-3 sm:mx-5">
     <div class="dropdown dropdown-top dropdown-hover">
