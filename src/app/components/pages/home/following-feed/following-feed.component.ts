@@ -47,8 +47,6 @@ export class FollowingFeedComponent implements OnInit {
         if(this.nextPage !== null) {
           this.page = this.nextPage
         }
-        // this.page = this.nextPage === null ? this.page : publications.pagination.nextPage
-        // this.homeDataService.changeFollowingPublications(this.followingPublications)
         this.isLoading = false
       },
       error: (error) => {

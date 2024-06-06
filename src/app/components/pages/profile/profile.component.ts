@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       if (this.username) {
         this.getUser(this.username);
         this.profileDataService.changeUsername(this.username);
-        this.getPublications(this.username);
+        // this.getPublications(this.username);
         console.log("paramUser", this.paramUser);
         console.log("currentUser", this.currentUser);
         // this.isFollowing(this.currentUser._id , this.paramUser()._id);
@@ -109,16 +109,16 @@ export class ProfileComponent implements OnInit, OnDestroy{
   sendCommunities(communities: CommunityList[]) {
     this.profileDataService.changeProfileCommunities(communities);
   }
-  private getPublications(username: string) {
-    this._publicationService.getUserPublications(username).subscribe({
-      next: (data: AllPublications) => {
-        this.profileDataService.changeProfilePublications(data.body);
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
-  }
+  // private getPublications(username: string) {
+  //   this._publicationService.getUserPublications(username).subscribe({
+  //     next: (data: AllPublications) => {
+  //       this.profileDataService.changeProfilePublications(data.body);
+  //     },
+  //     error: (error: any) => {
+  //       console.log(error);
+  //     }
+  //   })
+  // }
 
   private getUser(username: string) {
     console.log("hola mundo",username)
