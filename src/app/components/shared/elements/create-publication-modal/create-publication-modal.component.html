@@ -57,10 +57,13 @@
           [ngModelOptions]="{standalone: true}" 
           name="youtubeUrl" 
           placeholder="https://www.youtube.com/watch?v=9c8QJB5kfPs">
-          <button class="btn btn-outline btn-secondary" (click)="checkYoutubeVideo()"><i class="fa-regular fa-play-circle"></i>Añadir URL</button>
+          <button type="button" class="btn btn-outline btn-secondary" (click)="checkYoutubeVideo()"><i class="fa-regular fa-play-circle"></i>Añadir URL</button>
         </div> 
       @if(isYoutubeUrlValid) {
-            <iframe width="560" height="315" [src]="getEmbedUrl(youtubeUrl)" frameborder="0" allowfullscreen></iframe>
+        <youtube-player class="w-80 h-80"
+        [videoId]="obtenerIdVideoYoutube(youtubeUrl) || ''">
+      </youtube-player>
+            <!-- <iframe width="560" height="315" [src]="getEmbedUrl(youtubeUrl)" frameborder="0" allowfullscreen></iframe> -->
           }
       </div>
       }
@@ -99,7 +102,7 @@
         </ul>
       </div>
       </label>  
-   <button class="btn btn-primary w-full mt-2" type="submit" [disabled]="!profileForm.valid">Publicar</button>
+   <button class="btn btn-primary w-full mt-2" type="submit" [disabled]="!profileForm.valid" (click)="onSubmit">Publicar</button>
   </form>
   </div>
 </dialog>

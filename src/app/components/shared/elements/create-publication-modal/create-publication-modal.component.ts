@@ -5,14 +5,16 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { AllCommunities } from '@interfaces/communities.interface';
 import { OneUser, OneUserCommunity, User } from '@interfaces/users.interface';
 import { UserService } from '@services/user.service';
-import { Publication, PublicationCreator } from '@interfaces/publications.interface';
+import { OnePublication, Publication, PublicationCreator } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
 import Swal from 'sweetalert2';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-publication-modal',
   standalone: true,
-  imports: [FormsModule, ImageEntryComponent,ReactiveFormsModule],
+  imports: [FormsModule, ImageEntryComponent,ReactiveFormsModule, YouTubePlayerModule],
   templateUrl: './create-publication-modal.component.html',
   styleUrl: './create-publication-modal.component.scss'
 })
@@ -23,7 +25,13 @@ export class CreatePublicationModalComponent implements OnInit{
   inputURL = '';
   youtubeUrl = '';
   isYoutubeUrlValid = false;
-  constructor(private sanitizer: DomSanitizer, private userService: UserService,private formBuilder: FormBuilder, private publicationService: PublicationsService) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private userService: UserService,
+    private formBuilder: FormBuilder, 
+    private publicationService: PublicationsService,
+    private router: Router
+  ) {}
 
   @Input() username: string = '';
   user!: User;
@@ -45,6 +53,28 @@ export class CreatePublicationModalComponent implements OnInit{
     this.postCommunity.set(community)
   }
 
+
+  obtenerIdVideoYoutube(url: string): string | null {
+    // Expresión regular para extraer la ID del video de una URL de YouTube en el formato "https://youtu.be/ID" 
+    const regExp1 = /^https?:\/\/youtu\.be\/([A-Za-z0-9_-]+)\??.*$/;
+    // Expresión regular para extraer la ID del video de una URL de YouTube en el formato "https://www.youtube.com/watch?v=ID"
+    const regExp2 = /^https?:\/\/(?:www\.)?youtube\.com\/watch\?.*v=([A-Za-z0-9_-]+).*$/;
+
+    // Intentar hacer coincidir con el primer formato de URL
+    let match = url.match(regExp1);
+    if (match && match[1]) {
+        return match[1]; 
+    }
+
+    // Si no coincide con el primer formato, intentar hacer coincidir con el segundo formato de URL
+    match = url.match(regExp2);
+    if (match && match[1]) {
+        return match[1]; 
+    }
+
+    // Si no coincide con ninguno de los formatos, retorna null
+    return null;
+}
 
   //TODO: Implementar metodo para limpiar el formulario al crear la publicacion correctamente
 
@@ -97,12 +127,16 @@ export class CreatePublicationModalComponent implements OnInit{
   private createPublication(publication: any) {
     //TODO: Revisar al añadir enlace de youtube, que hace que se cree la publicacion
     this.publicationService.createPublication(publication).subscribe({
-      next: (data: any) => {
+      next: (data: OnePublication) => {
+        const newPost = data.body;
         document.getElementById('close-createpost-modal')?.click();
         Swal.fire({
           icon: 'success',
           title: 'Publicación creada con éxito',
           text: 'Seras redirigido en 3 segundos',
+          allowOutsideClick: false, 
+          allowEscapeKey: false, 
+          allowEnterKey: false, 
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -111,13 +145,15 @@ export class CreatePublicationModalComponent implements OnInit{
             title: 'modal-color',
           }
         })
-        console.log(data);
+        .then(() => {
+          this.router.navigate(['/publication', newPost._id]); // Reemplaza '/ruta-deseada' con la ruta a la que deseas redirigir
+        });
+        console.log("postnuevecito",newPost._id);
       },
       error: (error) => {
         console.error(error);
       }
     })
-
 
   }
 

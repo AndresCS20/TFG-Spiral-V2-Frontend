@@ -85,10 +85,16 @@ export class PersonalComponent implements OnInit{
   }
 
   private fillFormWithUser(user: User): void {
+    console.log("uzuario",user)
+    let birth_date = ''
+    if(user.birth_date){
+      const date = typeof user.birth_date === 'string' ? new Date(user.birth_date) : user.birth_date;
+      birth_date = date.toISOString().split('T')[0]
+    }
     this.personalSettingsForm.patchValue({
       fullname: user.fullname,
       email: user.email,
-      birth_date: user.birth_date ? user.birth_date.toISOString().split('T')[0] : '' // Convert Date to string
+      birth_date: birth_date
     });
 
     console.log(this.personalSettingsForm.value);
