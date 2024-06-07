@@ -41,7 +41,7 @@ export interface UpdateUser{
  interests?: string[];
  birth_date?: Date;
  link?: string;
- ubicaion?: string;
+ ubication?: string;
  social_networks?: SocialNetworks[];
 }
 

@@ -16,7 +16,7 @@ import { FollowsService } from '@services/follows.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterModule, AvatarFrameComponent, AboutComponent, CommonModule],
+  imports: [RouterModule, AboutComponent, CommonModule, AvatarFrameComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   username!: string | null;
   private routeSub!: Subscription;
   loggedUser!: User;
+  avatarRingo = "flames"
   constructor(private storageService: StorageService, 
     private _userService: UserService,
     private _followService: FollowsService,

@@ -24,8 +24,14 @@ export class AvatarFrameComponent implements OnInit{
   ngOnInit(): void {
     this.selectedFrame = this.getProfileFrame(this.frame_name);
 
-    this.avatarBodyClass = `avatar-${this.profile_size}`
-    this.avatarClass = `avatar-image ${this.selectedFrame.attributes.rounded} ${this.selectedFrame.attributes.animated || ''}`;
+    if(this.selectedFrame){
+      this.avatarBodyClass = `avatar-${this.profile_size}`
+      this.avatarClass = `avatar-image ${this.selectedFrame.attributes.rounded} ${this.selectedFrame.attributes.animated || ''}`;
+    } else {
+      this.avatarBodyClass = 'avatar-small'
+      this.avatarClass = 'avatar-image rounded-lg'
+    }
+
   }
 
   getProfileFrame(frameName: string) {

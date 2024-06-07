@@ -1,21 +1,32 @@
+@if(!isLoading){
+
+
 <div class="dropdown dropdown-end">
   <div tabindex="0" role="button" class="mx-2 rounded-3xl">
 
 <!-- <div tabindex="0" role="button" class="btn mx-1 rounded-3xl"> -->
   <div class="flex align-items-center">
-  <app-avatar-frame [profile_picture]="user.profile_picture" profile_size="small" [frame_name]="user.profile_picture_frame"></app-avatar-frame>
+    @if(user){
+    <app-avatar-frame [profile_picture]="user.profile_picture || 'https://picsum.photos/seed/' + user.username + '/1280/720'" profile_size="small" [frame_name]="user.profile_picture_frame"></app-avatar-frame>
+    }@else {
+      <i class="fa-regular fa-user text-2xl"></i>
+    }
+
 </div>
 <ul class="p-2 shadow gap-2 menu dropdown-content z-[1] bg-base-100 rounded-box min-w-52 w-fit">
   <li><a class="flex items-center p-3 text-sm" target="_blank">
-    <app-avatar-frame [profile_picture]="user.profile_picture" profile_size="small" frame_name="flames"></app-avatar-frame>
-
+   @if (user) {
+    <app-avatar-frame [profile_picture]="user.profile_picture" profile_size="small" [frame_name]="user.profile_picture_frame"></app-avatar-frame>
+  }@else {
+    <i class="fa-regular fa-user text-2xl"></i>
+  }
     <div class="mx-1">
-      @if(user.fullname!= null && user.fullname!= ''){
+      @if(user){
         <h5 class="text-lg">{{user.fullname}}</h5>
-        <span class="text-base italic">{{user.username}}</span>  
+        <span class="text-base italic">{{user.username}}</span> 
       }@else {
-        <h5 class="text-lg font-bold">{{user.username}}</h5>
-      }
+        <h5 class="text-lg">{{userStorage.fullname}}</h5>
+        <span class="text-base italic">{{userStorage.username}}</span>        }
     </div>
 </a></li>
 <li class="dividied -m-0.5"></li>
@@ -31,3 +42,7 @@
 </ul>
 </div>
 </div>
+}
+@else {
+  <i class="fa-solid fa-spinner animate-spin"></i>
+}

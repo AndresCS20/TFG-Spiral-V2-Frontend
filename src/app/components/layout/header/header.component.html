@@ -50,7 +50,7 @@
     </div>
 
     <span class="flex-1-auto"></span>
-    <app-create-publication-modal [username]="user.username"/>
+    <app-create-publication-modal [username]="userStorage.username"/>
     <app-language-selector/>
 
     <button class="btn btn-circle mx-1 hidden md:block tooltip tooltip-bottom" data-tip="Pantalla Completa" (click)="fullscreen()">
@@ -130,4 +130,4 @@
         </ul>
       </div>
     </div>
-<app-userzone [user]="user"></app-userzone>
+<app-userzone [user]="userInfo"></app-userzone>

@@ -7,7 +7,7 @@ import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
 import { CreatePublicationModalComponent } from '../../shared/elements/create-publication-modal/create-publication-modal.component';
-import { User } from '@interfaces/users.interface';
+import { OneUser, User } from '@interfaces/users.interface';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { UserService } from '@services/user.service';
 
@@ -21,17 +21,30 @@ import { UserService } from '@services/user.service';
 export class HeaderComponent implements OnInit{
 
 
-  constructor(private storageService: StorageService, private authService: AuthService ,private eventBusService: EventBusService, private userService: UserService) { }
-
+  constructor(
+    private storageService: StorageService, 
+    private authService: AuthService ,
+    private eventBusService: EventBusService, 
+    private userService: UserService,  
+  ) { }
+  screenfull = false;
   isLoggedIn = false;
   eventBusSub?: Subscription;
-  user !: User;
+  userStorage !: User;
+  userInfo !: User;
   
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      this.user = this.storageService.getUser();
+      this.userStorage = this.storageService.getUser();
+    }
+
+    if(this.userStorage){
+      this.getUserInfo(this.userStorage.username);
+     if(this.userInfo){
+        console.log("userinfo",this.userInfo)
+      }
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
@@ -44,9 +57,19 @@ export class HeaderComponent implements OnInit{
     window.location.reload();
   }
 
-
-
-  screenfull = false;
+  private getUserInfo (username:string){
+    this.userService.getOneUser(username).subscribe({
+    next: (user: OneUser) => {
+      this.userInfo = user.body;
+      console.log("oneuser",this.userInfo)
+    },
+    error: (error) => {
+      console.log(error);
+    }
+      
+  })
+    }
+  
   collapseSidebar() {
   document.body.classList.toggle('collapsed');
   }

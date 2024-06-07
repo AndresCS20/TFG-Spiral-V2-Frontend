@@ -33,13 +33,32 @@
       <label class="label cursor-pointer">
         <app-avatar-frame [profile_picture]="complectUser.profile_picture" profile_size="small" [frame_name]="avatarFrame"/>
         <span class="label-text">{{avatarFrame}}</span> 
-        <input type="radio" name="avatarFrame" class="radio checked:bg-primary" checked />
+        <input type="radio" name="profile_picture_frame" class="radio checked:bg-primary" formControlName="profile_picture_frame" value="{{avatarFrame}}"  checked />
       </label>
     </div>
   }
+  </div>
+  @if(profileForm.controls['profile_picture'].errors && profileForm.controls['profile_picture'].touched) {
+    <div class="alert alert-error my-2">
+     <i class="fa fa-exclamation-circle"></i>
+      @if(profileForm.controls['profile_picture'].errors['minLengthIfNotEmpty']) {
+        El enlace de imagen de perfil debe tener al menos 6 caracteres
+      }
+      @if(profileForm.controls['profile_picture'].errors['maxLength']) {
+        El enlace de imagen de perfil debe tener como máximo 40 caracteres
+      }
+      @if(profileForm.controls['profile_picture'].errors['isValidUrl']) {
+        El enlace de imagen de perfil no es válido
+      }
+      @if(profileForm.controls['profile_picture'].errors['isValidImageExtension']) {
+        El enlace de imagen de perfil no tiene una extensión válida
+      }
+    </div>
+
+   }
 
  
-</div>
+
   </div>
 
   <div class="card bg-base-200 p-4 my-5">
@@ -97,7 +116,7 @@
      <i class="fa-solid fa-gamepad"></i>
      <input type="text" class="grow" placeholder="Hacer ejercicio, jugar videojuegos, leer" [ngModelOptions]="{standalone: true}" [(ngModel)]="interestInput"/>
     </div>
-    <button class="btn btn-primary" (click)="addInterest()"><i class="fa-regular fa-plus"></i>&nbsp;Añadir</button>
+    <button class="btn btn-primary" type="button" (click)="addInterest()"><i class="fa-regular fa-plus"></i>&nbsp;Añadir</button>
    </div>
  
    <div class="flex gap-3 my-2">

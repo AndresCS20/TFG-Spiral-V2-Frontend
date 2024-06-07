@@ -1,9 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { OneUser, User } from '@interfaces/users.interface';
+import { Router } from '@angular/router';
+import { Route } from '@forge/api';
+import { OneUser, UpdateUser, User } from '@interfaces/users.interface';
 import { StorageService } from '@services/storage.service';
 import { UserService } from '@services/user.service';
 import { AvatarFrameComponent } from 'src/app/components/shared/elements/avatar-frame/avatar-frame.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +23,12 @@ export class ProfileComponent implements OnInit {
   complectUser !: User
   isLoading = true
   profilePictureFrames :string[]= []
-  constructor (private formBuilder: FormBuilder, private storageService: StorageService, private userService: UserService, private avatarFrame : AvatarFrameComponent) { }
+  constructor (
+    private formBuilder: FormBuilder, 
+    private storageService: StorageService, 
+    private userService: UserService, 
+    private avatarFrame : AvatarFrameComponent,
+    private router: Router) { }
 
   ngOnInit(): void { 
 
@@ -37,6 +45,7 @@ export class ProfileComponent implements OnInit {
     banner_picture: ['', [this.minLengthIfNotEmpty(6), Validators.maxLength(40), this.isValidUrl.bind(this), this.isValidImageExtension.bind(this)]],
     ubication: ['', [this.minLengthIfNotEmpty(6), Validators.maxLength(60)]],
     description: ['', [this.minLengthIfNotEmpty(6), Validators.maxLength(60)]],
+    profile_picture_frame : ['', Validators.required],
   })
 
   addInterest(){
@@ -52,10 +61,42 @@ export class ProfileComponent implements OnInit {
 
   onSubmit():void{
     if(this.profileForm.valid){
-      const {profile_picture, banner_picture, ubication, description} = this.profileForm.value
-      console.log(profile_picture, banner_picture, ubication, description)
+      const user: UpdateUser = {
+        profile_picture: this.profileForm.value.profile_picture ||'',
+        banner_picture: this.profileForm.value.banner_picture || '',
+        ubication: this.profileForm.value.ubication || '',
+        description: this.profileForm.value.description || '',
+        profile_picture_frame: this.profileForm.value.profile_picture_frame || '',
+        interests: this.interests()
+      }
+      const {profile_picture, banner_picture, ubication, description, profile_picture_frame} = this.profileForm.value
+      console.log("usuarioactualizar",user)
       // this.storageService.updateProfile({profile_picture, banner_picture, ubication, description})
+      this.updateUser(user)
     }
+}
+
+updateUser(userToUpdate: UpdateUser): void {
+  this.userService.updateUser(this.userStorage.username, userToUpdate).subscribe({
+    next: (data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Ajustes de perfil actualizados',
+        allowOutsideClick: false, 
+        allowEscapeKey: false, 
+        allowEnterKey: false, 
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        customClass: {
+          popup: 'bg-base-200',
+          title: 'modal-color',
+        }
+      }).then(() => {
+        window.location.reload();
+      })
+    },
+  })
 }
 
 private getUser(username: string): void {
@@ -80,7 +121,8 @@ private fillFormWithUser(user: User): void {
     profile_picture: user.profile_picture,
     banner_picture: user.banner_picture,
     ubication: user.ubication,
-    description: user.description
+    description: user.description,
+    profile_picture_frame: user.profile_picture_frame || 'none'
   });
   this.interests.set(user.interests);
 }
