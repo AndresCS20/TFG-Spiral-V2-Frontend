@@ -32,6 +32,16 @@ export interface Community {
  buttons:          Button[];
 }
 
+export interface CommunityUpdate{
+ fullname: string;
+ owner?:   string;
+ description?: string;
+ profile_picture?: string;
+ banner_picture?: string;
+ rules?: Rule[];
+ buttons?: Button[];
+}
+
 export interface Button {
  title: string;
  url:   string;

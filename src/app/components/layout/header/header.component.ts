@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserzoneComponent } from '../../shared/layout/userzone/userzone.component';
 import { StorageService } from '@services/storage.service';
-import { EventBusService } from '@shared/event-bus.service';
+import { EventBusService } from '@services/event-bus.service';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';

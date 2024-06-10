@@ -23,14 +23,18 @@
         </div>
         <div class="flex items-center gap-4 mt-4">
           @if (!isMemberOfTheCommunity) {  
-            <button class="btn btn-success" (click)="joinCommunity()"><i class="fa-regular fa-door-open"></i>Unirse</button>
+            <button class="btn btn-success" (click)="joinCommunity()">
+              <i class="fa-regular fa-door-open"></i>Unirse</button>
           }
           @else if(isMemberOfTheCommunity && !isOwnerOfCommunity){
-            <button class="btn btn-error" (click)="leaveCommunity()"><i class="fa-regular fa-door-closed"></i>Salir</button>
+            <button class="btn btn-error" (click)="leaveCommunity()">
+              <i class="fa-regular fa-door-closed"></i>Salir</button>
           }   
           @else {
-            <button class="btn btn-warning" (click)="changeOwner()"><i class="fa-regular fa-badge-sheriff"></i> Cambiar Dueño</button>
-            <button class="btn btn-error" (click)="deleteCommunity()"><i class="fa-regular fa-trash-can"></i>Eliminar Comunidad</button>
+            <button class="btn btn-warning" (click)="changeOwner()">
+              <i class="fa-regular fa-badge-sheriff"></i> Cambiar Dueño</button>
+            <button class="btn btn-error" (click)="deleteCommunity()">
+              <i class="fa-regular fa-trash-can"></i>Eliminar Comunidad</button>
           }
         </div>
       </div> 

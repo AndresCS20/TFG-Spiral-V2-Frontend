@@ -19,7 +19,7 @@ export class CreateCommunityModalComponent implements OnInit{
   constructor(private router: Router,private communityService: CommunitiesService, private formBuilder: FormBuilder, private storageService: StorageService) { }
   currentUser !: User
   createCommunityForm = this.formBuilder.group({
-    shortname: ['', [Validators.required, this.textNumberUnderscoreDashValidator(),Validators.minLength(3), Validators.maxLength(20)]], //NOTA VALIDA QUE NO META CARACTERES ESPECIALES
+    shortname: ['', [Validators.required, this.textNumberUnderscoreDashValidator(),Validators.minLength(3), Validators.maxLength(20)]], 
     fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
     description: ['', [Validators.maxLength(200)]],
     profile_picture: ['', [this.minLengthIfNotEmpty(6), Validators.maxLength(100), this.isValidUrl.bind(this), this.isValidImageExtension.bind(this)]],

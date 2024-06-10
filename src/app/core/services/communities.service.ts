@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllCommunities, Community, CommunityCreate, OneCommunity } from '@interfaces/communities.interface';
+import { AllCommunities, Community, CommunityCreate, CommunityUpdate, OneCommunity } from '@interfaces/communities.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -12,6 +12,11 @@ const API_URL = environment.API_URL;
 export class CommunitiesService {
  
   constructor(private http: HttpClient) {}
+
+
+  updateCommunity(shortname:string, community : CommunityUpdate): Observable<CommunityUpdate> {
+    return this.http.patch<CommunityUpdate>(API_URL + 'community/' + shortname + '', community);
+  }
 
   createCommunity(community: CommunityCreate): Observable<Community> {
     return this.http.post<Community>(API_URL + 'community', community);

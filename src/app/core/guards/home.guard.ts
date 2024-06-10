@@ -8,7 +8,6 @@ export const homeGuard: CanActivateFn = (route, state) => {
   const userIsLoggedIn = storageService.isLoggedIn(); 
   const router = inject(Router);
 
-
     if (userIsLoggedIn) {
       return true;
     } else {
