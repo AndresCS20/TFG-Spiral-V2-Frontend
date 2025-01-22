@@ -18,35 +18,18 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "baseUrl": "./",
     "paths": {
-      "@components/layout/*": [
-        "src/app/components/layout/*"
-      ],
-      "@components/pages/*": [
-        "src/app/components/pages/*"
-      ],
-      "@services/*": [
-        "src/app/core/services/*"
-      ],
-      "@interfaces/*": [
-        "src/app/core/interfaces/*"
-      ],
-      "@shared/*": [
-        "src/app/core/shared/*"
-      ],
-      "@helpers/*":[
-        "src/app/core/helpers/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-
-    }
+      "@components/layout/*": ["src/app/components/layout/*"],
+      "@components/pages/*": ["src/app/components/pages/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@interfaces/*": ["src/app/core/interfaces/*"],
+      "@shared/*": ["src/app/core/shared/*"],
+      "@helpers/*": ["src/app/core/helpers/*"],
+      "@assets/*": ["src/assets/*"]
+    },
+    "types": ["node"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
