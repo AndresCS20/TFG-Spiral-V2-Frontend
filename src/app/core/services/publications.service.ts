@@ -4,7 +4,7 @@ import { AllPublications, AllPublicationsPaginated, OnePublication, Publication,
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
-const API_URL = process.env.API_URL;
+const API_URL = environment.API_URL;
 
 @Injectable({
  providedIn: 'root'

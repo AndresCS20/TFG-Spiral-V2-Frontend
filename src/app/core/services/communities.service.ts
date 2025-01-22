@@ -4,7 +4,7 @@ import { AllCommunities, Community, CommunityCreate, CommunityUpdate, OneCommuni
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
-const API_URL = process.env.API_URL;
+const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'

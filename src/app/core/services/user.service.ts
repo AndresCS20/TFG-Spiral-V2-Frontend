@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.development';
 import { AllUsers, OneUser, UpdateUser, User } from '@interfaces/users.interface';
 import { FollowList } from '@interfaces/follows.interface';
 
-const API_URL = process.env.API_URL;
+const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root',
