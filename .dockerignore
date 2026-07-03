@@ -1,0 +1,9 @@
+node_modules
+dist
+.angular
+.git
+.env
+coverage
+*.log
+karma.conf.js
+**/karma-debug.html
