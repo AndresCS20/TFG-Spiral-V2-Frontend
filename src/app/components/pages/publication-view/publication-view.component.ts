@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { OnePublication, Publication, Comment } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
@@ -23,7 +24,8 @@ export class PublicationViewComponent implements OnInit{
     private storageService : StorageService,
     private publicationService: PublicationsService,     
     private route: ActivatedRoute, 
-    private router: Router) { }
+    private router: Router,
+    private destroyRef: DestroyRef) { }
 
     publicationId!: string | null;
     publication !: Publication
@@ -38,7 +40,7 @@ export class PublicationViewComponent implements OnInit{
       let route = this.route;
       while (route.firstChild) route = route.firstChild;
       this.publicationId = route.snapshot.paramMap.get('publicationId');
-      this.user = this.storageService.getUser();
+      this.user = this.storageService.getUser()! as unknown as User;
       if (this.publicationId) {
         this.getPublicationById(this.publicationId);
       }
@@ -49,7 +51,7 @@ export class PublicationViewComponent implements OnInit{
         userId: this.user._id,
         content: this.commentBox
       }
-      this.publicationService.createComment(this.publication._id ,{userId: this.user._id, content: this.commentBox}).subscribe({
+      this.publicationService.createComment(this.publication._id ,{userId: this.user._id, content: this.commentBox}).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data: OnePublication) => {
           this.comments.set(data.body.comments);
           this.commentBox = "";
@@ -64,7 +66,7 @@ export class PublicationViewComponent implements OnInit{
 
     getPublicationById(publicationId: string){
 
-      this.publicationService.getPublicationById(publicationId).subscribe({
+      this.publicationService.getPublicationById(publicationId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data: OnePublication) => {
           this.publication = data.body;
           console.log("weoeoeoeo",this.publication);

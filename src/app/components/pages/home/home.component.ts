@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.storage.getUser();
+    this.user = this.storage.getUser()! as unknown as User;
     // this.getFollowingPublications();
     // this.getUserCommunitiesPublications();
   }

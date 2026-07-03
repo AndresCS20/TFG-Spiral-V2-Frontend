@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageTitleComponent } from '../../shared/elements/page-title/page-title.component';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { PublicationsService } from '@services/publications.service';
@@ -21,10 +22,11 @@ export class ExploreComponent implements OnInit {
     private userService: UserService,
     private publicationsService: PublicationsService, 
     private exploreDataService: ExploreDataService, 
-    private storageService: StorageService) {}
+    private storageService: StorageService,
+    private destroyRef: DestroyRef) {}
 
   ngOnInit(): void {
-    this.user = this.storageService.getUser();
+    this.user = this.storageService.getUser()! as unknown as User;
     // this.getGlobalPublications(this.user.username);
     this.getMeetPeopleList(this.user.username);
   }
@@ -41,7 +43,7 @@ export class ExploreComponent implements OnInit {
   // }
 
   private getMeetPeopleList(username:string): void {
-    this.userService.getGlobalUsers(username).subscribe({
+    this.userService.getGlobalUsers(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: AllUsers) => {
         this.exploreDataService.changeMeetPeopleList(data.body);
       },

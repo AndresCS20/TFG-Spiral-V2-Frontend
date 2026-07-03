@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { Community } from '@interfaces/communities.interface';
 import { CommuniyDataService } from '@services/data/communiy-data.service';
@@ -13,12 +14,12 @@ import { AvatarFrameComponent } from 'src/app/components/shared/elements/avatar-
   styleUrl: './about-us.component.scss'
 })
 export class AboutUsComponent implements OnInit {
-  constructor(private router: Router,private communityDataService: CommuniyDataService) {}
+  constructor(private router: Router,private communityDataService: CommuniyDataService, private destroyRef: DestroyRef) {}
 
   community!: Community
   
   ngOnInit() {
-    this.communityDataService.currentCommunity.subscribe(community => {
+    this.communityDataService.currentCommunity.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(community => {
       if (community) {
         this.community = community;
         console.log("Comunidad",this.community);

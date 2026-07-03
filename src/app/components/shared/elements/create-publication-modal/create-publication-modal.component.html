@@ -1,8 +1,8 @@
 <!-- Open the modal using ID.showModal() method -->
-<button class="btn tooltip tooltip-bottom flex" data-tip="Crear publicación" onclick="create_post.showModal()"><i class="fa-regular fa-circle-plus"></i> <span class="hidden lg:block">Crear publicación</span></button>
+<button class="btn tooltip tooltip-bottom flex" data-tip="Crear publicación" onclick="create_post.showModal()"><i class="icon-[ph--plus-circle]"></i> <span class="hidden lg:block">Crear publicación</span></button>
 <dialog id="create_post" class="modal">
   <div class="modal-box w-11/12 max-w-screen-md p-5">
-    <h3 class="font-bold text-lg"><i class="fa-regular fa-circle-plus"></i> Crear publicación</h3>
+    <h3 class="font-bold text-lg"><i class="icon-[ph--plus-circle]"></i> Crear publicación</h3>
     <form method="dialog">
       <button id="close-createpost-modal" class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
     </form>
@@ -12,16 +12,16 @@
       
     <ul class="menu menu-vertical lg:menu-horizontal gap-3">
       <li>
-        <a [className]="publicationType == 'text' ? 'active' : ''" (click)="setPublicationType('text')"><i class="fa-regular fa-pen-to-square"></i> Texto</a>
+        <a [className]="publicationType == 'text' ? 'active' : ''" (click)="setPublicationType('text')"><i class="icon-[fa-regular--pen-to-square]"></i> Texto</a>
       </li>
       <li>
-        <a [className]="publicationType == 'image' ? 'active' : ''" (click)="setPublicationType('image')"><i class="fa-regular fa-image"></i>Imagen</a>
+        <a [className]="publicationType == 'image' ? 'active' : ''" (click)="setPublicationType('image')"><i class="icon-[fa-regular--image]"></i>Imagen</a>
       </li>
       <li>
-        <a [className]="publicationType == 'video' ? 'active' : ''" (click)="setPublicationType('video')"><i class="fa-regular fa-video"></i>Video</a>
+        <a [className]="publicationType == 'video' ? 'active' : ''" (click)="setPublicationType('video')"><i class="icon-[fa-regular--video]"></i>Video</a>
       </li>
       <li class="disabled">
-        <a><i class="fa-regular fa-link"></i>URL</a>
+        <a><i class="icon-[fa-regular--link]"></i>URL</a>
       </li>
     </ul></div>
     </div>
@@ -39,7 +39,7 @@
         </div>
       <div class="flex mt-1 mb-5">
         <input type="text" class="input input-bordered flex-1 mr-3" placeholder="Introduce un enlace">
-        <button class="btn btn-outline btn-secondary"><i class="fa-regular fa-link-simple"></i>Guardar enlace</button>
+        <button class="btn btn-outline btn-secondary"><i class="icon-[fa-regular--link-simple]"></i>Guardar enlace</button>
       </div>
       </div>
 
@@ -57,7 +57,7 @@
           [ngModelOptions]="{standalone: true}" 
           name="youtubeUrl" 
           placeholder="https://www.youtube.com/watch?v=9c8QJB5kfPs">
-          <button type="button" class="btn btn-outline btn-secondary" (click)="checkYoutubeVideo()"><i class="fa-regular fa-play-circle"></i>Añadir URL</button>
+          <button type="button" class="btn btn-outline btn-secondary" (click)="checkYoutubeVideo()"><i class="icon-[fa-regular--play-circle]"></i>Añadir URL</button>
         </div> 
       @if(isYoutubeUrlValid) {
         <youtube-player class="w-80 h-80"

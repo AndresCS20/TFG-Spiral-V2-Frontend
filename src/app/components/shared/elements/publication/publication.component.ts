@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DateFromNowPipe } from '../../../../shared/pipes/date-from-now.pipe';
 import { AvatarFrameComponent } from '../avatar-frame/avatar-frame.component';
 import { BodyReaction, OnePublication, Publication, ReactionReaction } from '@interfaces/publications.interface';
-import { StorageService } from '@services/storage.service';
+import { StorageService, UserPublic } from '@services/storage.service';
 import { RouterLink } from '@angular/router';
-import moment from 'moment';
-import 'moment/locale/es'
+import { DateService } from '@services/date.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PublicationsService } from '@services/publications.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -12,15 +13,15 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
  @Component({
   selector: 'app-publication',
   standalone: true,
-  imports: [AvatarFrameComponent, RouterLink, CarouselModule, YouTubePlayerModule],
+  imports: [AvatarFrameComponent, RouterLink, CarouselModule, YouTubePlayerModule, DateFromNowPipe],
   templateUrl: './publication.component.html',
   styleUrl: './publication.component.scss'
 })
 export class PublicationComponent implements OnInit{
 
-  constructor(private storageServie: StorageService, private publicationService: PublicationsService, private sanitizer: DomSanitizer) {}
+  constructor(private storageServie: StorageService, private publicationService: PublicationsService, private sanitizer: DomSanitizer, private dateService: DateService, private destroyRef: DestroyRef) {}
   @Input() publication!: Publication
-  user : any
+  user: UserPublic | null = null
   reactions = signal<BodyReaction[]>([])
   activeReaction = signal<BodyReaction | null>(null) // Se guarda el type de reacción activa
   reactionCount = signal(0)
@@ -107,12 +108,13 @@ export class PublicationComponent implements OnInit{
   }
 
   hasUserReacted(): BodyReaction | null {
-    // console.log("ID USU:", this.user._id)
+    const currentUser = this.user;
+    if (!currentUser) return null;
     for (let reaction of this.publication.reactions) {
       reaction.reactions.some(userReaction => {
-        console.log(userReaction.user._id, this.user._id)
+        console.log(userReaction.user._id, currentUser._id)
       })
-      if (reaction.reactions.some(userReaction => userReaction.user._id === this.user._id)) {
+      if (reaction.reactions.some(userReaction => userReaction.user._id === currentUser._id)) {
         console.log("REAZION", reaction)
         return reaction;
       }
@@ -121,11 +123,12 @@ export class PublicationComponent implements OnInit{
   }
 
   addReactionBackend(reaction: BodyReaction): void {
+    if (!this.user) return;
     const body = {
       userId: this.user._id,
       reactionType: reaction.type
     }
-    this.publicationService.addReaction(this.publication._id, body).subscribe({
+    this.publicationService.addReaction(this.publication._id, body).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OnePublication) => {
         this.publication = data.body
         this.reactions.set(this.publication.reactions)
@@ -139,8 +142,8 @@ export class PublicationComponent implements OnInit{
   }
 
   deleteReactionBackend(reaction: BodyReaction): void {
-  
-    this.publicationService.deleteReaction(this.publication._id, this.user._id,reaction._id).subscribe({
+   if (!this.user) return;
+    this.publicationService.deleteReaction(this.publication._id, this.user._id,reaction._id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OnePublication) => {
         this.publication = data.body
         this.reactions.set(this.publication.reactions)
@@ -153,7 +156,7 @@ export class PublicationComponent implements OnInit{
     })
   }
 
-  updateReaction(reaction : any){
+  updateReaction(reaction: BodyReaction){
     console.log("activeReaction", this.activeReaction())
     if(this.activeReaction() == null){
       // if (this.activeReaction()?.name != reaction.name) {
@@ -191,7 +194,7 @@ export class PublicationComponent implements OnInit{
   // }
 
   dateFormatted(): string {
-    return moment(this.publication.createdAt).locale('es').fromNow();
+    return this.dateService.fromNow(this.publication.createdAt);
   }
 
   updateReactionsSats(){

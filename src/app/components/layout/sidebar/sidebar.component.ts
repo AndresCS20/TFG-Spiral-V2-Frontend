@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserzoneComponent } from '../../shared/layout/userzone/userzone.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { StorageService } from '@services/storage.service';
@@ -14,11 +15,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 export class SidebarComponent implements OnInit{
 
   isLoggedIn = false
+  isCollapsed = signal(false);
   
   storedTheme!: string | null;
   themeForm!: FormGroup;
   
-  constructor (private storageService: StorageService, private fb: FormBuilder){}
+  constructor (private storageService: StorageService, private fb: FormBuilder, private destroyRef: DestroyRef){}
   @ViewChild('iconSelectedTheme', { static: true }) iconSelectedTheme!: ElementRef;
 
   ngOnInit(): void {
@@ -30,10 +32,16 @@ export class SidebarComponent implements OnInit{
     this.changeTheme(this.storedTheme? this.storedTheme : 'dark');
     this.themeForm.patchValue({ theme: this.storedTheme });
 
+    // Restore sidebar state
+    const saved = localStorage.getItem('sidebar-collapsed');
+    if (saved === 'true') {
+      this.isCollapsed.set(true);
+    }
   }
 
-  collapseSidebar() {
-    document.body.classList.toggle('collapsed');
+  toggleSidebar() {
+    this.isCollapsed.update(v => !v);
+    localStorage.setItem('sidebar-collapsed', String(this.isCollapsed()));
   }
 
   initForm() {
@@ -41,7 +49,7 @@ export class SidebarComponent implements OnInit{
       theme: ['dark']
     });
 
-    this.themeForm.valueChanges.subscribe((value) => {
+    this.themeForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
       this.changeTheme(value.theme);
     });
   }

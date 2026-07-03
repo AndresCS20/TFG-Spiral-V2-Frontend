@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button, Community, CommunityUpdate, OneCommunity, Rule } from '@interfaces/communities.interface';
@@ -18,7 +19,8 @@ export class SettingsComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, 
     private router: Router,
     private communityService: CommunitiesService, 
-    private communityDataService: CommuniyDataService
+    private communityDataService: CommuniyDataService,
+    private destroyRef: DestroyRef
   ) {}
 
   ruleError = false
@@ -60,7 +62,7 @@ export class SettingsComponent implements OnInit{
   // })
 
   ngOnInit(): void {
-    this.communityDataService.currentCommunity.subscribe(community => {
+    this.communityDataService.currentCommunity.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(community => {
 
       if (community) {
         this.complectCommunity = community
@@ -99,7 +101,7 @@ export class SettingsComponent implements OnInit{
     this.buttons.set(community.buttons)
   }
   updateCommunity(shortname:string,communityToUpdate: CommunityUpdate): void {
-    this.communityService.updateCommunity(shortname, communityToUpdate).subscribe({
+    this.communityService.updateCommunity(shortname, communityToUpdate).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         Swal.fire({
           icon: 'success',

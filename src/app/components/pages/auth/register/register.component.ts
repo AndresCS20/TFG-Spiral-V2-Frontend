@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit{
   
 
   currentDate = this.getEighteenYearsAgo();
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private destroyRef: DestroyRef) { }
   router = inject(Router)
 
   ngOnInit(): void {
@@ -62,7 +63,7 @@ export class RegisterComponent implements OnInit{
   register(): void {
     const { username, email, password, fullname, birth_date} = this.formRegister.value;
 
-    this.authService.register(username, email, password,fullname,birth_date).subscribe({
+    this.authService.register(username, email, password,fullname,birth_date).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
         console.log(data);
         Swal.fire({

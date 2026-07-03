@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../../../core/services/auth.service';
-import { StorageService } from '../../../../core/services/storage.service';
+import { StorageService, UserPublic } from '../../../../core/services/storage.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -13,18 +14,17 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  form: any = {
+  form: { username: string | null; password: string | null } = {
     username: null,
     password: null
   };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
-  user : any
+  user: UserPublic | null = null
 
   logo_url = 'assets/images/spiral.png';
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
 
@@ -43,21 +43,30 @@ export class LoginComponent implements OnInit {
 
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.user = this.storageService.getUser();
-      console.log(this.user.username)
+      const loggedUser = this.storageService.getUser();
+      this.user = loggedUser;
+      console.log(loggedUser?.username)
     }
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const username = this.form.username ?? '';
+    const password = this.form.password ?? '';
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(username, password).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
+        const userPublic: UserPublic = {
+          _id: data._id,
+          username: data.username,
+          fullname: data.fullname,
+          email: data.email,
+          profile_picture: data.profile_picture,
+          banner_picture: data.banner_picture,
+        };
+        this.storageService.saveUser(userPublic);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
         this.reloadPage();
       },
       error: err => {
@@ -85,4 +94,3 @@ export class LoginComponent implements OnInit {
     // });
   }
 }
-

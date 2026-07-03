@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { StorageService } from '../../../core/services/storage.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AvatarFrameComponent } from '../../shared/elements/avatar-frame/avatar-frame.component';
@@ -6,7 +7,6 @@ import { UserService } from '@services/user.service';
 import { AllUsers, CommunityList, OneUser, User } from '@interfaces/users.interface';
 import { AboutComponent } from './about/about.component';
 import { ProfileDataService } from '@services/data/profile-data.service';
-import { Subscription } from 'rxjs';
 import { AllPublications } from '@interfaces/publications.interface';
 import { PublicationsService } from '@services/publications.service';
 import { Community } from '@interfaces/communities.interface';
@@ -20,12 +20,11 @@ import { FollowsService } from '@services/follows.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent implements OnInit, OnDestroy{
+export class ProfileComponent implements OnInit{
   currentUser!: User;
   isFollowingUser: boolean = false;
   paramUser = signal({} as User);
   username!: string | null;
-  private routeSub!: Subscription;
   loggedUser!: User;
   avatarRingo = "flames"
   constructor(private storageService: StorageService, 
@@ -35,7 +34,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
     private router: Router,
     private profileDataService:ProfileDataService,
     private storage : StorageService,
-    private _publicationService: PublicationsService,  
+    private _publicationService: PublicationsService,
+    private destroyRef: DestroyRef,  
   ) 
     { }
 
@@ -44,9 +44,9 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   private subscribeToRouteParams(): void {
-    this.routeSub = this.route.paramMap.subscribe(paramMap => {
+    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(paramMap => {
       this.username = paramMap.get('username');
-      this.currentUser = this.storage.getUser();
+      this.currentUser = this.storage.getUser()! as unknown as User;
       console.log("quehay", this.currentUser)
       if (this.username) {
         this.getUser(this.username);
@@ -59,14 +59,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
-  }
-
   followUser(){
-    this._followService.followUser({userId: this.currentUser._id, followId: this.paramUser()._id}).subscribe({
+    this._followService.followUser({userId: this.currentUser._id, followId: this.paramUser()._id}).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: any) => {
         console.log(data);
         this.isFollowingUser = true;
@@ -81,7 +75,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   isFollowing(userId: string, followId: string){
-    this._followService.checkIsFollowing({userId: userId, followId: followId}).subscribe({
+    this._followService.checkIsFollowing({userId: userId, followId: followId}).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: any) => {
         this.isFollowingUser = data.result;
       },
@@ -92,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   unFollowUser(){
-    this._followService.unFollowUser({userId: this.currentUser._id, followId: this.paramUser()._id}).subscribe({
+    this._followService.unFollowUser({userId: this.currentUser._id, followId: this.paramUser()._id}).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: any) => {
         console.log(data);
         this.isFollowingUser = false;
@@ -123,7 +117,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
 
   private getUser(username: string) {
     console.log("hola mundo",username)
-    this._userService.getOneUser(username).subscribe({
+    this._userService.getOneUser(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OneUser) => {
         this.paramUser.set(data.body);
         this.profileDataService.changeUserProfile(this.paramUser());

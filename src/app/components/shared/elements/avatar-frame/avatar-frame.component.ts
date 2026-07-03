@@ -1,8 +1,5 @@
-import { animate } from '@angular/animations';
-import { Component, Injectable, Input, OnInit } from '@angular/core';
-@Injectable({
-  providedIn: 'root',
-})
+import { Component, Input, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-avatar-frame',
   standalone: true,
@@ -11,7 +8,6 @@ import { Component, Injectable, Input, OnInit } from '@angular/core';
   styleUrl: './avatar-frame.component.scss'
 })
 export class AvatarFrameComponent implements OnInit{
-  avatar_url ="assets/avatar/frame"
   default_avatar = "assets/avatar/none.png";
   @Input() frame_name: string = "none";
   @Input() profile_picture: string = this.default_avatar;

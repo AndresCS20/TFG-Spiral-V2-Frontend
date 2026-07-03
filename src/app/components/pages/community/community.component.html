@@ -18,33 +18,33 @@
           </div>
           <div>
             <h1 class="text-2xl font-bold">{{ community.fullname }}</h1>
-            <p class="text-secondary"><i class="fa-regular fa-circle-s"></i>/{{community.shortname}}</p>
+            <p class="text-secondary"><i class="icon-[fa-regular--circle-s]"></i>/{{community.shortname}}</p>
           </div>
         </div>
         <div class="flex items-center gap-4 mt-4">
           @if (!isMemberOfTheCommunity) {  
             <button class="btn btn-success" (click)="joinCommunity()">
-              <i class="fa-regular fa-door-open"></i>Unirse</button>
+              <i class="icon-[fa-regular--door-open]"></i>Unirse</button>
           }
           @else if(isMemberOfTheCommunity && !isOwnerOfCommunity){
             <button class="btn btn-error" (click)="leaveCommunity()">
-              <i class="fa-regular fa-door-closed"></i>Salir</button>
+              <i class="icon-[fa-regular--door-closed]"></i>Salir</button>
           }   
           @else {
             <button class="btn btn-warning" (click)="changeOwner()">
-              <i class="fa-regular fa-badge-sheriff"></i> Cambiar Dueño</button>
+              <i class="icon-[ph--shield-star]"></i> Cambiar Dueño</button>
             <button class="btn btn-error" (click)="deleteCommunity()">
-              <i class="fa-regular fa-trash-can"></i>Eliminar Comunidad</button>
+              <i class="icon-[fa-regular--trash-can]"></i>Eliminar Comunidad</button>
           }
         </div>
       </div> 
     </header>
     <div class="card card-bordered container  bg-base-200/50 card-compact items-center my-2">
       <ul class="menu menu-vertical md:menu-horizontal w-fit rounded-box gap-2">
-       <li class="block lg:hidden"><a routerLink="/community/{{ communityShortName }}/about" routerLinkActive="active"><i class="fa-regular fa-earth-europe"></i>&nbsp;Sobre la comunidad</a></li>
-       <li><a routerLink="/community/{{ communityShortName }}/feed" routerLinkActive="active"><i class="fa-regular fa-memo"></i>&nbsp;Publicaciones</a></li>
-       <li><a routerLink="/community/{{ communityShortName }}/members" routerLinkActive="active"><i class="fa-solid fa-users"></i>&nbsp;Miembros</a></li>
-       @if(isOwnerOfCommunity){<li><a routerLink="/community/{{ communityShortName }}/settings" routerLinkActive="active"><i class="fa-regular fa-cogs"></i>&nbsp;Ajustes</a></li>}
+       <li class="block lg:hidden"><a routerLink="/community/{{ communityShortName }}/about" routerLinkActive="active"><i class="icon-[fa-regular--earth-europe]"></i>&nbsp;Sobre la comunidad</a></li>
+       <li><a routerLink="/community/{{ communityShortName }}/feed" routerLinkActive="active"><i class="icon-[fa-regular--memo]"></i>&nbsp;Publicaciones</a></li>
+       <li><a routerLink="/community/{{ communityShortName }}/members" routerLinkActive="active"><i class="icon-[fa-solid--users]"></i>&nbsp;Miembros</a></li>
+       @if(isOwnerOfCommunity){<li><a routerLink="/community/{{ communityShortName }}/settings" routerLinkActive="active"><i class="icon-[fa-regular--cogs]"></i>&nbsp;Ajustes</a></li>}
       </ul>
       </div>
       </div>
@@ -67,6 +67,6 @@
   </div>
 } @else {
   <div class="flex items-center justify-center h-screen">
-    <div class="fa-regular fa-spinner animate-spin"></div>
+    <div class="icon-[fa-regular--spinner] animate-spin"></div>
   </div>
 }

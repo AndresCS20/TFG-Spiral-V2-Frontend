@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-cogs"></i> Ajustes</h1>
+<h1 class="text-2xl font-semibold leading-tight my-5"><i class="icon-[fa-regular--cogs]"></i> Ajustes</h1>
 
 <div class="container">
  <!-- Campos: FullName:string, Description:string, Rules (Array Object(title: string y content:string)), Buttons (Array Object(title: string y url:string)) -->
@@ -9,13 +9,13 @@
   [formGroup]="formCommunity"
   >
   <div class="card bg-base-200 p-4 mb-5">
-    <h2 class="card-title"><i class="fa-solid fa-input-text"></i>&nbsp;Nombre completo</h2>
+    <h2 class="card-title"><i class="icon-[fa-solid--input-text]"></i>&nbsp;Nombre completo</h2>
     <div class="block md:flex items-center gap-3 my-2">
       <label class="form-control w-full my-2">
        <span class="label-text">Introduce el enlace de una imagen</span>
        
        <div class="input input-bordered flex items-center gap-2 my-2">
-        <i class="fa-solid fa-input-text"></i>
+        <i class="icon-[fa-solid--input-text]"></i>
         <input type="text" class="grow" placeholder="Spiral Community" formControlName="fullname"/>
       </div>
       </label>
@@ -23,7 +23,7 @@
 
      @if(formCommunity.controls['fullname'].errors && formCommunity.controls['fullname'].touched) {
       <div class="alert alert-error flex my-2">
-        <i class="fa-regular fa-circle-xmark"></i>
+        <i class="icon-[ph--x-circle]"></i>
         @if(formCommunity.controls['fullname'].errors['required']) {
           El nombre completo es obligatorio
         }
@@ -39,7 +39,7 @@
 
     </div>
     <div class="card bg-base-200 p-4 mb-5">
-      <h2 class="card-title"><i class="fa-solid fa-subtitles"></i>&nbsp;Descripción</h2>
+      <h2 class="card-title"><i class="icon-[fa-solid--subtitles]"></i>&nbsp;Descripción</h2>
       <div class="block md:flex items-center gap-3 my-2">
         <label class="form-control w-full my-2">
          <span class="label-text mb-2
@@ -50,7 +50,7 @@
 
        @if(formCommunity.controls['description'].errors && formCommunity.controls['description'].touched) {
         <div class="alert alert-error flex my-2">
-          <i class="fa-regular fa-circle-xmark"></i>
+          <i class="icon-[ph--x-circle]"></i>
 
           @if(formCommunity.controls['description'].errors['maxlength']) {
             La descripción debe tener como máximo 400 caracteres
@@ -59,7 +59,7 @@
        }
       </div>
       <div class="card bg-base-200 p-4 mb-5">
-        <h2 class="card-title"><i class="fa-solid fa-head-side"></i>&nbsp;Foto de perfil</h2>
+        <h2 class="card-title"><i class="icon-[fa-solid--head-side]"></i>&nbsp;Foto de perfil</h2>
         <div class="block md:flex items-center gap-3 my-2">
          @if(complectCommunity.profile_picture){
           <app-avatar-frame [profile_picture]="complectCommunity.profile_picture" profile_size="large" frame_name="none"/>
@@ -68,7 +68,7 @@
           <span class="label-text">Introduce el enlace de una imagen</span>
           
           <div class="input input-bordered flex items-center gap-2 my-2">
-           <i class="fa-regular fa-head-side"></i>
+           <i class="icon-[fa-regular--head-side]"></i>
            <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profile_picture"/>
          </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
          </label>
@@ -94,7 +94,7 @@
          }
         </div>
         <div class="card bg-base-200 p-4 my-5">
-          <h2 class="card-title"><i class="fa-regular fa-image"></i> Foto de portada</h2>
+          <h2 class="card-title"><i class="icon-[fa-regular--image]"></i> Foto de portada</h2>
           <div class="block md:flex items-center gap-3 my-2">
            @if(complectCommunity.banner_picture){
              <div class="w-full md:w-64 h-24 rounded-lg" 
@@ -107,7 +107,7 @@
             <span class="label-text">Introduce el enlace de una imagen</span>
             
             <div class="input input-bordered flex items-center gap-2 my-2">
-             <i class="fa-solid fa-image"></i>
+             <i class="icon-[fa-solid--image]"></i>
              <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="banner_picture"/>
            </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
            </label>
@@ -115,7 +115,7 @@
           </div>
     </form> 
       <div class="card bg-base-200 p-4 mb-5">
-        <h2 class="card-title"><i class="fa-regular fa-file-lines"></i>&nbsp;Reglas</h2>
+        <h2 class="card-title"><i class="icon-[fa-regular--file-lines]"></i>&nbsp;Reglas</h2>
         <div class="overflow-x-auto mt-5">
           <table class="table table-zebra">
 
@@ -133,7 +133,7 @@
              }
              @empty {
               <tr>
-                <td colspan="2"><i class="fa-regular fa-circle-xmark"></i> No hay reglas</td>
+                <td colspan="2"><i class="icon-[ph--x-circle]"></i> No hay reglas</td>
               </tr>
              }
           </table>
@@ -141,7 +141,7 @@
         <div class="divider my-2"></div>
         @if(ruleTitleInput.length==0){
         <div class="alert alert-error flex my-2">
-          <i class="fa-regular fa-circle-xmark"></i>
+          <i class="icon-[ph--x-circle]"></i>
           <span>
             <h3 class="font-bold">El titulo de la regla es obligatorio</h3>
           </span>
@@ -150,7 +150,7 @@
 
         <label class="form-control w-full">         
           <div class="input input-bordered flex items-center gap-2">
-           <i class="fa-solid fa-input-text"></i>
+           <i class="icon-[fa-solid--input-text]"></i>
            <input type="text" class="grow" placeholder="Titulo de la regla" [ngModelOptions]="{standalone: true}" [(ngModel)]="ruleTitleInput"/>
          </div>
          </label>
@@ -159,13 +159,13 @@
       </div>
 
       <div class="card bg-base-200 p-4 mb-5">
-        <h2 class="card-title"><i class="fa-regular fa-file-lines"></i>&nbsp;Botones</h2>
+        <h2 class="card-title"><i class="icon-[fa-regular--file-lines]"></i>&nbsp;Botones</h2>
         
         <ul class="my-2 flex">
           @for (button of buttons(); track $index) {
           <li class="join m-1">
             <span class="btn btn-sm btn-{{button.color}} join-item">{{button.title}}</span>
-            <span class="btn join-item btn-sm btn-neutral" (click)="deleteButton($index)"><i class="fa-regular fa-bucket text-xs"></i></span>
+            <span class="btn join-item btn-sm btn-neutral" (click)="deleteButton($index)"><i class="icon-[fa-regular--bucket] text-xs"></i></span>
           </li>
         }
         </ul>
@@ -176,13 +176,13 @@
           <span class="label-text">Introduce el titulo del boton</span>
           
           <div class="input input-bordered flex items-center gap-2 my-2">
-           <i class="fa-solid fa-input-text"></i>
+           <i class="icon-[fa-solid--input-text]"></i>
            <input type="text" class="grow" placeholder="Titulo Boton" formControlName="buttonTitle"/>
          </div>
          </label>
          @if(formButtons.controls['buttonTitle'].errors && formButtons.controls['buttonTitle'].touched) {
           <div class="alert alert-error flex my-2">
-            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="icon-[ph--x-circle]"></i>
             @if(formButtons.controls['buttonTitle'].errors['required']) {
               El titulo del boton es obligatorio
             }
@@ -205,7 +205,7 @@
         </label>
         @if(formButtons.controls['buttonColor'].errors && formButtons.controls['buttonColor'].touched) {
           <div class="alert alert-error flex my-2">
-            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="icon-[ph--x-circle]"></i>
             @if(formButtons.controls['buttonColor'].errors['required']) {
               El color del boton es obligatorio
             }
@@ -216,14 +216,14 @@
           <span class="label-text">Introduce el enlace del boton</span>
           
           <div class="input input-bordered flex items-center gap-2 my-2">
-           <i class="fa-solid fa-link"></i>
+           <i class="icon-[fa-solid--link]"></i>
            <input type="text" class="grow" placeholder="https://www.google.es/" formControlName="buttonUrl"/>
          </div>
          </label>
 
          @if(formButtons.controls['buttonUrl'].errors && formButtons.controls['buttonUrl'].touched) {
           <div class="alert alert-error flex my-2">
-            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="icon-[ph--x-circle]"></i>
             @if(formButtons.controls['buttonUrl'].errors['required']) {
               El enlace del boton es obligatorio
             }
@@ -250,7 +250,7 @@
     }
     @else {
       <div class="card bg-base-200 p-4 mb-5">
-        <i class="fa-regular fa-spinner text-2xl animate-spin"></i>
+        <i class="icon-[fa-regular--spinner] text-2xl animate-spin"></i>
         <span class="text-lg">Cargando...</span>
       </div>
     }

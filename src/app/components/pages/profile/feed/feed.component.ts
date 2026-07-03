@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllPublicationsPaginated, Publication } from '@interfaces/publications.interface';
 import { ProfileDataService } from '@services/data/profile-data.service';
 import { PublicationsService } from '@services/publications.service';
@@ -22,12 +23,13 @@ export class FeedComponent implements OnInit{
   totalPages = 0
   constructor(
     private profileDataService: ProfileDataService,
-    private publicationsService: PublicationsService
+    private publicationsService: PublicationsService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
     console.log("AQUI ENTRO")
-    this.profileDataService.currentUsername.subscribe(username => {
+    this.profileDataService.currentUsername.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(username => {
       console.log("AQUI TAMBIEN",username)
       if (username) {
         this.username = username
@@ -37,7 +39,7 @@ export class FeedComponent implements OnInit{
   }
 
   private getMyPublications() {
-    this.publicationsService.getUserPublications(this.username, this.page, this.limit).subscribe({
+    this.publicationsService.getUserPublications(this.username, this.page, this.limit).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (publications: AllPublicationsPaginated) => {
         this.publications = [...this.publications, ...publications.body]
         this.nextPage = publications.pagination.nextPage

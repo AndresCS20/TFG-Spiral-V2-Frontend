@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllPublicationsPaginated, Publication } from '@interfaces/publications.interface';
 import { User } from '@interfaces/users.interface';
 import { ExploreDataService } from '@services/data/explore-data.service';
@@ -22,10 +23,10 @@ export class GlobalPostsComponent implements OnInit{
   page = 1
   nextPage : number | null = null
   totalPages = 0
-  constructor(private publicationsService: PublicationsService, private storageService:StorageService) { }
+  constructor(private publicationsService: PublicationsService, private storageService:StorageService, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
-    this.currentUser = this.storageService.getUser()
+    this.currentUser = this.storageService.getUser()! as unknown as User
     if(this.currentUser) {
       this.getGlobalPublications()
     }
@@ -38,7 +39,7 @@ export class GlobalPostsComponent implements OnInit{
   }
 
   private getGlobalPublications() {
-    this.publicationsService.getGlobalPublications(this.currentUser.username, this.page, this.limit).subscribe({
+    this.publicationsService.getGlobalPublications(this.currentUser.username, this.page, this.limit).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (publications: AllPublicationsPaginated) => {
         this.globalPublications = [...this.globalPublications, ...publications.body]
         this.nextPage = publications.pagination.nextPage

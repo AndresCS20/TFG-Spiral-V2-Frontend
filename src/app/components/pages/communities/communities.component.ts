@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommunityBoxComponent } from '../../shared/elements/community-box/community-box.component';
 import { PageTitleComponent } from '../../shared/elements/page-title/page-title.component';
 import { CommunitiesService } from '@services/communities.service';
@@ -18,13 +19,13 @@ export class CommunitiesComponent implements OnInit{
   communities!: Community[]; 
   communitiesLenght!: number;
 
-  constructor(private _CommunitiesService: CommunitiesService) { }
+  constructor(private _CommunitiesService: CommunitiesService, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
     this.getCommunities();
   }
 private getCommunities() {
- this._CommunitiesService.getCommunities().subscribe({
+ this._CommunitiesService.getCommunities().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
     next: (data: AllCommunities) => {
       this.communitiesLenght = data.body.length;
       this.communities = data.body;

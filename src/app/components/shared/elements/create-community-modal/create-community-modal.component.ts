@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Community, CommunityCreate } from '@interfaces/communities.interface';
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class CreateCommunityModalComponent implements OnInit{
 
-  constructor(private router: Router,private communityService: CommunitiesService, private formBuilder: FormBuilder, private storageService: StorageService) { }
+  constructor(private router: Router,private communityService: CommunitiesService, private formBuilder: FormBuilder, private storageService: StorageService, private destroyRef: DestroyRef) { }
   currentUser !: User
   createCommunityForm = this.formBuilder.group({
     shortname: ['', [Validators.required, this.textNumberUnderscoreDashValidator(),Validators.minLength(3), Validators.maxLength(20)]], 
@@ -28,7 +29,7 @@ export class CreateCommunityModalComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.currentUser = this.storageService.getUser()
+    this.currentUser = this.storageService.getUser()! as unknown as User
   }
 
   onSubmit() :void {
@@ -44,7 +45,7 @@ export class CreateCommunityModalComponent implements OnInit{
     community.shortname = community.shortname.toLowerCase()
     let communityCreate : CommunityCreate = {...community, owner: this.currentUser._id}
     console.log(communityCreate)
-    this.communityService.createCommunity(communityCreate).subscribe(
+    this.communityService.createCommunity(communityCreate).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
       (data) => {
         document.getElementById('close-create-community-modal')?.click();
 

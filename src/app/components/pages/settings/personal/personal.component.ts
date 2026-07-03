@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { OneUser, User } from '@interfaces/users.interface';
 import { AuthService } from '@services/auth.service';
@@ -19,7 +20,7 @@ export class PersonalComponent implements OnInit{
   currentUser !: User
   currentDate = this.getEighteenYearsAgo();
 
-  constructor (private formBuilder: FormBuilder, private authService: AuthService, private storageService: StorageService, private userService: UserService) { }
+  constructor (private formBuilder: FormBuilder, private authService: AuthService, private storageService: StorageService, private userService: UserService, private destroyRef: DestroyRef) { }
 
   personalSettingsForm = this.formBuilder.group({
     fullname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -28,7 +29,7 @@ export class PersonalComponent implements OnInit{
   });
 
   ngOnInit(): void {
-    this.currentUser = this.storageService.getUser();
+    this.currentUser = this.storageService.getUser()! as unknown as User;
     if(this.currentUser){
       this.getUser(this.currentUser.username);
     }
@@ -47,7 +48,7 @@ export class PersonalComponent implements OnInit{
   }
 
   updateUser(fullname:string, email:string, birth_date:Date): void {
-    this.userService.updateUser(this.currentUser.username, {fullname: fullname, email: email, birth_date: birth_date}).subscribe({
+    this.userService.updateUser(this.currentUser.username, {fullname: fullname, email: email, birth_date: birth_date}).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         Swal.fire({
           icon: 'success',
@@ -68,7 +69,7 @@ export class PersonalComponent implements OnInit{
     })
   }
   private getUser(username: string): void {
-    this.userService.getOneUser(username).subscribe(
+    this.userService.getOneUser(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
       (data: OneUser) => {
         this.complectUser = data.body;
         if(this.complectUser){

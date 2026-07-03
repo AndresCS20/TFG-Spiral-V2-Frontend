@@ -1,11 +1,11 @@
 <div class="container max-w-4xl mx-auto mt-4">
- <h1 class="text-2xl font-semibold leading-tight my-5"><i class="fa-regular fa-user"></i>&nbsp;Ajustes del Perfil</h1>
+ <h1 class="text-2xl font-semibold leading-tight my-5"><i class="icon-[ph--user]"></i>&nbsp;Ajustes del Perfil</h1>
 @if(!isLoading){
 
 
  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="card bg-base-200 p-4 mb-5">
-  <h2 class="card-title"><i class="fa-solid fa-head-side"></i>&nbsp;Foto de perfil</h2>
+  <h2 class="card-title"><i class="icon-[fa-solid--head-side]"></i>&nbsp;Foto de perfil</h2>
   <div class="block md:flex items-center gap-3 my-2">
    @if(complectUser.profile_picture){
     <app-avatar-frame [profile_picture]="complectUser.profile_picture" profile_size="large" [frame_name]="complectUser.profile_picture_frame"/>
@@ -19,12 +19,12 @@
     <span class="label-text">Introduce el enlace de una imagen</span>
     
     <div class="input input-bordered flex items-center gap-2 my-2">
-     <i class="fa-regular fa-head-side"></i>
+     <i class="icon-[fa-regular--head-side]"></i>
      <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="profile_picture"/>
    </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
    </label>
   </div>
-  <div class="divider my-0.5"><i class="fa-regular fa-frame"></i> Marco del Avatar</div>
+  <div class="divider my-0.5"><i class="icon-[fa-regular--frame]"></i> Marco del Avatar</div>
   <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mt-2">
 
 
@@ -62,7 +62,7 @@
   </div>
 
   <div class="card bg-base-200 p-4 my-5">
-   <h2 class="card-title"><i class="fa-regular fa-image"></i> Foto de portada</h2>
+   <h2 class="card-title"><i class="icon-[fa-regular--image]"></i> Foto de portada</h2>
    <div class="block md:flex items-center gap-3 my-2">
     @if(complectUser.banner_picture){
       <div class="w-full md:w-64 h-24 rounded-lg" 
@@ -75,7 +75,7 @@
      <span class="label-text">Introduce el enlace de una imagen</span>
      
      <div class="input input-bordered flex items-center gap-2 my-2">
-      <i class="fa-solid fa-image"></i>
+      <i class="icon-[fa-solid--image]"></i>
       <input type="text" class="grow" placeholder="https://i.imgur.com/wX5XykY.png?1" formControlName="banner_picture"/>
     </div><span class="label-text-alt">Formatos permitidos JPG, JPEG, PNG y GIF</span>
     </label>
@@ -85,19 +85,19 @@
 
    <!-- Ubicacion -->
    <div class="card bg-base-200 p-4 my-5">
-    <h2 class="card-title"><i class="fa-regular fa-map-marker"></i> Ubicación</h2>
+    <h2 class="card-title"><i class="icon-[fa-regular--map-marker]"></i> Ubicación</h2>
     <label class="form-control w-full my-2">
      <span class="label-text">Introduce tu ubicación</span>
      
      <div class="input input-bordered flex items-center gap-2 my-2">
-      <i class="fa-solid fa-map"></i>
+      <i class="icon-[fa-solid--map]"></i>
       <input type="text" class="grow" placeholder="Madrid, Españita" formControlName="ubication"/>
     </div>
     </label>
    </div>
 
    <div class="card bg-base-200 p-4 my-5">
-    <h2 class="card-title"><i class="fa-regular fa-book-user"></i> Biografía</h2>
+    <h2 class="card-title"><i class="icon-[fa-regular--book-user]"></i> Biografía</h2>
     <label class="form-control">
      <div class="label">
        <span class="label-text">Introduce tu biografia</span>
@@ -108,15 +108,15 @@
 
    <!-- Intereses -->
   <div class="card bg-base-200 p-5 mb-5">
-   <h2 class="card-title"><i class="fa-regular fa-gamepad"></i> Intereses / Hobbies</h2>
+   <h2 class="card-title"><i class="icon-[fa-regular--gamepad]"></i> Intereses / Hobbies</h2>
    <div class="form-control w-full my-2">
     <label class="label-text">Introduce tus intereses / hobbies</label>
     <div class="flex gap-3 my-2">
     <div class="input input-bordered flex flex-1 items-center gap-2">
-     <i class="fa-solid fa-gamepad"></i>
+     <i class="icon-[fa-solid--gamepad]"></i>
      <input type="text" class="grow" placeholder="Hacer ejercicio, jugar videojuegos, leer" [ngModelOptions]="{standalone: true}" [(ngModel)]="interestInput"/>
     </div>
-    <button class="btn btn-primary" type="button" (click)="addInterest()"><i class="fa-regular fa-plus"></i>&nbsp;Añadir</button>
+    <button class="btn btn-primary" type="button" (click)="addInterest()"><i class="icon-[fa-regular--plus]"></i>&nbsp;Añadir</button>
    </div>
  
    <div class="flex gap-3 my-2">
@@ -125,7 +125,7 @@
       @for (interest of interests(); track $index) {
         <li class="join m-1">
           <span class="badge join-item badge-lg badge-secondary">{{interest}}</span>
-          <span class="btn join-item btn-xs btn-neutral" (click)="removeInterest($index)"><i class="fa-regular fa-bucket text-xs"></i></span>
+          <span class="btn join-item btn-xs btn-neutral" (click)="removeInterest($index)"><i class="icon-[fa-regular--bucket] text-xs"></i></span>
         </li>
       }
     </ul>
@@ -140,7 +140,7 @@
 
    <!-- Redes Sociales -->
    <div class="card bg-base-200 p-4 my-5">
-    <h2 class="card-title"><i class="fa-regular fa-share-nodes"></i> Redes Sociales</h2>
+    <h2 class="card-title"><i class="icon-[ph--share-network]"></i> Redes Sociales</h2>
     <label class="form-control w-full my-2">
      <div class="label">
        <span class="label-text">Introduce tus redes</span>
@@ -151,15 +151,15 @@
 
 <!-- Boton de guardar -->
    <div class="card bg-base-200 p-4 my-5 flex justify-center">
-    <button class="btn btn-primary" [disabled]="!profileForm.valid"><i class="fa-solid fa-floppy-disk"></i> Guardar ajustes del perfil</button>
-    <!-- <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp;Guardar</button> -->
+    <button class="btn btn-primary" [disabled]="!profileForm.valid"><i class="icon-[fa-solid--floppy-disk]"></i> Guardar ajustes del perfil</button>
+    <!-- <button class="btn btn-primary"><i class="icon-[fa-regular--floppy-disk]"></i>&nbsp;Guardar</button> -->
    </div>
 
  </form>
 }
 @else {
   <div class="card bg-base-200 p-4 my-5 flex justify-center">
-    <i class="fa-regular fa-spinner text-2xl animate-spin"></i>
+    <i class="icon-[fa-regular--spinner] text-2xl animate-spin"></i>
   </div>
 }
  </div>

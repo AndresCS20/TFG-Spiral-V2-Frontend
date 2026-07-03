@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
@@ -29,7 +30,8 @@ export class AppComponent {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private destroyRef: DestroyRef
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +40,9 @@ export class AppComponent {
     this.changeTheme(this.storedTheme? this.storedTheme : 'dark');
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
-      console.log(user)
-
-      this.username = user.username;
+      if (user) {
+        this.username = user.username;
+      }
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
@@ -54,7 +56,7 @@ export class AppComponent {
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
+    this.authService.logout().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: res => {
         console.log(res);
         this.storageService.clean();

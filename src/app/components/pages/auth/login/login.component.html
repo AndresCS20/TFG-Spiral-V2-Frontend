@@ -27,7 +27,7 @@
                   <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nombre de usuario</span>
                   <label class="input input-bordered flex items-center gap-2"
                   [ngClass]="{ 'input-error': f.submitted && username.errors }">
-                    <i class="fa-regular fa-user"></i>
+                    <i class="icon-[ph--user]"></i>
                     <input
                     type="text"
                     name="username"
@@ -40,7 +40,7 @@
                   </label>
                   @if (username.errors && f.submitted) {
                     <div class="alert alert-warning">
-                      <i class="fa-regular fa-circle-exclamation"></i>
+                      <i class="icon-[fa-regular--circle-exclamation]"></i>
                       Nombre de usuario es requerido!
                     </div>
                   }
@@ -49,7 +49,7 @@
                   <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Contraseña</span>
                   <label class="input input-bordered flex items-center gap-2"
                   [ngClass]="{ 'input-error': f.submitted && password.errors }">
-                    <i class="fa-regular fa-lock"></i>
+                    <i class="icon-[fa-regular--lock]"></i>
                   <input
                     type="password"
                     class="grow"
@@ -63,7 +63,7 @@
                   /></label>
                   @if (password.errors && f.submitted) {
                   <div class="alert alert-warning">
-                    <i class="fa-regular fa-circle-exclamation"></i>
+                    <i class="icon-[fa-regular--circle-exclamation]"></i>
                     @if (password.errors['required']) {
                     <span>La contraseña es requerida</span>
                     }
@@ -74,12 +74,12 @@
                   }
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-primary btn-block"><i class="fa-regular fa-person-to-portal"></i> Iniciar Sesión</button>
+                  <button class="btn btn-primary btn-block"><i class="icon-[ph--sign-in]"></i> Iniciar Sesión</button>
                 </div>
                 <div class="form-group">
                   @if (f.submitted && isLoginFailed) {
                   <div class="alert alert-error">
-                      <i class="fa-regular fa-circle-xmark"></i>
+                      <i class="icon-[ph--x-circle]"></i>
                       <span>
                         <h3 class="font-bold">Fallo en el inicio de sesión</h3>
                         <div class="text-xs">{{ errorMessage }}</div>
@@ -99,11 +99,11 @@
                 <div class="flex flex-col gap-4 text-sm">
                     <p>¿Todavia no tienes una cuenta? ¿A que esperas?&nbsp; 
                       <a routerLink="/register" class="btn btn-outline btn-accent" >
-                     <i class="fa-regular fa-signature"></i> Registrate
+                     <i class="icon-[ph--pen]"></i> Registrate
                     </a></p>
                     <p>¿Olvidate tu contraseña?&nbsp;
                     <a href="#" class="btn btn-sm btn-ghost" >
-                      <i class="fa-regular fa-backward"></i>Recupera tu contraseña
+                      <i class="icon-[fa-regular--backward]"></i>Recupera tu contraseña
                       </a>
                       </p>
                 </div>

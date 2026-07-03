@@ -1,12 +1,10 @@
-
-<div class="avatarf "[class]="avatarBodyClass">
-    <div class="avatar-image w-full h-full bg-base-100 bg-cover bg-center" style="background-image: url({{profile_picture || default_avatar}})"></div>
-    <!-- <img [src]="profile_picture || default_avatar" alt="Avatar" class="avatar-image"> -->
-    
-    @if (frame_name != "none") {
-        <img [src]="selectedFrame?.attributes.image" alt="" 
-        class="avatar-frame absolute"
-        [class]="avatarClass">
-    }
-
+<div class="avatarf" [class]="avatarBodyClass">
+  <img [src]="profile_picture || default_avatar" alt="Avatar de usuario" class="avatar-image w-full h-full bg-base-100">
+  
+  @if (frame_name != "none") {
+    <img [src]="selectedFrame?.attributes.image"
+      alt="Marco de avatar"
+      class="avatar-frame absolute"
+      [class]="avatarClass">
+  }
 </div>

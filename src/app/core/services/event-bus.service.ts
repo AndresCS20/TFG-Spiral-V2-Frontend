@@ -13,7 +13,7 @@ export class EventBusService {
     this.subject$.next(event);
   }
 
-  on(eventName: string, action: any): Subscription {
+  on(eventName: string, action: (value: unknown) => void): Subscription {
     return this.subject$.pipe(
       filter((e: EventData) => e.name === eventName),
       map((e: EventData) => e["value"])).subscribe(action);

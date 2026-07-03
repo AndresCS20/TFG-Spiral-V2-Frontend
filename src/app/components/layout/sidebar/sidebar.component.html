@@ -11,10 +11,10 @@
   </div>
   <button
     class="closed-btn btn btn-circle btn-ghost mx-1"
-    (click)="collapseSidebar()"
+    (click)="toggleSidebar()"
     type="button"
   >
-    <i class="fa-regular fa-circle-xmark text-lg"></i>
+    <i class="icon-[ph--x-circle] text-lg"></i>
   </button>
 </div>
 <div class="sidebar-links-wrapper overflow-y-scroll menu-bar">
@@ -27,7 +27,7 @@
         routerLink="/login" routerLinkActive="active"
         title="Iniciar Sesión"
         >
-          <i class="fa-regular fa-person-to-portal icon text-lg"></i>
+          <i class="icon-[ph--sign-in] icon text-lg"></i>
           <span class="hide">Iniciar Sesión</span>
         </a>
       </li>
@@ -37,7 +37,7 @@
         routerLink="/register" routerLinkActive="active"
         title="Registrate"
         >
-          <i class="fa-regular fa-signature text-lg"></i>
+          <i class="icon-[ph--pen] text-lg"></i>
           <span class="hide">Registrate</span>
         </a>
       </li>
@@ -50,7 +50,7 @@
           [routerLink]="['/home']" [routerLinkActive]="['active']"
           title="Inicio"
         >
-          <i class="fa-regular fa-home text-lg"></i>
+          <i class="icon-[ph--house] text-lg"></i>
           <span class="hide">Inicio</span>
         </a>
       </li>
@@ -60,7 +60,7 @@
           [routerLink]="['/explore']" [routerLinkActive]="['active']"
           title="Explorar"
           >
-          <i class="fa-regular fa-planet-moon text-lg"></i>
+          <i class="icon-[ph--planet] text-lg"></i>
           <span class="hide">Explorar</span>
         </a>
       </li>
@@ -70,7 +70,7 @@
         [routerLink]="['/communities']" [routerLinkActive]="['active']"
         title="Comunidades"
         >
-          <i class="fa-regular fa-people-group text-lg"></i>
+          <i class="icon-[ph--users-three] text-lg"></i>
           <span class="hide">Comunidades</span>
         </a>
       </li>
@@ -81,7 +81,7 @@
         title="Mensajes">
           <div class="indicator">
             <span class="indicator-item badge badge-secondary badge-xs text-xs">99+</span>
-            <i class="fa-regular fa-message-smile text-lg"></i>
+            <i class="icon-[ph--chat-circle] text-lg"></i>
           </div>
           <span class="hide">Mensajes</span>
         </a>
@@ -91,7 +91,7 @@
         class="tooltip flex text-left" 
         routerLink="/marketplace" routerLinkActive="active"
         >
-          <i class="fa-regular fa-store text-lg"></i>
+          <i class="icon-[ph--storefront] text-lg"></i>
           <span class="hide">Mercado</span>
         </a>
       </li>
@@ -100,7 +100,7 @@
         class="tooltip flex text-left" 
         routerLink="/bookmark" routerLinkActive="active"
         title="Guardado">
-          <i class="fa-regular fa-bookmark text-lg"></i>
+          <i class="icon-[ph--bookmark] text-lg"></i>
           <span class="hide">Guardado</span>
         </a>
       </li>
@@ -109,7 +109,7 @@
         class="tooltip flex text-left" 
         routerLink="/devzone" routerLinkActive="active"
         title="DevZone">
-          <i class="fa-regular fa-flask text-lg"></i>
+          <i class="icon-[ph--flask] text-lg"></i>
           <span class="hide">DevZone</span>
         </a>
       </li>
@@ -121,13 +121,13 @@
 </div>
 <div class="sidebar__profile">
   <button class="btn btn-accent switch px-5 flex w-full" onclick="my_modal_2.showModal()">
-    <i class="fa-regular fa-brush text-xl"></i>
+    <i class="icon-[ph--paint-brush] text-xl"></i>
     <span class="hide">Personalización</span>
   </button>
   <dialog id="my_modal_2" class="modal">
     <div class="modal-box w-10/12 md:w-6/12 max-w-5xl">
       <h3 class="font-bold text-lg my-2">
-        <i class="fa-solid fa-paint-roller"></i> Temas
+        <i class="icon-[ph--paint-roller-fill]"></i> Temas
       </h3>
       <form [formGroup]="themeForm">
         <div
@@ -219,7 +219,7 @@
           <a
             href="#"
             class="block active py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-home px-0 md:px-3"></i>
+            <i class="icon-[ph--house] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
               Inicio</span>
           </a>
@@ -246,9 +246,9 @@
           <a
             tabindex="0"
             class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-badge-sheriff px-0 md:px-3"></i>
+            <i class="icon-[ph--shield-star] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">Panel Admin</span>
-            <i class="fa-regular fa-down px-0 md:px-3"></i>
+            <i class="icon-[ph--caret-down] px-0 md:px-3"></i>
           </a>
           <ul
             tabindex="0"
@@ -261,7 +261,7 @@
           <a
             href="#"
             class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-bell px-0 md:px-3"></i>
+            <i class="icon-[ph--bell] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
               Notificaciones</span>
           </a>
@@ -306,10 +306,10 @@
   </div>
   <button
     class="closed-btn btn btn-circle btn-ghost mx-1"
-    (click)="collapseSidebar()"
+    (click)="toggleSidebar()"
     type="button"
   >
-    <i class="fa-regular fa-circle-xmark text-lg"></i>
+    <i class="icon-[ph--x-circle] text-lg"></i>
   </button>
 </div>
 <div class="sidebar-links-wrapper overflow-y-scroll menu-bar">
@@ -322,7 +322,7 @@
         routerLink="/login" routerLinkActive="active"
         title="Iniciar Sesión"
         >
-          <i class="fa-regular fa-person-to-portal icon text-lg"></i>
+          <i class="icon-[ph--sign-in] icon text-lg"></i>
           <span class="hide">Iniciar Sesión</span>
         </a>
       </li>
@@ -332,7 +332,7 @@
         routerLink="/register" routerLinkActive="active"
         title="Registrate"
         >
-          <i class="fa-regular fa-signature text-lg"></i>
+          <i class="icon-[ph--pen] text-lg"></i>
           <span class="hide">Registrate</span>
         </a>
       </li>
@@ -345,7 +345,7 @@
           [routerLink]="['/home']" [routerLinkActive]="['active']"
           title="Inicio"
         >
-          <i class="fa-regular fa-home text-lg"></i>
+          <i class="icon-[ph--house] text-lg"></i>
           <span class="hide">Inicio</span>
         </a>
       </li>
@@ -355,7 +355,7 @@
           [routerLink]="['/explore']" [routerLinkActive]="['active']"
           title="Explorar"
           >
-          <i class="fa-regular fa-planet-moon text-lg"></i>
+          <i class="icon-[ph--planet] text-lg"></i>
           <span class="hide">Explorar</span>
         </a>
       </li>
@@ -365,7 +365,7 @@
         [routerLink]="['/communities']" [routerLinkActive]="['active']"
         title="Comunidades"
         >
-          <i class="fa-regular fa-people-group text-lg"></i>
+          <i class="icon-[ph--users-three] text-lg"></i>
           <span class="hide">Comunidades</span>
         </a>
       </li>
@@ -376,7 +376,7 @@
         title="Mensajes">
           <div class="indicator">
             <span class="indicator-item badge badge-secondary badge-xs text-xs z-0">99+</span>
-            <i class="fa-regular fa-message-smile text-lg"></i>
+            <i class="icon-[ph--chat-circle] text-lg"></i>
           </div>
           <span class="hide">Mensajes</span>
         </a>
@@ -386,7 +386,7 @@
         class="tooltip flex text-left" 
         routerLink="/marketplace" routerLinkActive="active"
         >
-          <i class="fa-regular fa-store text-lg"></i>
+          <i class="icon-[ph--storefront] text-lg"></i>
           <span class="hide">Mercado</span>
         </a>
       </li>
@@ -395,7 +395,7 @@
         class="tooltip flex text-left" 
         routerLink="/bookmark" routerLinkActive="active"
         title="Guardado">
-          <i class="fa-regular fa-bookmark text-lg"></i>
+          <i class="icon-[ph--bookmark] text-lg"></i>
           <span class="hide">Guardado</span>
         </a>
       </li>
@@ -404,7 +404,7 @@
         class="tooltip flex text-left" 
         routerLink="/devzone" routerLinkActive="active"
         title="DevZone">
-          <i class="fa-regular fa-flask text-lg"></i>
+          <i class="icon-[ph--flask] text-lg"></i>
           <span class="hide">DevZone</span>
         </a>
       </li>
@@ -421,7 +421,7 @@
       <div class="drawer-content">
         
         <label for="my-drawer" class="btn btn-primary drawer-button">
-          <i class="fa-regular fa-brush text-xl"></i>
+          <i class="icon-[ph--paint-brush] text-xl"></i>
           <span class="hide">Personalización</span>
         </label>
       </div> 
@@ -517,7 +517,7 @@
           <a
             href="#"
             class="block active py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-home px-0 md:px-3"></i>
+            <i class="icon-[ph--house] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
               Inicio</span>
           </a>
@@ -544,9 +544,9 @@
           <a
             tabindex="0"
             class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-badge-sheriff px-0 md:px-3"></i>
+            <i class="icon-[ph--shield-star] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">Panel Admin</span>
-            <i class="fa-regular fa-down px-0 md:px-3"></i>
+            <i class="icon-[ph--caret-down] px-0 md:px-3"></i>
           </a>
           <ul
             tabindex="0"
@@ -559,7 +559,7 @@
           <a
             href="#"
             class="block text-center md:text-left py-1 md:py-3 pl-1 align-middle color-logo">
-            <i class="fa-regular fa-bell px-0 md:px-3"></i>
+            <i class="icon-[ph--bell] px-0 md:px-3"></i>
             <span class="pb-1 md:pb-0 text-xs md:text-base block md:inline-block">
               Notificaciones</span>
           </a>

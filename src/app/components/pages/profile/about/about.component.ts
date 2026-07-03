@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ProfileDataService } from '@services/data/profile-data.service';
@@ -12,11 +13,11 @@ import { User } from '@interfaces/users.interface';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private router: Router,private profileDataService: ProfileDataService) {}
+  constructor(private router: Router,private profileDataService: ProfileDataService, private destroyRef: DestroyRef) {}
   userProfile!: User;
   isLoading = true;
   ngOnInit(): void {
-    this.profileDataService.currentUserProfile.subscribe(user => {
+    this.profileDataService.currentUserProfile.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(user => {
       if (user) {
         this.userProfile = user;
         console.log("Usuario",this.userProfile);

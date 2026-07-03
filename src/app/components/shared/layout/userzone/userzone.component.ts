@@ -18,7 +18,7 @@ export class UserzoneComponent implements OnInit{
   profileUrl = '/profile/';
   constructor(private storageService: StorageService){}
   ngOnInit(): void {
-    this.userStorage = this.storageService.getUser();
+    this.userStorage = this.storageService.getUser()! as unknown as User;
     if(this.userStorage){
       // this.user = this.userStorage;
       this.isLoading = false;

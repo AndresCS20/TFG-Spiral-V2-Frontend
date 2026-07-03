@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from '@interfaces/users.interface';
 import { AuthService } from '@services/auth.service';
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class SecurityComponent implements OnInit{
   user !: User
-  constructor (private formBuilder: FormBuilder, private authService: AuthService, private storageService: StorageService, private userService: UserService) { }
+  constructor (private formBuilder: FormBuilder, private authService: AuthService, private storageService: StorageService, private userService: UserService, private destroyRef: DestroyRef) { }
   checkPasswords: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('newPassword');
     const confirmPassword = control.get('confirmPassword');
@@ -30,7 +31,7 @@ export class SecurityComponent implements OnInit{
   },{ validators: this.checkPasswords, updateOn: 'blur' });
 
   ngOnInit(): void {
-    this.user = this.storageService.getUser();
+    this.user = this.storageService.getUser()! as unknown as User;
   }
 
   onSubmit(): void {
@@ -63,7 +64,7 @@ export class SecurityComponent implements OnInit{
 
   updatePassword(username: string, newPassword: string): void {
   
-    this.userService.updateUser(username, { password: newPassword }).subscribe({
+    this.userService.updateUser(username, { password: newPassword }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         Swal.fire({
           icon: 'success',
@@ -91,7 +92,7 @@ export class SecurityComponent implements OnInit{
   
   checkPasswordBack(username: string, password: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.authService.checkPassword(username, password).subscribe({
+      this.authService.checkPassword(username, password).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => {
           resolve(true);
         },

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { UserzoneComponent } from '../../shared/layout/userzone/userzone.component';
 import { StorageService } from '@services/storage.service';
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit{
     private storageService: StorageService, 
     private authService: AuthService ,
     private eventBusService: EventBusService, 
-    private userService: UserService,  
+    private userService: UserService,
+    private destroyRef: DestroyRef,  
   ) { }
   screenfull = false;
   isLoggedIn = false;
@@ -37,7 +39,7 @@ export class HeaderComponent implements OnInit{
     this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      this.userStorage = this.storageService.getUser();
+      this.userStorage = this.storageService.getUser()! as unknown as User;
     }
 
     if(this.userStorage){
@@ -58,7 +60,7 @@ export class HeaderComponent implements OnInit{
   }
 
   private getUserInfo (username:string){
-    this.userService.getOneUser(username).subscribe({
+    this.userService.getOneUser(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
     next: (user: OneUser) => {
       this.userInfo = user.body;
       console.log("oneuser",this.userInfo)

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FollowInfo, FollowList, FollowUser } from '@interfaces/follows.interface';
 import { User } from '@interfaces/users.interface';
@@ -18,14 +19,14 @@ export class FollowsComponent implements OnInit{
   follows!: FollowUser[];
   username!: string;
 
-  constructor(private router: Router, private route: ActivatedRoute,private _userService: UserService, private _profileDataService: ProfileDataService) {
+  constructor(private router: Router, private route: ActivatedRoute,private _userService: UserService, private _profileDataService: ProfileDataService, private destroyRef: DestroyRef) {
     this.urlSegment = this.getLastSegmentOfUrl();
     console.log(this.urlSegment);
     this.username = this.route.snapshot.paramMap.get('username') || '';
   }
 
   ngOnInit(): void {
-    this._profileDataService.currentUsername.subscribe(username => {
+    this._profileDataService.currentUsername.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(username => {
       if (username) {
         this.username = username;
       }
@@ -40,7 +41,7 @@ export class FollowsComponent implements OnInit{
   
   private getFollows(username: string, followType: string): void {
 
-    this._userService.getFollows(username, followType).subscribe({
+    this._userService.getFollows(username, followType).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
     // this._userService.getFollows(username, followType).subscribe((data) => {
       next: (data: FollowList) => {
         this.follows = data.body.map(followInfo => followInfo.user);

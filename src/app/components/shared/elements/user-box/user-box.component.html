@@ -9,7 +9,7 @@
      <h4 class="text-xl font-bold">
     {{user.fullname}}
      </h4>
-     <p class="text-base font-normal"><i class="fa-regular fa-at mr-1 text-sm"></i>{{user.username}}</p>
+     <p class="text-base font-normal"><i class="icon-[ph--at] mr-1 text-sm"></i>{{user.username}}</p>
  </div>  @if(communityMemberDate){
     <p class="text-sm font-bold">Fecha de unión:</p>
     <p class="text-sm font-normal">{{communityMemberDate | date : "dd/MM/yyyy"}}</p>
@@ -29,5 +29,5 @@
      </div>
  </div>}
  <div class="bg-base-200 w-full h-fit p-3 flex items-center justify-center rounded-xl">
-    <button routerLink="/profile/{{user.username}}/feed"><i class="fa-regular fa-user"></i>Ver Perfil</button>    
+    <button routerLink="/profile/{{user.username}}/feed"><i class="icon-[ph--user]"></i>Ver Perfil</button>    
 </div>

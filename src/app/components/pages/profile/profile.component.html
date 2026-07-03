@@ -37,22 +37,22 @@
         {
           <h3 class="font-manrope font-bold text-4xl mb-1">{{paramUser().fullname}}</h3>
           <p class="font-normal text-base leading-7">
-            <i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser().username}}
+            <i class="icon-[ph--at] mr-1 text-sm"></i>{{paramUser().username}}
           </p>
         } @else {
-          <h3 class="font-manrope font-bold text-4xl mb-1"><i class="fa-regular fa-at mr-1 text-sm"></i>{{paramUser().username}}</h3>
+          <h3 class="font-manrope font-bold text-4xl mb-1"><i class="icon-[ph--at] mr-1 text-sm"></i>{{paramUser().username}}</h3>
         }     
 
       </div>
       <div class="flex items-center gap-4">
         <span
           class="py-3.5 px-5 badge badge-outline badge-primary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-right"></i>&nbsp;{{paramUser().followers?.length || 0}}
+          ><i class="icon-[fa-regular--person-walking-arrow-right]"></i>&nbsp;{{paramUser().followers?.length || 0}}
           Seguidores</span
         >
         <span
           class="py-3.5 px-5 badge badge-outline badge-secondary font-semibold text-base leading-7 shadow-sm"
-          ><i class="fa-regular fa-person-walking-arrow-loop-left"></i>&nbsp;{{paramUser().following?.length || 0}}
+          ><i class="icon-[fa-regular--person-walking-arrow-loop-left]"></i>&nbsp;{{paramUser().following?.length || 0}}
           Seguidos</span
         >
       </div>
@@ -63,7 +63,7 @@
     @if(paramUser().username === currentUser.username) {
       <div class="flex items-center gap-4">
         <button class="py-3.5 px-5 btn btn-primary" routerLink="/settings/profile">
-          <i class="fa-regular fa-user-pen"></i> Editar Perfil
+          <i class="icon-[fa-regular--user-pen]"></i> Editar Perfil
         </button>
       </div> 
        }
@@ -72,11 +72,11 @@
         <div class="flex items-center gap-4">
         @if (!isFollowingUser) {
           <button class="py-3.5 px-5 btn btn-primary" (click)="followUser()">
-            <i class="fa-regular fa-user-check"></i> Seguir
+            <i class="icon-[fa-regular--user-check]"></i> Seguir
           </button>
         }@else {
           <button class="py-3.5 px-5 btn btn-error" (click)="unFollowUser()">
-            <i class="fa-regular fa-user-xmark"></i> Dejar de Seguir
+            <i class="icon-[fa-regular--user-xmark]"></i> Dejar de Seguir
           </button>
         }
         </div>
@@ -87,19 +87,19 @@
         role="tablist"
         class="menu menu-vertical md:menu-horizontal gap-1 w-full md:w-fit"
       >
-      <li class="block lg:hidden"><a routerLink="/profile/{{ username }}/about" routerLinkActive="active"><i class="fa-regular fa-info"></i>&nbsp;Sobre mi</a></li>
+      <li class="block lg:hidden"><a routerLink="/profile/{{ username }}/about" routerLinkActive="active"><i class="icon-[fa-regular--info]"></i>&nbsp;Sobre mi</a></li>
         <li>
           <a
             routerLink="/profile/{{ paramUser().username }}/feed"
             routerLinkActive="active"
-            ><i class="fa-regular fa-rectangle-vertical"></i> Publicaciones</a
+            ><i class="icon-[fa-regular--rectangle-vertical]"></i> Publicaciones</a
           >
         </li>
         <li>
           <a
             routerLink="/profile/{{ paramUser().username }}/media"
             routerLinkActive="active"
-            ><i class="fa-regular fa-rectangle-history-circle-user"></i>
+            ><i class="icon-[fa-regular--rectangle-history-circle-user]"></i>
             Multimedia</a
           >
         </li>
@@ -107,7 +107,7 @@
           <a
             routerLink="/profile/{{ paramUser().username }}/communities"
             routerLinkActive="active"
-            ><i class="fa-regular fa-users"></i> Comunidades</a
+            ><i class="icon-[fa-regular--users]"></i> Comunidades</a
           >
         </li>
         <li>
@@ -122,7 +122,7 @@
           <a
             routerLink="/profile/{{ paramUser().username }}/following"
             routerLinkActive="active"
-            ><i class="fa-regular fa-person-walking-arrow-loop-left"></i> Lista
+            ><i class="icon-[fa-regular--person-walking-arrow-loop-left]"></i> Lista
             de Seguidos</a
           >
         </li>

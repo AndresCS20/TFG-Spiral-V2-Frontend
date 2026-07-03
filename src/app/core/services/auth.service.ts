@@ -3,6 +3,21 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+export interface LoginResponse {
+  _id: string;
+  username: string;
+  fullname: string;
+  email: string;
+  accessToken: string;
+  profile_picture?: string;
+  banner_picture?: string;
+}
+
+export interface AuthStatusResponse {
+  status: string;
+  message?: string;
+}
+
 const AUTH_API = environment.API_URL+'auth/';
 
 const httpOptions = {
@@ -15,8 +30,8 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  checkPassword(username: string, password: string): Observable<any> {
-    return this.http.post(
+  checkPassword(username: string, password: string): Observable<AuthStatusResponse> {
+    return this.http.post<AuthStatusResponse>(
       AUTH_API + 'checkPassword',
       {
         username,
@@ -26,8 +41,8 @@ export class AuthService {
     );
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
       AUTH_API + 'login',
       {
         username,
@@ -37,8 +52,8 @@ export class AuthService {
     );
   }
 
-  register(username: string, email: string, password: string, fullname:string,birth_date: Date): Observable<any> {
-    return this.http.post(
+  register(username: string, email: string, password: string, fullname:string, birth_date: Date): Observable<AuthStatusResponse> {
+    return this.http.post<AuthStatusResponse>(
       AUTH_API + 'register',
       {
         username,
@@ -51,7 +66,7 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+  logout(): Observable<AuthStatusResponse> {
+    return this.http.post<AuthStatusResponse>(AUTH_API + 'signout', { }, httpOptions);
   }
 }

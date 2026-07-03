@@ -1,7 +1,7 @@
 
 <div class="container max-w-4xl mx-auto px-6 md:px-8">
  <h1 class="text-2xl font-semibold leading-tight my-5">
-  <i class="fa-regular fa-memo"></i> Publicacion abierta
+  <i class="icon-[fa-regular--memo]"></i> Publicacion abierta
  </h1>
 
  @if(!isLoading){
@@ -10,14 +10,14 @@
 <app-publication [publication]="publication"></app-publication>
 <div class="card card-bordered shadow min-w-xl h-fit">
  <div class="card-body">
-  <h2 class="card-title"><i class="fa-regular fa-comments"></i>Comentarios</h2>
+  <h2 class="card-title"><i class="icon-[fa-regular--comments]"></i>Comentarios</h2>
 
 
    <div class="form-control">
     <textarea class="textarea textarea-bordered" placeholder="Agrega un comentario" [(ngModel)]="commentBox"></textarea>
    </div>
    <div class="form-control mt-3">
-    <button class="btn btn-primary" (click)="createComment()"><i class="fa-regular fa-paper-plane"></i>&nbsp;Enviar comentario</button>
+    <button class="btn btn-primary" (click)="createComment()"><i class="icon-[fa-regular--paper-plane]"></i>&nbsp;Enviar comentario</button>
    </div>
 
  @if(comments().length > 0){
@@ -39,7 +39,7 @@
        <div class="font-medium">
         <a class="hover:underline text-sm" [routerLink]="'/profile/'+comment.user.username+'/feed'" target="_blank">
          {{comment.user.fullname}} 
-         <span class="text-sm text-secondary leading-none ml-1"><i class="fa-regular fa-at text-sm"></i>{{comment.user.username}}</span>
+         <span class="text-sm text-secondary leading-none ml-1"><i class="icon-[ph--at] text-sm"></i>{{comment.user.username}}</span>
         </a>
        </div>
        <div class="text-md">
@@ -73,7 +73,7 @@
 } @else {
   <div class="card card-bordered shadow min-w-xl h-fit">
    <div class="card-body">
-    <i class="fa-solid fa-spinner"></i> Cargando publicacion
+    <i class="icon-[fa-solid--spinner]"></i> Cargando publicacion
    </div>
   </div>
   

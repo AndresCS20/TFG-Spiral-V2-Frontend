@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { AllPublications, AllPublicationsPaginated, Publication } from '@interfaces/publications.interface';
 import { User } from '@interfaces/users.interface';
@@ -26,7 +27,7 @@ export class FeedComponent implements OnInit {
   nextPage : number | null = null
   totalPages = 0
 
-  constructor(private route: ActivatedRoute, private _publicationsService: PublicationsService, private storageService:StorageService) { }
+  constructor(private route: ActivatedRoute, private _publicationsService: PublicationsService, private storageService:StorageService, private destroyRef: DestroyRef) { }
 
   ngOnInit(): void {
     
@@ -40,7 +41,7 @@ export class FeedComponent implements OnInit {
   }
 
   private getCommunityPublications(shortname: string) {
-    this._publicationsService.getCommunityPublications(shortname, this.page, this.limit).subscribe({
+    this._publicationsService.getCommunityPublications(shortname, this.page, this.limit).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (publications: AllPublicationsPaginated) => {
         this.publications = [...this.publications, ...publications.body]
         this.nextPage = publications.pagination.nextPage

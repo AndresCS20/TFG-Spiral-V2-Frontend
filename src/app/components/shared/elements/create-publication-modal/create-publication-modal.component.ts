@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Input, OnInit, Renderer2, ViewChild, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, FormsModule,FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ImageEntryComponent } from './image-entry/image-entry.component';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
@@ -30,7 +31,8 @@ export class CreatePublicationModalComponent implements OnInit{
     private userService: UserService,
     private formBuilder: FormBuilder, 
     private publicationService: PublicationsService,
-    private router: Router
+    private router: Router,
+    private destroyRef: DestroyRef
   ) {}
 
   @Input() username: string = '';
@@ -126,7 +128,7 @@ export class CreatePublicationModalComponent implements OnInit{
 
   private createPublication(publication: any) {
     //TODO: Revisar al añadir enlace de youtube, que hace que se cree la publicacion
-    this.publicationService.createPublication(publication).subscribe({
+    this.publicationService.createPublication(publication).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OnePublication) => {
         const newPost = data.body;
         document.getElementById('close-createpost-modal')?.click();
@@ -164,7 +166,7 @@ export class CreatePublicationModalComponent implements OnInit{
   }
 
   private getUser(username: string) {
-    this.userService.getOneUser(username).subscribe({
+    this.userService.getOneUser(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OneUser) => {
         this.user = data.body;
         console.log("user",this.user);

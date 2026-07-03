@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OneUser, UpdateUser, User } from '@interfaces/users.interface';
@@ -27,11 +28,12 @@ export class ProfileComponent implements OnInit {
     private storageService: StorageService, 
     private userService: UserService, 
     private avatarFrame : AvatarFrameComponent,
-    private router: Router) { }
+    private router: Router,
+    private destroyRef: DestroyRef) { }
 
   ngOnInit(): void { 
 
-    this.userStorage = this.storageService.getUser();
+    this.userStorage = this.storageService.getUser()! as unknown as User;
     if(this.userStorage){
       this.getUser(this.userStorage.username);
     }
@@ -76,7 +78,7 @@ export class ProfileComponent implements OnInit {
 }
 
 updateUser(userToUpdate: UpdateUser): void {
-  this.userService.updateUser(this.userStorage.username, userToUpdate).subscribe({
+  this.userService.updateUser(this.userStorage.username, userToUpdate).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
     next: (data) => {
       Swal.fire({
         icon: 'success',
@@ -99,7 +101,7 @@ updateUser(userToUpdate: UpdateUser): void {
 }
 
 private getUser(username: string): void {
-  this.userService.getOneUser(username).subscribe(
+  this.userService.getOneUser(username).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
     (data: OneUser) => {
       this.complectUser = data.body;
       if(this.complectUser){

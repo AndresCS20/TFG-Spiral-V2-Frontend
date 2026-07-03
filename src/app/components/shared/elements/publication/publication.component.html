@@ -1,159 +1,159 @@
-<div class="flex flex-col max-w-140 w-full card hover:card-bordered hover:shadow-md transition-all duration-300 my-5">
-  <!---->
-  <div class="flex items-center mx-6 sm:mx-8 mt-6 mb-4 ">
-    <div class="relative mr-3"><a routerLink="/profile/{{publication.author.username}}">
-      <app-avatar-frame
-      [profile_picture]="publication.author.profile_picture"
-      profile_size="small"
-      [frame_name]="publication.author.profile_picture_frame || 'none'"
-    ></app-avatar-frame>
-    </a>
-</div>
-    
- 
+<article class="card flex flex-col max-w-140 w-full hover:card-bordered hover:shadow-md transition-all duration-300 my-5">
+  <!-- Header: author info + menu -->
+  <header class="flex items-center mx-6 sm:mx-8 mt-6 mb-4">
+    <div class="relative mr-3">
+      <a routerLink="/profile/{{publication.author.username}}">
+        <app-avatar-frame
+          [profile_picture]="publication.author.profile_picture"
+          profile_size="small"
+          [frame_name]="publication.author.profile_picture_frame || 'none'"
+        ></app-avatar-frame>
+      </a>
+    </div>
+
     <div class="flex flex-col">
-      <div class="flex"><span class="font-semibold">{{publication.author.fullname}}</span>
-        <a href="/profile/{{publication.author.username}}/feed"><span class="text-sm text-secondary leading-none ml-1"
-          ><i class="fa-regular fa-at text-sm"></i>{{publication.author.username}}</span>  </a>
-        </div>
-        <div class="join mt-2"> @if(publication.community){
-             <a href="/community/{{publication.community.shortname}}/feed">
-              <span class="badge badge-lg badge-info join-item">      
-                <app-avatar-frame
+      <div class="flex items-center">
+        <span class="font-semibold">{{publication.author.fullname}}</span>
+        <a routerLink="/profile/{{publication.author.username}}/feed" class="text-sm text-secondary leading-none ml-1"
+          ><i class="icon-[ph--at] text-sm"></i>{{publication.author.username}}</a>
+      </div>
+      <div class="join mt-2">
+        @if(publication.community){
+          <a href="/community/{{publication.community.shortname}}/feed">
+            <span class="badge badge-lg badge-info join-item">
+              <app-avatar-frame
                 [profile_picture]="publication.community.profile_picture"
                 profile_size="xsmall"
                 frame_name="none"
               ></app-avatar-frame>
-               {{publication.community.shortname}}</span></a>}     
-              <span class="text-sm italic badge badge-lg badge-ghost join-item"
-        ><i class="fa-regular fa-clock"></i>&nbsp; {{dateFormatted()}}</span>
-        </div>
-
-      
+              {{publication.community.shortname}}
+            </span>
+          </a>
+        }
+        <span class="text-sm italic badge badge-lg badge-ghost join-item">
+          <i class="icon-[ph--clock]"></i>&nbsp; {{publication.createdAt | dateFromNow}}
+        </span>
+      </div>
     </div>
 
     <div class="dropdown dropdown-end ml-auto -mr-4">
-    <button tabindex="2" role="button"
-      class="btn btn-ghost-circle  tooltip" data-tip = "Opciones">
-      <i class="fa-regular fa-ellipsis-v"></i>
-    </button>
+      <button tabindex="2" role="button" class="btn btn-ghost-circle tooltip" data-tip="Opciones"
+        aria-label="Opciones de publicación">
+        <i class="icon-[ph--dots-three-vertical]"></i>
+      </button>
       <ul tabindex="2" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-        @if(publication.author._id === user._id){
-          <li><a><i class="fa-regular fa-pencil"></i> Editar</a></li>
-          <li><a><i class="fa-regular fa-trash-alt"></i> Eliminar</a></li>
-        }@else {
-          <li><a><i class="fa-regular fa-flag"></i> Reportar</a></li>
-          <li><a><i class="fa-regular fa-eye-slash"></i> Ocultar</a></li>
+        @if(user && publication.author._id === user._id){
+          <li><a><i class="icon-[ph--pencil]"></i> Editar</a></li>
+          <li><a><i class="icon-[ph--trash]"></i> Eliminar</a></li>
+        } @else {
+          <li><a><i class="icon-[ph--flag]"></i> Reportar</a></li>
+          <li><a><i class="icon-[ph--eye-slash]"></i> Ocultar</a></li>
         }
-
-
       </ul>
     </div>
-  </div>
-  <div class="mx-6 sm:mx-8 mt-2 mb-6">
-    {{publication.content}}
-  </div>
-  <div class="relative mb-4">
-    @if (publication.images.length>0) {
+  </header>
 
-      @if(publication.images.length>1){
+  <!-- Content: text + media -->
+  <main class="mx-6 sm:mx-8 mt-2 mb-6">
+    <p>{{publication.content}}</p>
+  </main>
+
+  @if (publication.images.length > 0) {
+    <div class="relative mb-4">
+      @if(publication.images.length > 1){
         <owl-carousel-o class="w-24" [options]="customOptions">
           @for (image of publication.images; track $index) {  
-          <ng-template carouselSlide>
-            <div class="w-full h-80 bg-cover bg-center "
-             [style]="{'background-image': 'url(' + image + ')'}"
-            ></div>
-          </ng-template>  
+            <ng-template carouselSlide>
+              <div class="w-full h-80 bg-cover bg-center"
+                [style]="{'background-image': 'url(' + image + ')'}"
+                role="img" [attr.aria-label]="'Imagen de publicación'"
+              ></div>
+            </ng-template>
           } 
-        </owl-carousel-o> 
+        </owl-carousel-o>
+      } @else {
+        <div class="w-full h-80 bg-cover bg-center"
+          [style]="{'background-image': 'url(' + publication.images[0] + ')'}"
+          role="img" [attr.aria-label]="'Imagen de publicación'"
+        ></div>
       }
-      @else {
-        <div class="w-full h-80 bg-cover bg-center "
-        [style]="{'background-image': 'url(' + publication.images[0] + ')'}"
-       ></div>
-      }
-  }
-  @else if (publication.video && obtenerIdVideoYoutube(publication.video) !== null) {
-    <!-- <iframe class="w-full h-96" [src]="obtenerEnlaceEmbed(publication.video)" frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-    <div class="w-fit mx-auto">
-          <youtube-player class="w-full h-80"
-  [videoId]="obtenerIdVideoYoutube(publication.video) || ''">
-</youtube-player>
     </div>
-
+  } @else if (publication.video && obtenerIdVideoYoutube(publication.video) !== null) {
+    <div class="w-fit mx-auto mb-4">
+      <youtube-player class="w-full h-80"
+        [videoId]="obtenerIdVideoYoutube(publication.video) || ''">
+      </youtube-player>
+    </div>
   }
-  </div>
-  <div class="flex items-center mx-3 sm:mx-5">
-    <div class="dropdown dropdown-top dropdown-hover">
-      <div tabindex="0" role="button" class="btn m-1">
-        @if(activeReaction()!== null){
-          <span class="font-bold ">{{activeReaction()?.icon}} {{activeReaction()?.name}}</span>
-        }@else {
-          <span><i class="fa-regular fa-thumbs-up"></i>&nbsp; Reaccionar</span>
-        }
 
-        
-      </div>
-      <div tabindex="0" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100 text-primary-content">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-          @for (reaction of reactions(); track reaction._id) {
-            <button class="btn btn-md text-xl"
-            [class.btn-disabled]="activeReaction()?.name !== null && activeReaction()?.name !== reaction.name"
-            [class.btn-primary]="activeReaction()?.name === reaction.name"
-            [attr.data-tip]="reaction.name"
-            (click)="updateReaction(reaction)"
-            >{{reaction.icon}}</button>
+  <!-- Footer: reactions + share + bookmark -->
+  <footer>
+    <div class="flex items-center mx-3 sm:mx-5">
+      <div class="dropdown dropdown-top dropdown-hover">
+        <div tabindex="0" role="button" class="btn m-1" aria-label="Reaccionar">
+          @if(activeReaction() !== null){
+            <span class="font-bold">{{activeReaction()?.icon}} {{activeReaction()?.name}}</span>
+          } @else {
+            <span><i class="icon-[fa-regular--thumbs-up]"></i>&nbsp; Reaccionar</span>
           }
-          
-   
+        </div>
+        <div tabindex="0" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100 text-primary-content">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            @for (reaction of reactions(); track reaction._id) {
+              <button class="btn btn-md text-xl"
+                [class.btn-disabled]="activeReaction()?.name !== null && activeReaction()?.name !== reaction.name"
+                [class.btn-primary]="activeReaction()?.name === reaction.name"
+                [attr.data-tip]="reaction.name"
+                (click)="updateReaction(reaction)"
+                [attr.aria-label]="'Reaccionar con ' + reaction.name"
+              >{{reaction.icon}}</button>
+            }
+          </div>
         </div>
       </div>
-    </div>
-    <button class="px-3 mr-1 btn btn-ghost" [routerLink]="'/publication/'+publication._id">
-      <i class="fa-regular fa-comment"></i>
-      <span class="ml-1">Comentar</span>
-      </button
-    >
-    <span class="flex-auto"></span>
-    
+      <button class="px-3 mr-1 btn btn-ghost" [routerLink]="'/publication/'+publication._id"
+        aria-label="Comentar publicación">
+        <i class="icon-[ph--chat-text]"></i>
+        <span class="ml-1">Comentar</span>
+      </button>
+      <span class="flex-auto"></span>
 
-
-    <div class="dropdown dropdown-top dropdown-end">
-      <button class="px-3 mr-1 btn btn-ghost">
-        <i class="fa-regular fa-share-alt"></i>
+      <div class="dropdown dropdown-top dropdown-end">
+        <button class="px-3 mr-1 btn btn-ghost" aria-label="Compartir publicación">
+          <i class="icon-[ph--share]"></i>
+          <span class="badge badge-info">4</span>
+        </button>
+        <div tabindex="3" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100">
+          <div class="card-body">
+            <span class="card-title">Compartir publicación</span>
+            <div class="grid grid-cols-2 gap-2">
+              <button class="btn btn-md bg-blue-600 hover:bg-blue-700 text-white" aria-label="Compartir en Facebook"><i class="icon-[ph--facebook-logo]"></i></button>
+              <button class="btn btn-md bg-gray-500 hover:bg-gray-600" aria-label="Compartir en X"><i class="icon-[ph--twitter-logo]"></i></button>
+              <button class="btn btn-md bg-orange-600 hover:bg-orange-700 text-white" aria-label="Compartir en Reddit"><i class="icon-[ph--reddit-logo]"></i></button>
+              <button class="btn btn-md bg-green-500 hover:bg-green-600 text-white" aria-label="Compartir en WhatsApp"><i class="icon-[ph--whatsapp-logo]"></i></button>
+            </div>
+            <button class="btn btn-primary btn-md" aria-label="Copiar enlace"><i class="icon-[ph--clipboard-text]"></i> Copiar enlace</button>
+          </div>
+        </div>
+      </div>
+      
+      <button class="px-3 btn btn-ghost" aria-label="Guardar publicación">
+        <i class="icon-[ph--bookmark]"></i>
         <span class="badge badge-info">4</span>
       </button>
-      <div tabindex="3" class="dropdown-content z-[1] card card-compact w-64 p-2 shadow bg-base-100">
-        <div class="card-body">
-          <span class="card-title">Compartir publicacion</span>
-          <div class="grid grid-cols-2 gap-2">
-            <button class="btn btn-md bg-blue-600 hover:bg-blue-700 text-white"><i class="fa-brands fa-facebook"></i></button>
-            <button class="btn btn-md bg-gray-500 hover:bg-gray-600"><i class="fa-brands fa-x-twitter"></i></button>
-            <button class="btn btn-md bg-orange-600 hover:bg-orange-700 text-white"><i class="fa-brands fa-reddit"></i></button>
-            <button class="btn btn-md bg-green-500 hover:bg-green-600 text-white"><i class="fa-brands fa-whatsapp"></i></button>
-            </div>
-            <button class="btn btn-primary btn-md"><i class="fa-regular fa-clipboard"></i> Copiar enlace</button>
-        </div>
+    </div>
+
+    <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6" />
+
+    <div class="flex sm:items-center mx-6 sm:mx-8 mb-4 sm:mb-6">
+      <div class="flex items-center join w-full md:w-fit">
+        @if(reactionCount() > 0){
+          @for (mostReaction of mostReacted(); track mostReaction._id) {
+            <span class="btn btn-outline border-inherit no-animation join-item">{{mostReaction.icon}} {{mostReaction.reactions.length}}</span>
+          }
+        }
+        <button class="btn btn-outline tracking-tight join-item"><i class="icon-[ph--plus-circle]"></i> {{reactionCount()}} reacciones</button>
       </div>
     </div>
-    
-    <button class="px-3 btn btn-ghost">
-      <i class="fa-regular fa-bookmark"></i>
-      <span class="badge badge-info">4</span>
-      
-    </button>
-  </div>
-  <hr class="border-b mx-6 sm:mx-8 mt-4 mb-6" />
-  <div class="flex  sm:items-center mx-6 sm:mx-8 mb-4 sm:mb-6">
-    <div class="flex items-center join w-full md:w-fit">
-
-      @if(reactionCount() > 0){
-        @for (mostReaction of mostReacted(); track mostReaction._id) {
-          <span class="btn btn-outline border-inherit no-animation join-item">{{mostReaction.icon}} {{mostReaction.reactions.length}}</span>
-      }
-    }
-      <button class="btn btn-outline tracking-tight join-item"><i class="fa-regular fa-circle-plus"></i> {{reactionCount()}} reacciones</button>
-    </div>
-   
-  </div>
-</div>
+  </footer>
+</article>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CommunitiesService } from '@services/communities.service';
@@ -21,7 +22,8 @@ export class CommunityComponent implements OnInit {
     private router: Router,
     private storageService: StorageService,
     private _communitiesService: CommunitiesService,
-    private communityDataService: CommuniyDataService
+    private communityDataService: CommuniyDataService,
+    private destroyRef: DestroyRef
   ) {}
   isMemberOfTheCommunity = false;
   communityShortName!: string | null;
@@ -37,7 +39,7 @@ export class CommunityComponent implements OnInit {
       this.getCommunity(this.communityShortName);
       
       // Actualiza el usuario
-      this.user = this.storageService.getUser();
+      this.user = this.storageService.getUser()! as unknown as User;
 
       // Verifica si el usuario está definido antes de llamar a checkIsMember
       if (this.user) {
@@ -60,7 +62,7 @@ export class CommunityComponent implements OnInit {
   }
   leaveCommunity(){
     if(this.communityShortName !== null){
-      this._communitiesService.leaveCommunity(this.communityShortName, this.user._id).subscribe({
+      this._communitiesService.leaveCommunity(this.communityShortName, this.user._id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data) => {
           Swal.fire({
             icon: 'success',
@@ -85,7 +87,7 @@ export class CommunityComponent implements OnInit {
 
   joinCommunity(){
     if(this.communityShortName !== null){
-    this._communitiesService.joinCommunity(this.communityShortName, this.user._id).subscribe({
+    this._communitiesService.joinCommunity(this.communityShortName, this.user._id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         Swal.fire({
           icon: 'success',
@@ -108,7 +110,7 @@ export class CommunityComponent implements OnInit {
   }
 
   private checkIsOwner(shortname:string, userId: string){
-    this._communitiesService.checkIsCommunityOwner(shortname, userId).subscribe({
+    this._communitiesService.checkIsCommunityOwner(shortname, userId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.isOwnerOfCommunity = true
         this.communityDataService.changeIsCommunityOnwner(true);
@@ -122,7 +124,7 @@ export class CommunityComponent implements OnInit {
   }
 
   private checkIsMember(shortname:string, userId: string){
-    this._communitiesService.checkIsCommunityMember(shortname, userId).subscribe({
+    this._communitiesService.checkIsCommunityMember(shortname, userId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.isMemberOfTheCommunity = true
       },
@@ -134,7 +136,7 @@ export class CommunityComponent implements OnInit {
   }
 
   private getCommunity(communityShortName: string) {
-    this._communitiesService.getOneCommunity(communityShortName).subscribe({
+    this._communitiesService.getOneCommunity(communityShortName).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: OneCommunity) => {
         this.community = data.body;
         this.communityDataService.changeCommunity(this.community);

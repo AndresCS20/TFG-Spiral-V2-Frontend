@@ -1,5 +1,5 @@
-  <button class="expand-btn btn btn-circle btn-ghost mx-1 tooltip tooltip-bottom" data-tip="Contraer Extender Menu" (click)="collapseSidebar()" type="button">
-    <i class="fa-regular fa-arrow-left-from-line text-lg"></i>
+  <button class="expand-btn btn btn-circle btn-ghost mx-1 tooltip tooltip-bottom" data-tip="Contraer Extender Menu" (click)="collapseSidebar()" type="button" aria-label="Contraer o expandir menú lateral">
+    <i class="icon-[ph--arrow-left] text-lg"></i>
     </button>
 
 
@@ -7,7 +7,7 @@
     <div class="dropdown dropdown-hover">
     <label class="input input-bordered items-center gap-2 mx-1 hidden md:flex">
       <input tabindex="0" type="text" class="grow" placeholder="Buscar..." />
-      <i class="fa-regular fa-magnifying-glass text-xl"></i>
+      <i class="icon-[ph--magnifying-glass] text-xl"></i>
     </label>
       <ul tabindex="0" class="dropdown-content z-[1] menu p-2 gap-2 shadow bg-base-100 rounded-box w-52">
         <li><a>
@@ -55,9 +55,9 @@
 
     <button class="btn btn-circle mx-1 hidden md:block tooltip tooltip-bottom" data-tip="Pantalla Completa" (click)="fullscreen()">
       @if (screenfull) {
-        <i class="fa-regular fa-compress text-xl"></i>
+        <i class="icon-[ph--arrows-in] text-xl"></i>
       }@else {
-        <i class="fa-regular fa-expand text-xl"></i>
+        <i class="icon-[ph--arrows-out] text-xl"></i>
       }
     
     </button>
@@ -67,7 +67,7 @@
          <div class="indicator mx-1">
     <span class="indicator-item badge badge-secondary"></span> 
        <button tabindex="0" role="button" class="btn btn-circle tooltip tooltip-bottom" data-tip="Notificaciones">
-    <i class="fa-regular fa-bell-ring text-xl"></i>
+    <i class="icon-[ph--bell-ringing] text-xl"></i>
     </button>
     </div>
       <div tabindex="0" class="dropdown-content min-w-80 card transform-none w-fit rounded-lg z-[1] bg-base-200  shadow p-3">
@@ -82,7 +82,7 @@
             class="-mx-2 flex items-start rounded-md p-2"
             href="#">
             <div class="bg-base-300 group-hover:bg-primary rounded-md flex items-center justify-center aspect-square w-10 h-10">
-              <i class="fa-regular fa-message-dots"></i>
+              <i class="icon-[ph--chat-dots]"></i>
             </div>
             <div class="space-y-1">
               <p class="font-medium">Fernando te ha mandado un mensaje</p>
@@ -94,7 +94,7 @@
           class="-mx-2 flex items-start rounded-md p-2"
           href="#">
           <div class="bg-base-300 group-hover:bg-primary rounded-md flex items-center justify-center aspect-square w-10 h-10">
-            <i class="fa-regular fa-user-tag"></i>
+            <i class="icon-[ph--identification-badge]"></i>
           </div>
           <div class="space-y-1">
             <p class="font-medium">Alfredo te ha mencionado en una publicacion</p>
@@ -106,7 +106,7 @@
         class="-mx-2 flex items-start rounded-md p-2"
         href="#">
         <div class="bg-base-300 group-hover:bg-primary rounded-md flex items-center justify-center aspect-square w-10 h-10">
-          <i class="fa-regular fa-child-reaching"></i>
+          <i class="icon-[ph--baby]"></i>
         </div>
         <div class="space-y-1">
           <p class="font-medium">Fernando Alonso ha reaccionado a tu publicacion</p>
@@ -118,7 +118,7 @@
       class="-mx-2 flex items-start rounded-md p-2"
       href="#">
       <div class="bg-base-300 group-hover:bg-primary rounded-md flex items-center justify-center aspect-square w-10 h-10">
-        <i class="fa-regular fa-share-nodes"></i>
+        <i class="icon-[ph--share-network]"></i>
       </div>
       <div >
         <p class="font-medium">Sete compartido tu publicacion</p>
@@ -126,7 +126,7 @@
       </div>
     </a>
     </li>
-      <button class="btn btn-primary">Ver más notifiaciones <i class="fa-regular fa-chevrons-right"></i></button>
+      <button class="btn btn-primary">Ver más notifiaciones <i class="icon-[ph--caret-double-right]"></i></button>
         </ul>
       </div>
     </div>
