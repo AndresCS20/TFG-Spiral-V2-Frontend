@@ -32,7 +32,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+          "production": {
               "budgets": [
                 {
                   "type": "initial",
@@ -45,6 +45,14 @@
                   "maximumError": "4kb"
                 }
               ],
+              "optimization": {
+                "scripts": true,
+                "fonts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              },
               "outputHashing": "all"
             },
             "development": {
@@ -92,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "90456f85-37c4-4c15-b543-ef312382bc1c"
   }
 }
