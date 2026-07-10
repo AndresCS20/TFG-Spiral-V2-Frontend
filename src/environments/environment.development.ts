@@ -1,4 +1,4 @@
 export const environment = {
  production: false,
- API_URL: 'https://tfg-spiral-v2-backend-production.up.railway.app/api/',
+ API_URL: 'http://api.spiral.test/api/',
 };
